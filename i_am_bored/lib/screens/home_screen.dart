@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/settings_screen.dart';
+import '../widgets/circle_shape.dart';
 import '../widgets/app_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,17 +14,24 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 20,
-        // backgroundColor: Theme.of(context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.elliptical(40, 30),
-            // top: Radius.circular(30),
           ),
         ),
         title: Text('The Bored App'),
       ),
       drawer: AppDrawer(),
-      // backgroundColor: Theme.of(context).buttonColor);
+      // body: Container(
+      //   decoration: BoxDecoration(
+      //     border: Border.all(
+      //       color: Colors.red,
+      //       width: 10,
+      //     ),
+      //     borderRadius: BorderRadius.circular(12),
+      //   ),
+      // ),
+      body: CircleShape(),
     );
   }
 }

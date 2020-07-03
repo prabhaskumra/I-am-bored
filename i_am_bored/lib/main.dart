@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import './screens/home_screen.dart';
 import './screens/settings_screen.dart';
+import './screens/about_app_screen.dart';
+import './screens/donation_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +23,8 @@ class MyApp extends StatelessWidget {
       home: HomeScreen(),
       routes: {
         SettingsScreen.routeName: (ctx) => SettingsScreen(),
+        AboutAppScreen.routeName: (ctx) => AboutAppScreen(),
+        DonationScreen.routeName: (ctx) => DonationScreen(),
       },
     );
   }
