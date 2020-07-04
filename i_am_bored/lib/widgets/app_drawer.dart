@@ -9,13 +9,20 @@ class AppDrawer extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
+  static const fontsize = 20.0;
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
         children: <Widget>[
           AppBar(
-            title: Text('Menu'),
+            title: Text(
+              'Menu',
+              style: TextStyle(
+                fontSize: fontsize,
+              ),
+            ),
             automaticallyImplyLeading: false,
             elevation: 20,
             shape: RoundedRectangleBorder(
@@ -29,7 +36,12 @@ class AppDrawer extends StatelessWidget {
               Icons.info,
               // color: Colors.yellowAccent,
             ),
-            title: Text('About App'),
+            title: Text(
+              'About App',
+              style: TextStyle(
+                fontSize: fontsize,
+              ),
+            ),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).pushNamed(AboutAppScreen.routeName);
@@ -38,7 +50,12 @@ class AppDrawer extends StatelessWidget {
           Divider(),
           ListTile(
             leading: Icon(Icons.settings),
-            title: Text('Settings'),
+            title: Text(
+              'Settings',
+              style: TextStyle(
+                fontSize: fontsize,
+              ),
+            ),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).pushNamed(SettingsScreen.routeName);
@@ -49,7 +66,12 @@ class AppDrawer extends StatelessWidget {
             leading: Icon(
               Icons.fastfood,
             ),
-            title: Text('Buy me a coffee!'),
+            title: Text(
+              'Buy me a coffee!',
+              style: TextStyle(
+                fontSize: fontsize,
+              ),
+            ),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).pushNamed(DonationScreen.routeName);

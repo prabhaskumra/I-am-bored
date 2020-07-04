@@ -9,6 +9,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  static const fontsize = 25.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         title: Text(
           'The Bored App',
-          // style: TextStyle(),
+          style: TextStyle(
+            fontSize: fontsize,
+          ),
         ),
       ),
       drawer: AppDrawer(),
@@ -29,10 +33,10 @@ class _HomeScreenState extends State<HomeScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.blue[50],
-          border: Border.all(
-            color: Colors.red,
-            width: 10,
-          ),
+          // border: Border.all(
+          //   color: Colors.red,
+          //   width: 10,
+          // ),
           borderRadius: BorderRadius.all(Radius.zero),
         ),
         child: Column(
@@ -42,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.blue[900],
-                fontSize: 22,
+                fontSize: fontsize,
               ),
             ),
           ],

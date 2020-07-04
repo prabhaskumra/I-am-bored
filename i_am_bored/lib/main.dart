@@ -20,6 +20,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.lightGreen,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'Yellowtail',
+        textTheme: TextTheme(
+          caption: TextStyle(
+            fontSize: 30.0,
+          ),
+        ),
       ),
       home: HomeScreen(),
       routes: {
