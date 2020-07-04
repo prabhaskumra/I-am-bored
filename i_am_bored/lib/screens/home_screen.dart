@@ -19,19 +19,36 @@ class _HomeScreenState extends State<HomeScreen> {
             bottom: Radius.elliptical(40, 30),
           ),
         ),
-        title: Text('The Bored App'),
+        title: Text(
+          'The Bored App',
+          // style: TextStyle(),
+        ),
       ),
       drawer: AppDrawer(),
-      // body: Container(
-      //   decoration: BoxDecoration(
-      //     border: Border.all(
-      //       color: Colors.red,
-      //       width: 10,
-      //     ),
-      //     borderRadius: BorderRadius.circular(12),
-      //   ),
-      // ),
-      body: CircleShape(),
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.blue[50],
+          border: Border.all(
+            color: Colors.red,
+            width: 10,
+          ),
+          borderRadius: BorderRadius.all(Radius.zero),
+        ),
+        child: Column(
+          children: <Widget>[
+            Text(
+              "How are you feeling Today?",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.blue[900],
+                fontSize: 22,
+              ),
+            ),
+          ],
+        ),
+      ),
+      // body: CircleShape(),
     );
   }
 }

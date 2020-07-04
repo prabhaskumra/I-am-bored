@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightGreen,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        fontFamily: 'Yellowtail',
       ),
       home: HomeScreen(),
       routes: {
