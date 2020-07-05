@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/circle_shape.dart';
 import '../widgets/app_drawer.dart';
+import '../models/bored_https_call.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,14 +12,21 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   static const fontsize = 25.0;
 
+  BoredHttpsCall callClass;
+
+  Future<void> _fetchData() async {
+    await BoredHttpsCall().callByActivity();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: kToolbarHeight / 1.2,
         elevation: 20,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
-            bottom: Radius.elliptical(40, 30),
+            bottom: Radius.elliptical(30, 30),
           ),
         ),
         title: Text(
@@ -49,6 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontSize: fontsize,
               ),
             ),
+            RaisedButton(
+              onPressed: _fetchData,
+              // onPressed: callClass.callByActivity,
+            )
           ],
         ),
       ),

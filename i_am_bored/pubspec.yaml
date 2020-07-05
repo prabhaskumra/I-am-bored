@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^0.12.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -64,7 +65,7 @@ flutter:
     - family: Yellowtail
       fonts:
         - asset: assets/fonts/Yellowtail-Regular.ttf
-          weight: 700
+          weight: 600
     - family: Lato
       fonts:
         - asset: assets/fonts/Lato-Regular.ttf
