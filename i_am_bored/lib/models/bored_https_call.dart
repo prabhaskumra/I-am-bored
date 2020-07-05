@@ -16,11 +16,15 @@ class BoredHttpsCall {
       final extranctedData = json.decode(response.body) as Map<String, dynamic>;
 
       // final List<BoredData> loadedProducts = [];
-
       print(extranctedData);
+
       print("readching here");
     } catch (error) {
       throw (error);
     }
+  }
+
+  Future<void> callByParticipants(int quantity) {
+    String url = 'https://www.boredapi.com/api/activity?participants=$quantity';
   }
 }

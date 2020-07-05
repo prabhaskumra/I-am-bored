@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../widgets/circle_shape.dart';
 import '../widgets/app_drawer.dart';
 import '../models/bored_https_call.dart';
+import '../widgets/table_data.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -48,19 +49,13 @@ class _HomeScreenState extends State<HomeScreen> {
           borderRadius: BorderRadius.all(Radius.zero),
         ),
         child: Column(
-          children: <Widget>[
+          children: [
             Text(
-              "How are you feeling Today?",
+              'How are you feeling today?',
+              style: TextStyle(fontSize: fontsize),
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.blue[900],
-                fontSize: fontsize,
-              ),
             ),
-            RaisedButton(
-              onPressed: _fetchData,
-              // onPressed: callClass.callByActivity,
-            )
+            TableData(fontsize: fontsize),
           ],
         ),
       ),
