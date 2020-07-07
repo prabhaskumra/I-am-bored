@@ -4,6 +4,7 @@ import '../widgets/circle_shape.dart';
 import '../widgets/app_drawer.dart';
 import '../models/bored_https_call.dart';
 import '../widgets/table_data.dart';
+import '../models/bored_data.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -14,9 +15,20 @@ class _HomeScreenState extends State<HomeScreen> {
   static const fontsize = 25.0;
 
   BoredHttpsCall callClass;
+  BoredData receivedData;
+  bool firstTime = false;
 
   Future<void> _fetchData() async {
-    await BoredHttpsCall().callByActivity();
+    BoredData value;
+    receivedData = await BoredHttpsCall().callByActivity(value);
+    // receivedData = value;
+
+    setState(() {
+      firstTime = true;
+    });
+
+    // print("RECEIED DATA");
+    // print(receivedData.key);
   }
 
   @override
@@ -28,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.elliptical(30, 30),
+            // bottom: Radius.circular(50),
           ),
         ),
         title: Text(
@@ -42,20 +55,53 @@ class _HomeScreenState extends State<HomeScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.blue[50],
-          // border: Border.all(
-          //   color: Colors.red,
-          //   width: 10,
-          // ),
+          border: Border.all(
+            color: Colors.white10,
+            width: 5,
+          ),
           borderRadius: BorderRadius.all(Radius.zero),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               'How are you feeling today?',
               style: TextStyle(fontSize: fontsize),
               textAlign: TextAlign.center,
             ),
-            TableData(fontsize: fontsize),
+            firstTime
+                ? TableData(
+                    fontsize: fontsize,
+                    value: receivedData,
+                  )
+                : Text('First Time'),
+            RaisedButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                side: BorderSide(color: Theme.of(context).primaryColor),
+              ),
+              child: Container(
+                width: 200,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      Icons.shuffle,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      "Find something",
+                      style: TextStyle(
+                        fontSize: fontsize / 1.2,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              onPressed: _fetchData,
+              color: Theme.of(context).primaryColor,
+            ),
           ],
         ),
       ),

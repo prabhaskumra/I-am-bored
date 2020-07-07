@@ -7,9 +7,9 @@ import 'bored_data.dart';
 class BoredHttpsCall {
   Future hasInitilized;
 
-  List<BoredData> _items = [];
+  List<BoredData> items = [];
 
-  Future<void> callByActivity() async {
+  Future<BoredData> callByActivity(BoredData value) async {
     const url = 'https://www.boredapi.com/api/activity/';
     try {
       final response = await http.get(url);
@@ -17,6 +17,19 @@ class BoredHttpsCall {
 
       // final List<BoredData> loadedProducts = [];
       print(extranctedData);
+      var value = BoredData(
+        activity: extranctedData['activity'],
+        type: extranctedData['type'],
+        participants: extranctedData['participants'],
+        price: extranctedData['price'] + 0.0,
+        link: extranctedData['link'],
+        key: extranctedData['key'],
+        accessibility: extranctedData['accessibility'] + 0.0,
+      );
+
+      return value;
+
+      print(value.key);
 
       print("readching here");
     } catch (error) {
