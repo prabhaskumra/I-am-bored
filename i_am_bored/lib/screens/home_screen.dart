@@ -17,6 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   BoredHttpsCall callClass;
   BoredData receivedData;
   bool firstTime = false;
+  String dropDown = 'Activity';
 
   Future<void> _fetchData() async {
     BoredData value;
@@ -75,13 +76,52 @@ class _HomeScreenState extends State<HomeScreen> {
                     value: receivedData,
                   )
                 : Text('First Time'),
+            Container(
+              // width: 200,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Theme.of(context).primaryColor,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: DropdownButton<String>(
+                value: dropDown,
+                icon: Icon(Icons.keyboard_arrow_down),
+                iconSize: 24,
+                elevation: 16,
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                ),
+                // underline: Container(
+                //   height: 2,
+                //   color: Theme.of(context).primaryColor,
+                // ),
+                items: <String>[
+                  'Activity',
+                  'Participants',
+                  'Price',
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (String newValue) {
+                  setState(() {
+                    dropDown = newValue;
+                  });
+                },
+              ),
+            ),
             RaisedButton(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
                 side: BorderSide(color: Theme.of(context).primaryColor),
               ),
               child: Container(
-                width: 200,
+                height: 50,
+                width: MediaQuery.of(context).size.width * .60,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

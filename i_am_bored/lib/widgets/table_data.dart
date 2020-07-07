@@ -119,9 +119,14 @@ class TableData extends StatelessWidget {
                 textAlign: TextAlign.center,
               )
             else
-              Text(value.link
-                  // INSERT THE LINK
-                  ),
+              Text(
+                value.link,
+                style: TextStyle(
+                  fontSize: fontsize / 1.2,
+                ),
+                textAlign: TextAlign.center,
+                // INSERT THE LINK
+              ),
 
             // Text('hee'),
           ],
