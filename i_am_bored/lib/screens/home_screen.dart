@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 import '../widgets/circle_shape.dart';
 import '../widgets/app_drawer.dart';
@@ -12,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static const fontsize = 25.0;
+  static const fontsize = 22.0;
 
   BoredHttpsCall callClass;
   BoredData receivedData;
@@ -65,78 +66,110 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'How are you feeling today?',
-              style: TextStyle(fontSize: fontsize),
-              textAlign: TextAlign.center,
+            Container(
+              width: double.infinity,
+              child: Card(
+                child: Text(
+                  'How are you feeling today?',
+                  style: TextStyle(fontSize: fontsize),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
             firstTime
-                ? TableData(
-                    fontsize: fontsize,
-                    value: receivedData,
+                ? Container(
+                    // width: Platform.isMacOS
+                    //     ? MediaQuery.of(context).size.width * .50
+                    //     : double.infinity,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Theme.of(context).primaryColor,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        Card(
+                          // borderOnForeground: mounted,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          shadowColor: Theme.of(context).primaryColorDark,
+                          elevation: 20,
+                          child: TableData(
+                            fontsize: fontsize,
+                            value: receivedData,
+                          ),
+                        ),
+                        Card(
+                          child: FlatButton(
+                            onPressed: () {},
+                            child: Icon(
+                              Icons.favorite_border,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   )
                 : Text('First Time'),
             Container(
+              margin: EdgeInsets.symmetric(vertical: 20.0),
               // width: 200,
+              height: 50,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Theme.of(context).primaryColor,
                   width: 2,
                 ),
-                borderRadius: BorderRadius.circular(12),
+                // borderRadius: BorderRadius.all(radius),
               ),
-              child: DropdownButton<String>(
-                value: dropDown,
-                icon: Icon(Icons.keyboard_arrow_down),
-                iconSize: 24,
-                elevation: 16,
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                ),
-                // underline: Container(
-                //   height: 2,
-                //   color: Theme.of(context).primaryColor,
-                // ),
-                items: <String>[
-                  'Activity',
-                  'Participants',
-                  'Price',
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (String newValue) {
-                  setState(() {
-                    dropDown = newValue;
-                  });
-                },
-              ),
+              // child: DropdownButton<String>(
+              //   value: dropDown,
+              //   icon: Icon(Icons.keyboard_arrow_down),
+              //   iconSize: 24,
+              //   elevation: 16,
+              //   style: TextStyle(
+              //     color: Theme.of(context).primaryColor,
+              //   ),
+              //   // underline: Container(
+              //   //   height: 2,
+              //   //   color: Theme.of(context).primaryColor,
+              //   // ),
+              //   items: <String>[
+              //     'Activity',
+              //     'Participants',
+              //     'Price',
+              //   ].map<DropdownMenuItem<String>>((String value) {
+              //     return DropdownMenuItem<String>(
+              //       value: value,
+              //       child: Text(value),
+              //     );
+              //   }).toList(),
+              //   onChanged: (String newValue) {
+              //     setState(() {
+              //       dropDown = newValue;
+              //     });
+              //   },
+              // ),
+              child: ListViewButtons(fontsize: fontsize),
             ),
-            RaisedButton(
+            RaisedButton.icon(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
                 side: BorderSide(color: Theme.of(context).primaryColor),
               ),
-              child: Container(
-                height: 50,
-                width: MediaQuery.of(context).size.width * .60,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      Icons.shuffle,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      "Find something",
-                      style: TextStyle(
-                        fontSize: fontsize / 1.2,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
+              icon: Icon(
+                Icons.shuffle,
+                color: Colors.white,
+              ),
+              label: Text(
+                "Find Something",
+                style: TextStyle(
+                  fontSize: fontsize / 1.2,
+                  color: Colors.white,
                 ),
               ),
               onPressed: _fetchData,
@@ -146,6 +179,65 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       // body: CircleShape(),
+    );
+  }
+}
+
+class ListViewButtons extends StatelessWidget {
+  const ListViewButtons({
+    Key key,
+    @required this.fontsize,
+  }) : super(key: key);
+
+  final double fontsize;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      scrollDirection: Axis.horizontal,
+      children: <Widget>[
+        RaisedButton.icon(
+          icon: Icon(Icons.ac_unit),
+          shape: RoundedRectangleBorder(side: BorderSide(color: Colors.white)),
+          onPressed: () {},
+          label: Text(
+            "Activity",
+            style: TextStyle(fontSize: fontsize),
+          ),
+          color: Theme.of(context).primaryColor,
+        ),
+        // Divider(),
+        RaisedButton.icon(
+          shape: RoundedRectangleBorder(side: BorderSide(color: Colors.white)),
+          icon: Icon(Icons.ac_unit),
+          onPressed: () {},
+          label: Text(
+            "Activity",
+            style: TextStyle(fontSize: fontsize),
+          ),
+          color: Theme.of(context).primaryColor,
+        ),
+        RaisedButton.icon(
+          icon: Icon(Icons.ac_unit),
+          shape: RoundedRectangleBorder(side: BorderSide(color: Colors.white)),
+          onPressed: () {},
+          label: Text(
+            "Activity",
+            style: TextStyle(fontSize: fontsize),
+          ),
+          color: Theme.of(context).primaryColor,
+        ),
+        RaisedButton.icon(
+          icon: Icon(Icons.ac_unit),
+          shape: RoundedRectangleBorder(side: BorderSide(color: Colors.white)),
+          onPressed: () {},
+          label: Text(
+            "Activity",
+            style: TextStyle(fontSize: fontsize),
+          ),
+          color: Theme.of(context).primaryColor,
+        ),
+      ],
     );
   }
 }

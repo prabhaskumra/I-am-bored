@@ -17,12 +17,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.pink,
+        primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: 'Yellowtail',
+        fontFamily: 'SansPro',
         textTheme: TextTheme(
           caption: TextStyle(
-            fontSize: 30.0,
+            fontSize: 20.0,
           ),
         ),
       ),
