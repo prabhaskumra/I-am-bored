@@ -197,7 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
               label: Text(
                 "Find Something",
                 style: TextStyle(
-                  fontSize: fontsize / 1.2,
+                  fontSize: fontsize,
                   color: Colors.white,
                 ),
               ),

@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ListViewButtons extends StatelessWidget {
+// enum SelectedButton {
+//   Activity,
+//   Paricipants,
+//   Price,
+//   Accessibility,
+// }
+
+class ListViewButtons extends StatefulWidget {
   const ListViewButtons({
     Key key,
     @required this.fontsize,
@@ -9,16 +16,41 @@ class ListViewButtons extends StatelessWidget {
   final double fontsize;
 
   @override
-  Widget build(BuildContext context) {
-    // enum selectedButton{
-    //   activity,
+  _ListViewButtonsState createState() => _ListViewButtonsState();
+}
 
-    // }
+class _ListViewButtonsState extends State<ListViewButtons> {
+  bool isActivity = true;
+  bool isParticipants = false;
+  bool isPrice = false;
+  bool isAccessibility = false;
+
+  @override
+  Widget build(BuildContext context) {
+    // var selectedKey = SelectedButton.Activity;
 
     var roundedRectangleBorder = RoundedRectangleBorder(
       side: BorderSide(color: Theme.of(context).primaryColor),
       borderRadius: BorderRadius.circular(10),
     );
+
+    void setKey(String key) {
+      setState(() {
+        if (key == 'isActivity') {
+          isActivity = true;
+          isParticipants = isAccessibility = isPrice = false;
+        } else if (key == 'isParticipants') {
+          isParticipants = true;
+          isPrice = isAccessibility = isActivity = false;
+        } else if (key == 'isPrice') {
+          isPrice = true;
+          isParticipants = isAccessibility = isActivity = false;
+        } else if (key == 'isAccessibility') {
+          isAccessibility = true;
+          isParticipants = isActivity = isPrice = false;
+        }
+      });
+    }
 
     return ListView(
       scrollDirection: Axis.horizontal,
@@ -26,54 +58,91 @@ class ListViewButtons extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: RaisedButton.icon(
-            icon: Icon(Icons.ac_unit),
+            icon: Icon(
+              Icons.ac_unit,
+              color: isActivity ? Colors.white : Colors.black,
+            ),
             shape: roundedRectangleBorder,
-            onPressed: () {},
+            onPressed: () {
+              setKey('isActivity');
+            },
             label: Text(
               "Activity",
-              style: TextStyle(fontSize: fontsize),
+              style: TextStyle(
+                fontSize: widget.fontsize,
+                color: isActivity ? Colors.white : Colors.black,
+              ),
             ),
-            color: Colors.white,
+            color: isActivity ? Theme.of(context).primaryColor : Colors.white,
           ),
         ),
         // Divider(),
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: RaisedButton.icon(
+            color:
+                isParticipants ? Theme.of(context).primaryColor : Colors.white,
             shape: roundedRectangleBorder,
-            icon: Icon(Icons.people),
-            onPressed: () {},
+            icon: Icon(
+              Icons.people,
+              color: isParticipants ? Colors.white : Colors.black,
+            ),
+            onPressed: () {
+              isParticipants = true;
+              setKey('isParticipants');
+              print(isParticipants);
+              print(isActivity);
+            },
             label: Text(
               "Pariticipants",
-              style: TextStyle(fontSize: fontsize),
+              style: TextStyle(
+                fontSize: widget.fontsize,
+                color: isParticipants ? Colors.white : Colors.black,
+              ),
             ),
-            color: Colors.white,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: RaisedButton.icon(
-            icon: Icon(Icons.attach_money),
+            icon: Icon(
+              Icons.attach_money,
+              color: isPrice ? Colors.white : Colors.black,
+            ),
             shape: roundedRectangleBorder,
-            onPressed: () {},
+            onPressed: () {
+              setKey('isPrice');
+            },
             label: Text(
               "Price",
-              style: TextStyle(fontSize: fontsize),
+              style: TextStyle(
+                fontSize: widget.fontsize,
+                color: isPrice ? Colors.white : Colors.black,
+              ),
             ),
-            color: Colors.white,
+            color: isPrice ? Theme.of(context).primaryColor : Colors.white,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: RaisedButton.icon(
-            icon: Icon(Icons.ac_unit),
+            icon: Icon(
+              Icons.ac_unit,
+              color: isAccessibility ? Colors.white : Colors.black,
+            ),
             shape: roundedRectangleBorder,
-            onPressed: () {},
+            color:
+                isAccessibility ? Theme.of(context).primaryColor : Colors.white,
+            onPressed: () {
+              setKey('isAccessibility');
+            },
             label: Text(
               "Accessibility",
-              style: TextStyle(fontSize: fontsize),
+              style: TextStyle(
+                fontSize: widget.fontsize,
+                color: isAccessibility ? Colors.white : Colors.black,
+              ),
             ),
-            color: Colors.white,
           ),
         ),
       ],
