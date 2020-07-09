@@ -6,6 +6,7 @@ import '../widgets/app_drawer.dart';
 import '../models/bored_https_call.dart';
 import '../widgets/table_data.dart';
 import '../models/bored_data.dart';
+import '../widgets/list_view_buttons.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -82,36 +83,64 @@ class _HomeScreenState extends State<HomeScreen> {
                     //     ? MediaQuery.of(context).size.width * .50
                     //     : double.infinity,
                     decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Theme.of(context).primaryColor,
-                        width: 1,
-                      ),
+                      // border: Border.all(
+                      //   color: Theme.of(context).primaryColor,
+                      //   width: 1,
+                      // ),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Column(
-                      children: <Widget>[
-                        Card(
-                          // borderOnForeground: mounted,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          shadowColor: Theme.of(context).primaryColorDark,
-                          elevation: 20,
-                          child: TableData(
+                    child: Card(
+                      // borderOnForeground: mounted,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      shadowColor: Theme.of(context).primaryColorDark,
+                      elevation: 20,
+                      child: Column(
+                        children: [
+                          TableData(
                             fontsize: fontsize,
                             value: receivedData,
                           ),
-                        ),
-                        Card(
-                          child: FlatButton(
-                            onPressed: () {},
-                            child: Icon(
-                              Icons.favorite_border,
-                              color: Theme.of(context).primaryColor,
-                            ),
+                          Divider(
+                            color: Theme.of(context).primaryColor,
+                            // endIndent: fontsize,
+                            thickness: 2,
                           ),
-                        ),
-                      ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            // crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              FlatButton.icon(
+                                hoverColor: Theme.of(context).primaryColorLight,
+                                onPressed: null,
+                                icon: Icon(
+                                  Icons.people,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                label: Text(
+                                  receivedData.participants.toString(),
+                                  style: TextStyle(
+                                    color: Theme.of(context).accentColor,
+                                    fontSize: fontsize - 4,
+                                  ),
+                                ),
+                              ),
+                              Icon(
+                                Icons.attach_money,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                              FlatButton(
+                                onPressed: () {},
+                                child: Icon(
+                                  Icons.star_border,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   )
                 : Text('First Time'),
@@ -120,12 +149,12 @@ class _HomeScreenState extends State<HomeScreen> {
               // width: 200,
               height: 50,
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context).primaryColor,
-                  width: 2,
-                ),
-                // borderRadius: BorderRadius.all(radius),
-              ),
+                  // border: Border.all(
+                  //   color: Theme.of(context).primaryColor,
+                  //   width: 2,
+                  // ),
+                  // borderRadius: BorderRadius.all(radius),
+                  ),
               // child: DropdownButton<String>(
               //   value: dropDown,
               //   icon: Icon(Icons.keyboard_arrow_down),
@@ -179,65 +208,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       // body: CircleShape(),
-    );
-  }
-}
-
-class ListViewButtons extends StatelessWidget {
-  const ListViewButtons({
-    Key key,
-    @required this.fontsize,
-  }) : super(key: key);
-
-  final double fontsize;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      scrollDirection: Axis.horizontal,
-      children: <Widget>[
-        RaisedButton.icon(
-          icon: Icon(Icons.ac_unit),
-          shape: RoundedRectangleBorder(side: BorderSide(color: Colors.white)),
-          onPressed: () {},
-          label: Text(
-            "Activity",
-            style: TextStyle(fontSize: fontsize),
-          ),
-          color: Theme.of(context).primaryColor,
-        ),
-        // Divider(),
-        RaisedButton.icon(
-          shape: RoundedRectangleBorder(side: BorderSide(color: Colors.white)),
-          icon: Icon(Icons.ac_unit),
-          onPressed: () {},
-          label: Text(
-            "Activity",
-            style: TextStyle(fontSize: fontsize),
-          ),
-          color: Theme.of(context).primaryColor,
-        ),
-        RaisedButton.icon(
-          icon: Icon(Icons.ac_unit),
-          shape: RoundedRectangleBorder(side: BorderSide(color: Colors.white)),
-          onPressed: () {},
-          label: Text(
-            "Activity",
-            style: TextStyle(fontSize: fontsize),
-          ),
-          color: Theme.of(context).primaryColor,
-        ),
-        RaisedButton.icon(
-          icon: Icon(Icons.ac_unit),
-          shape: RoundedRectangleBorder(side: BorderSide(color: Colors.white)),
-          onPressed: () {},
-          label: Text(
-            "Activity",
-            style: TextStyle(fontSize: fontsize),
-          ),
-          color: Theme.of(context).primaryColor,
-        ),
-      ],
     );
   }
 }

@@ -20,10 +20,10 @@ class TableData extends StatelessWidget {
     // print("VALUE");
     // print(value);
     return Table(
-      border: TableBorder.all(
-          // color: Colors.green,
-          // width: 10,
-          ),
+      // border: TableBorder.all(
+      //     // color: Colors.green,
+      //     // width: 10,
+      //     ),
       children: [
         TableRow(
           decoration: BoxDecoration(
