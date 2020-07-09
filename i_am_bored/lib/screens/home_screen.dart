@@ -147,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               margin: EdgeInsets.symmetric(vertical: 20.0),
               // width: 200,
-              height: 50,
+              height: 100,
               decoration: BoxDecoration(
                   // border: Border.all(
                   //   color: Theme.of(context).primaryColor,
@@ -155,6 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // ),
                   // borderRadius: BorderRadius.all(radius),
                   ),
+              child: ListViewButtons(fontsize: fontsize),
               // child: DropdownButton<String>(
               //   value: dropDown,
               //   icon: Icon(Icons.keyboard_arrow_down),
@@ -183,8 +184,10 @@ class _HomeScreenState extends State<HomeScreen> {
               //     });
               //   },
               // ),
-              child: ListViewButtons(fontsize: fontsize),
             ),
+            // Container(
+            //   child: Slider.adaptive(value: 0, onChanged: null),
+            // ),
             RaisedButton.icon(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
