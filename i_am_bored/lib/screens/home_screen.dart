@@ -67,16 +67,16 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              width: double.infinity,
-              child: Card(
-                child: Text(
-                  'How are you feeling today?',
-                  style: TextStyle(fontSize: fontsize),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
+            // Container(
+            //   width: double.infinity,
+            //   child: Card(
+            //     child: Text(
+            //       'How are you feeling today?',
+            //       style: TextStyle(fontSize: fontsize),
+            //       textAlign: TextAlign.center,
+            //     ),
+            //   ),
+            // ),
             firstTime
                 ? Container(
                     // width: Platform.isMacOS
@@ -144,6 +144,57 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   )
                 : Text('First Time'),
+            // Expanded(
+            //   child: GridView.count(
+            //     primary: false,
+            //     padding: const EdgeInsets.all(10),
+            //     crossAxisSpacing: 10,
+            //     mainAxisSpacing: 10,
+            //     crossAxisCount: 2,
+            //     children: <Widget>[
+            //       RaisedButton.icon(
+            //         icon: Icon(
+            //           Icons.attach_money,
+            //         ),
+            //         onPressed: () {},
+            //         label: Text(
+            //           "Price",
+            //           style: TextStyle(),
+            //         ),
+            //       ),
+            //       RaisedButton.icon(
+            //         icon: Icon(
+            //           Icons.attach_money,
+            //         ),
+            //         onPressed: () {},
+            //         label: Text(
+            //           "Price",
+            //           style: TextStyle(),
+            //         ),
+            //       ),
+            //       RaisedButton.icon(
+            //         icon: Icon(
+            //           Icons.attach_money,
+            //         ),
+            //         onPressed: () {},
+            //         label: Text(
+            //           "Price",
+            //           style: TextStyle(),
+            //         ),
+            //       ),
+            //       RaisedButton.icon(
+            //         icon: Icon(
+            //           Icons.attach_money,
+            //         ),
+            //         onPressed: () {},
+            //         label: Text(
+            //           "Price",
+            //           style: TextStyle(),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 20.0),
               // width: 200,
