@@ -17,7 +17,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
       borderRadius: BorderRadius.circular(10),
     );
     return GridView.count(
-      childAspectRatio: 4,
+      childAspectRatio: 5,
       primary: false,
       padding: const EdgeInsets.all(10),
       crossAxisSpacing: 5,

@@ -150,13 +150,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   )
                 : Text('First Time'),
-            Expanded(
-              child: GridViewButtons(),
-            ),
+            // Expanded(
+            //   child: GridViewButtons(),
+            // ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 20.0),
               // width: 200,
-              height: 100,
+
+              height: 270,
               // decoration: BoxDecoration(
               //   border: Border.all(
               //     color: Theme.of(context).primaryColor,
@@ -165,6 +166,9 @@ class _HomeScreenState extends State<HomeScreen> {
               // ),
               child: ListViewButtons(fontsize: fontsize),
             ),
+            // Expanded(
+            //   child: GridViewButtons(),
+            // ),
             RaisedButton.icon(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),

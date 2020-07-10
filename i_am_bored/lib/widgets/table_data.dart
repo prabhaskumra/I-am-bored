@@ -30,12 +30,12 @@ class TableData extends StatelessWidget {
               // color: Colors.yellow,
               ),
           children: [
-            Text(
-              'Activity',
-              // value.key,
-              style: TextStyle(fontSize: fontsize),
-              textAlign: TextAlign.center,
-            ),
+            // Text(
+            //   'Activity',
+            //   // value.key,
+            //   style: TextStyle(fontSize: fontsize),
+            //   textAlign: TextAlign.center,
+            // ),
             Text(
               value.activity,
               style: TextStyle(fontSize: fontsize),
@@ -46,13 +46,13 @@ class TableData extends StatelessWidget {
         //Second Row
         TableRow(
           children: [
-            Text(
-              "Type",
-              style: TextStyle(
-                fontSize: fontsize,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            // Text(
+            //   "Type",
+            //   style: TextStyle(
+            //     fontSize: fontsize,
+            //   ),
+            //   textAlign: TextAlign.center,
+            // ),
             Text(
               value.type,
               style: TextStyle(
@@ -63,53 +63,53 @@ class TableData extends StatelessWidget {
           ],
         ),
         // Third Row
-        TableRow(
-          children: [
-            Text(
-              "Participants",
-              style: TextStyle(
-                fontSize: fontsize,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              value.participants.toString(),
-              style: TextStyle(
-                fontSize: fontsize,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
+        // TableRow(
+        //   children: [
+        //     Text(
+        //       "Participants",
+        //       style: TextStyle(
+        //         fontSize: fontsize,
+        //       ),
+        //       textAlign: TextAlign.center,
+        //     ),
+        //     Text(
+        //       value.participants.toString(),
+        //       style: TextStyle(
+        //         fontSize: fontsize,
+        //       ),
+        //       textAlign: TextAlign.center,
+        //     ),
+        //   ],
+        // ),
         // 4th Row
-        TableRow(
-          children: [
-            Text(
-              "Price",
-              style: TextStyle(
-                fontSize: fontsize,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              "\$ " + value.price.toString(),
-              style: TextStyle(
-                fontSize: fontsize,
-              ),
-              textAlign: TextAlign.center,
-            )
-          ],
-        ),
+        // TableRow(
+        //   children: [
+        //     Text(
+        //       "Price",
+        //       style: TextStyle(
+        //         fontSize: fontsize,
+        //       ),
+        //       textAlign: TextAlign.center,
+        //     ),
+        //     Text(
+        //       "\$ " + value.price.toString(),
+        //       style: TextStyle(
+        //         fontSize: fontsize,
+        //       ),
+        //       textAlign: TextAlign.center,
+        //     )
+        //   ],
+        // ),
         // 5th Row
         TableRow(
           children: [
-            Text(
-              "Websit Link",
-              style: TextStyle(
-                fontSize: fontsize,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            // Text(
+            //   "Websit Link",
+            //   style: TextStyle(
+            //     fontSize: fontsize,
+            //   ),
+            //   textAlign: TextAlign.center,
+            // ),
             if (value.link == '')
               Text(
                 "No link",
@@ -131,24 +131,24 @@ class TableData extends StatelessWidget {
             // Text('hee'),
           ],
         ),
-        TableRow(
-          children: [
-            Text(
-              "Accesibility",
-              style: TextStyle(
-                fontSize: fontsize,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              value.accessibility.toString(),
-              style: TextStyle(
-                fontSize: fontsize,
-              ),
-              textAlign: TextAlign.center,
-            )
-          ],
-        ),
+        // TableRow(
+        //   children: [
+        //     Text(
+        //       "Accesibility",
+        //       style: TextStyle(
+        //         fontSize: fontsize,
+        //       ),
+        //       textAlign: TextAlign.center,
+        //     ),
+        //     Text(
+        //       value.accessibility.toString(),
+        //       style: TextStyle(
+        //         fontSize: fontsize,
+        //       ),
+        //       textAlign: TextAlign.center,
+        //     )
+        //   ],
+        // ),
       ],
     );
   }
