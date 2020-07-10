@@ -7,6 +7,7 @@ import '../models/bored_https_call.dart';
 import '../widgets/table_data.dart';
 import '../models/bored_data.dart';
 import '../widgets/list_view_buttons.dart';
+import '../widgets/gridview_buttons.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -82,6 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     // width: Platform.isMacOS
                     //     ? MediaQuery.of(context).size.width * .50
                     //     : double.infinity,
+                    height: MediaQuery.of(context).size.width * .70,
+                    //     : double.infinity,
                     decoration: BoxDecoration(
                       // border: Border.all(
                       //   color: Theme.of(context).primaryColor,
@@ -89,156 +92,79 @@ class _HomeScreenState extends State<HomeScreen> {
                       // ),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Card(
-                      // borderOnForeground: mounted,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      shadowColor: Theme.of(context).primaryColorDark,
-                      elevation: 20,
-                      child: Column(
-                        children: [
-                          TableData(
-                            fontsize: fontsize,
-                            value: receivedData,
-                          ),
-                          Divider(
-                            color: Theme.of(context).primaryColor,
-                            // endIndent: fontsize,
-                            thickness: 2,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            // crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
-                              FlatButton.icon(
-                                hoverColor: Theme.of(context).primaryColorLight,
-                                onPressed: null,
-                                icon: Icon(
-                                  Icons.people,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                                label: Text(
-                                  receivedData.participants.toString(),
-                                  style: TextStyle(
-                                    color: Theme.of(context).accentColor,
-                                    fontSize: fontsize - 4,
+                    child: SingleChildScrollView(
+                      child: Card(
+                        // borderOnForeground: mounted,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        shadowColor: Theme.of(context).primaryColorDark,
+                        elevation: 20,
+                        child: Column(
+                          children: [
+                            TableData(
+                              fontsize: fontsize,
+                              value: receivedData,
+                            ),
+                            Divider(
+                              color: Theme.of(context).primaryColor,
+                              // endIndent: fontsize,
+                              thickness: 2,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              // crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                FlatButton.icon(
+                                  hoverColor:
+                                      Theme.of(context).primaryColorLight,
+                                  onPressed: null,
+                                  icon: Icon(
+                                    Icons.people,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                  label: Text(
+                                    receivedData.participants.toString(),
+                                    style: TextStyle(
+                                      color: Theme.of(context).accentColor,
+                                      fontSize: fontsize - 4,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Icon(
-                                Icons.attach_money,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                              FlatButton(
-                                onPressed: () {},
-                                child: Icon(
-                                  Icons.star_border,
+                                Icon(
+                                  Icons.attach_money,
                                   color: Theme.of(context).primaryColor,
                                 ),
-                              )
-                            ],
-                          )
-                        ],
+                                FlatButton(
+                                  onPressed: () {},
+                                  child: Icon(
+                                    Icons.star_border,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   )
                 : Text('First Time'),
-            // Expanded(
-            //   child: GridView.count(
-            //     primary: false,
-            //     padding: const EdgeInsets.all(10),
-            //     crossAxisSpacing: 10,
-            //     mainAxisSpacing: 10,
-            //     crossAxisCount: 2,
-            //     children: <Widget>[
-            //       RaisedButton.icon(
-            //         icon: Icon(
-            //           Icons.attach_money,
-            //         ),
-            //         onPressed: () {},
-            //         label: Text(
-            //           "Price",
-            //           style: TextStyle(),
-            //         ),
-            //       ),
-            //       RaisedButton.icon(
-            //         icon: Icon(
-            //           Icons.attach_money,
-            //         ),
-            //         onPressed: () {},
-            //         label: Text(
-            //           "Price",
-            //           style: TextStyle(),
-            //         ),
-            //       ),
-            //       RaisedButton.icon(
-            //         icon: Icon(
-            //           Icons.attach_money,
-            //         ),
-            //         onPressed: () {},
-            //         label: Text(
-            //           "Price",
-            //           style: TextStyle(),
-            //         ),
-            //       ),
-            //       RaisedButton.icon(
-            //         icon: Icon(
-            //           Icons.attach_money,
-            //         ),
-            //         onPressed: () {},
-            //         label: Text(
-            //           "Price",
-            //           style: TextStyle(),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
+            Expanded(
+              child: GridViewButtons(),
+            ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 20.0),
               // width: 200,
               height: 100,
-              decoration: BoxDecoration(
-                  // border: Border.all(
-                  //   color: Theme.of(context).primaryColor,
-                  //   width: 2,
-                  // ),
-                  // borderRadius: BorderRadius.all(radius),
-                  ),
-              child: ListViewButtons(fontsize: fontsize),
-              // child: DropdownButton<String>(
-              //   value: dropDown,
-              //   icon: Icon(Icons.keyboard_arrow_down),
-              //   iconSize: 24,
-              //   elevation: 16,
-              //   style: TextStyle(
+              // decoration: BoxDecoration(
+              //   border: Border.all(
               //     color: Theme.of(context).primaryColor,
+              //     width: 2,
               //   ),
-              //   // underline: Container(
-              //   //   height: 2,
-              //   //   color: Theme.of(context).primaryColor,
-              //   // ),
-              //   items: <String>[
-              //     'Activity',
-              //     'Participants',
-              //     'Price',
-              //   ].map<DropdownMenuItem<String>>((String value) {
-              //     return DropdownMenuItem<String>(
-              //       value: value,
-              //       child: Text(value),
-              //     );
-              //   }).toList(),
-              //   onChanged: (String newValue) {
-              //     setState(() {
-              //       dropDown = newValue;
-              //     });
-              //   },
               // ),
+              child: ListViewButtons(fontsize: fontsize),
             ),
-            // Container(
-            //   child: Slider.adaptive(value: 0, onChanged: null),
-            // ),
             RaisedButton.icon(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
