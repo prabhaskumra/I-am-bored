@@ -161,70 +161,70 @@ class _ListViewButtonsState extends State<ListViewButtons> {
             ],
           ),
         ),
-        isActivity
-            ? Expanded(
-                child: GridViewButtons(),
-              )
-            : Row(
-                children: <Widget>[
-                  Container(
-                    width: 60,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      // border: Border.all(
-                      //   color: Theme.of(context).primaryColor,
-                      //   width: 1,
-                      // ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(7.0),
-                      child: Text(
-                        isActivity
-                            ? "Act"
-                            : (isParticipants
-                                ? "1"
-                                : (isPrice ? 'Low' : 'Least')),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Slider.adaptive(
-                      value: value,
-                      onChanged: (newValue) {
-                        setState(() {
-                          value = newValue;
-                        });
-                      },
-                      divisions: null,
-                      max: 5,
-                      min: 1,
-                      label: "112121",
-                    ),
-                  ),
-                  Container(
-                    width: 60,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      // border: Border.all(
-                      //   color: Theme.of(context).primaryColor,
-                      //   width: 1,
-                      // ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(7.0),
-                      child: Text(
-                        isActivity
-                            ? "Act"
-                            : (isParticipants
-                                ? "5"
-                                : (isPrice ? 'High' : 'Most')),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                ],
+        // isActivity
+        //     ? Expanded(
+        //         child: GridViewButtons(),
+        //       )
+        //     : Row(
+        Row(
+          children: <Widget>[
+            Container(
+              width: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                // border: Border.all(
+                //   color: Theme.of(context).primaryColor,
+                //   width: 1,
+                // ),
               ),
+              child: Padding(
+                padding: const EdgeInsets.all(7.0),
+                child: Text(
+                  isActivity
+                      ? "Act"
+                      : (isParticipants ? "1" : (isPrice ? 'Low' : 'Least')),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Slider.adaptive(
+                inactiveColor: Colors.blue,
+                // activeColor: Color,
+                activeColor: Colors.grey,
+                value: value,
+                onChanged: (newValue) {
+                  setState(() {
+                    value = newValue;
+                  });
+                },
+                divisions: null,
+                max: 5,
+                min: 1,
+                label: "112121",
+              ),
+            ),
+            Container(
+              width: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                // border: Border.all(
+                //   color: Theme.of(context).primaryColor,
+                //   width: 1,
+                // ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(7.0),
+                child: Text(
+                  isActivity
+                      ? "Act"
+                      : (isParticipants ? "5" : (isPrice ? 'High' : 'Most')),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }

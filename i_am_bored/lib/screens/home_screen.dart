@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
+import 'package:share/share.dart';
 
 import '../widgets/circle_shape.dart';
 import '../widgets/app_drawer.dart';
@@ -21,22 +23,41 @@ class _HomeScreenState extends State<HomeScreen> {
   BoredData receivedData;
   bool firstTime = false;
   String dropDown = 'Activity';
+  // var _isInit = true;
+  var _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  // @override
+  // void didChangeDependencies() {
+  //   if (_isInit) {
+  //     setState(() {
+  //       _isLoading = true;
+  //     });
+  //     _isLoading = true;
+  //   }
+  //   _isInit = false;
+  //   super.didChangeDependencies();
+  // }
 
   Future<void> _fetchData() async {
+    setState(() {
+      _isLoading = true;
+    });
     BoredData value;
     receivedData = await BoredHttpsCall().callByActivity(value);
-    // receivedData = value;
-
     setState(() {
       firstTime = true;
+      _isLoading = false;
     });
-
-    // print("RECEIED DATA");
-    // print(receivedData.key);
   }
 
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: kToolbarHeight / 1.2,
@@ -53,6 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
             fontSize: fontsize,
           ),
         ),
+        centerTitle: true,
       ),
       drawer: AppDrawer(),
       body: Container(
@@ -68,52 +90,72 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Container(
-            //   width: double.infinity,
-            //   child: Card(
-            //     child: Text(
-            //       'How are you feeling today?',
-            //       style: TextStyle(fontSize: fontsize),
-            //       textAlign: TextAlign.center,
-            //     ),
-            //   ),
-            // ),
             firstTime
                 ? Container(
-                    // width: Platform.isMacOS
-                    //     ? MediaQuery.of(context).size.width * .50
+                    height: mediaQuery.size.height * .30,
                     //     : double.infinity,
-                    height: MediaQuery.of(context).size.width * .70,
-                    //     : double.infinity,
-                    decoration: BoxDecoration(
-                      // border: Border.all(
-                      //   color: Theme.of(context).primaryColor,
-                      //   width: 1,
-                      // ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: SingleChildScrollView(
-                      child: Card(
-                        // borderOnForeground: mounted,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        shadowColor: Theme.of(context).primaryColorDark,
-                        elevation: 20,
-                        child: Column(
-                          children: [
-                            TableData(
-                              fontsize: fontsize,
-                              value: receivedData,
+                    // decoration: BoxDecoration(
+                    //   border: Border.all(
+                    //     color: Theme.of(context).primaryColor,
+                    //     width: 1,
+                    //   ),
+                    //   borderRadius: BorderRadius.circular(12),
+                    // ),
+                    child: Card(
+                      // borderOnForeground: mounted,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      shadowColor: Theme.of(context).primaryColorDark,
+                      elevation: 20,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SingleChildScrollView(
+                            child: Container(
+                              height: (mediaQuery.size.height * .30) / 1.5,
+                              // decoration: BoxDecoration(
+                              //   border: Border.all(
+                              //     color: Theme.of(context).primaryColor,
+                              //     width: 1,
+                              //   ),
+                              //   borderRadius: BorderRadius.circular(12),
+                              // ),
+                              child: TableData(
+                                fontsize: fontsize,
+                                value: receivedData,
+                              ),
                             ),
-                            Divider(
-                              color: Theme.of(context).primaryColor,
-                              // endIndent: fontsize,
-                              thickness: 2,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              // crossAxisAlignment: CrossAxisAlignment.end,
+                          ),
+                          Container(
+                            height: (mediaQuery.size.height * .30) / 60,
+                            // decoration: BoxDecoration(
+                            //   border: Border.all(
+                            //     color: Theme.of(context).primaryColor,
+                            //     width: 1,
+                            //   ),
+                            //   borderRadius: BorderRadius.circular(12),
+                            // ),
+                            child: _isLoading
+                                ? LinearProgressIndicator(
+                                    minHeight: 3,
+                                  )
+                                : Divider(
+                                    color: Theme.of(context).primaryColor,
+                                    thickness: 3,
+                                  ),
+                          ),
+                          Container(
+                            // decoration: BoxDecoration(
+                            //   border: Border.all(
+                            //     color: Theme.of(context).primaryColor,
+                            //     width: 1,
+                            //   ),
+                            //   borderRadius: BorderRadius.circular(12),
+                            // ),
+                            height: (mediaQuery.size.height * .30) / 6,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 FlatButton.icon(
                                   hoverColor:
@@ -131,9 +173,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                 ),
-                                Icon(
-                                  Icons.attach_money,
-                                  color: Theme.of(context).primaryColor,
+                                FlatButton(
+                                  child: Icon(
+                                    Icons.attach_money,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                  onPressed: null,
                                 ),
                                 FlatButton(
                                   onPressed: () {},
@@ -141,23 +186,61 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Icons.star_border,
                                     color: Theme.of(context).primaryColor,
                                   ),
-                                )
+                                ),
+                                // FlatButton(
+                                //   child: Icon(
+                                //     Icons.share,
+                                //     color: Theme.of(context).primaryColor,
+                                //   ),
+                                //   onPressed: () {},
+                                // ),
+                                FlatButton(
+                                  child: Platform.isIOS
+                                      ? Icon(
+                                          IconData(
+                                            62666, //share ICON
+                                            fontFamily: CupertinoIcons.iconFont,
+                                            fontPackage:
+                                                CupertinoIcons.iconFontPackage,
+                                          ),
+                                          color: Theme.of(context).primaryColor,
+                                        )
+                                      : Icon(
+                                          Icons.share,
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                  onPressed: () {
+                                    Share.share(receivedData.activity);
+                                  },
+                                ),
+                                // CupertinoButton(
+                                //   color: Theme.of(context).primaryColor,
+                                //   child: Icon(
+                                //     IconData(
+                                //       0xf4ca,
+                                //       fontFamily: CupertinoIcons.iconFont,
+                                //       fontPackage:
+                                //           CupertinoIcons.iconFontPackage,
+                                //     ),
+                                //   ),
+                                //   onPressed: () {},
+                                // ),
                               ],
-                            )
-                          ],
-                        ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   )
                 : Text('First Time'),
-            // Expanded(
-            //   child: GridViewButtons(),
-            // ),
+            Expanded(
+              child: GridViewButtons(),
+            ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 20.0),
               // width: 200,
 
-              height: 270,
+              height: 100,
               // decoration: BoxDecoration(
               //   border: Border.all(
               //     color: Theme.of(context).primaryColor,
@@ -169,24 +252,34 @@ class _HomeScreenState extends State<HomeScreen> {
             // Expanded(
             //   child: GridViewButtons(),
             // ),
-            RaisedButton.icon(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                side: BorderSide(color: Theme.of(context).primaryColor),
-              ),
-              icon: Icon(
-                Icons.shuffle,
-                color: Colors.white,
-              ),
-              label: Text(
-                "Find Something",
-                style: TextStyle(
-                  fontSize: fontsize,
+            Container(
+              width: mediaQuery.size.width * 0.6,
+              height: 42,
+              // decoration: BoxDecoration(
+              //   border: Border.all(
+              //     color: Theme.of(context).primaryColor,
+              //     width: 2,
+              //   ),
+              // ),
+              child: RaisedButton.icon(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  side: BorderSide(color: Theme.of(context).primaryColor),
+                ),
+                icon: Icon(
+                  Icons.shuffle,
                   color: Colors.white,
                 ),
+                label: Text(
+                  "Find Something",
+                  style: TextStyle(
+                    fontSize: fontsize,
+                    color: Colors.white,
+                  ),
+                ),
+                onPressed: _fetchData,
+                color: Theme.of(context).primaryColor,
               ),
-              onPressed: _fetchData,
-              color: Theme.of(context).primaryColor,
             ),
           ],
         ),
