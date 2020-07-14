@@ -3,14 +3,46 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'bored_data.dart';
+import '../models/variables.dart' as globals;
 
 class BoredHttpsCall {
   Future hasInitilized;
 
   List<BoredData> items = [];
 
-  Future<BoredData> callByActivity(BoredData value) async {
-    const url = 'https://www.boredapi.com/api/activity/';
+  Future<BoredData> callByActivity(
+      BoredData value, String callKey, double callValue) async {
+    String url;
+
+    switch (globals.callKey) {
+      case "isActivity":
+        {
+          url = 'https://www.boredapi.com/api/activity/';
+          break;
+        }
+
+      case "isParticipants":
+        {
+          url =
+              'http://www.boredapi.com/api/activity?participants=${globals.participantsKey}';
+          break;
+        }
+
+      case "isPrice":
+        {
+          url =
+              'http://www.boredapi.com/api/activity?price=${globals.priceKey}';
+          break;
+        }
+
+      case "isAccessibility":
+        {
+          url =
+              'http://www.boredapi.com/api/activity?accessibility=${globals.accessibliltyKey}';
+          break;
+        }
+    }
+
     try {
       final response = await http.get(url);
       final extranctedData = json.decode(response.body) as Map<String, dynamic>;
@@ -26,12 +58,7 @@ class BoredHttpsCall {
         key: extranctedData['key'],
         accessibility: extranctedData['accessibility'] + 0.0,
       );
-
       return value;
-
-      print(value.key);
-
-      print("readching here");
     } catch (error) {
       throw (error);
     }

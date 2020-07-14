@@ -10,6 +10,7 @@ import '../widgets/table_data.dart';
 import '../models/bored_data.dart';
 import '../widgets/list_view_buttons.dart';
 import '../widgets/gridview_buttons.dart';
+import '../models/variables.dart' as globals;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -25,30 +26,24 @@ class _HomeScreenState extends State<HomeScreen> {
   String dropDown = 'Activity';
   // var _isInit = true;
   var _isLoading = false;
+  String callKey = 'byActivity';
+  double callValue;
+
+  // ListViewButtons(fontsize: fontsize) listButtons;
+  ListViewButtons listButtons = ListViewButtons(fontsize: fontsize);
 
   @override
   void initState() {
     super.initState();
   }
 
-  // @override
-  // void didChangeDependencies() {
-  //   if (_isInit) {
-  //     setState(() {
-  //       _isLoading = true;
-  //     });
-  //     _isLoading = true;
-  //   }
-  //   _isInit = false;
-  //   super.didChangeDependencies();
-  // }
-
   Future<void> _fetchData() async {
     setState(() {
       _isLoading = true;
     });
     BoredData value;
-    receivedData = await BoredHttpsCall().callByActivity(value);
+    receivedData =
+        await BoredHttpsCall().callByActivity(value, callKey, callValue);
     setState(() {
       firstTime = true;
       _isLoading = false;
@@ -111,16 +106,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          SingleChildScrollView(
-                            child: Container(
-                              height: (mediaQuery.size.height * .30) / 1.5,
-                              // decoration: BoxDecoration(
-                              //   border: Border.all(
-                              //     color: Theme.of(context).primaryColor,
-                              //     width: 1,
-                              //   ),
-                              //   borderRadius: BorderRadius.circular(12),
-                              // ),
+                          Container(
+                            height: (mediaQuery.size.height * .30) / 1.5,
+                            // decoration: BoxDecoration(
+                            //   border: Border.all(
+                            //     color: Theme.of(context).primaryColor,
+                            //     width: 1,
+                            //   ),
+                            //   borderRadius: BorderRadius.circular(12),
+                            // ),
+                            child: SingleChildScrollView(
                               child: TableData(
                                 fontsize: fontsize,
                                 value: receivedData,
@@ -247,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
               //     width: 2,
               //   ),
               // ),
-              child: ListViewButtons(fontsize: fontsize),
+              child: listButtons,
             ),
             // Expanded(
             //   child: GridViewButtons(),
@@ -277,7 +272,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                   ),
                 ),
-                onPressed: _fetchData,
+                onPressed: () {
+                  // callKey = ListViewButtons(
+                  //   fontsize: fontsize,
+                  // ).getCallKeyValue();
+                  // callKey = ListViewButtons
+                  // print(callKey);
+                  print(globals.callKey);
+                  // globals.callKey = 'hhdfahsdhfad';
+                  // print(globals.callKey);
+                  _fetchData();
+                },
                 color: Theme.of(context).primaryColor,
               ),
             ),

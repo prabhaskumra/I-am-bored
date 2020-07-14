@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
-import '../widgets/gridview_buttons.dart';
-
-// enum SelectedButton {
-//   Activity,
-//   Paricipants,
-//   Price,
-//   Accessibility,
-// }
+import '../models/variables.dart' as globals;
 
 class ListViewButtons extends StatefulWidget {
   const ListViewButtons({
     Key key,
     @required this.fontsize,
+    // @required this.
   }) : super(key: key);
 
   final double fontsize;
@@ -22,12 +17,22 @@ class ListViewButtons extends StatefulWidget {
 }
 
 class _ListViewButtonsState extends State<ListViewButtons> {
-  bool isActivity = true;
-  bool isParticipants = false;
+  bool isActivity = false;
+  bool isParticipants = true;
   bool isPrice = false;
   bool isAccessibility = false;
 
   var value = 1.0;
+  var accessValue = 0.0;
+  var priceValue = 0.0;
+
+  // String getCallKey() {
+  //   if (isAccessibility)
+  //     return 'byAccessibility';
+  //   else if (isParticipants)
+  //     return 'byParticipants';
+  //   else if (isPrice) return 'byPrice';
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -40,21 +45,28 @@ class _ListViewButtonsState extends State<ListViewButtons> {
 
     void setKey(String key) {
       setState(() {
-        if (key == 'isActivity') {
-          isActivity = true;
-          isParticipants = isAccessibility = isPrice = false;
-        } else if (key == 'isParticipants') {
+//         if (key == 'isActivity') {
+//           isActivity = true;
+//           isParticipants = isAccessibility = isPrice = false;
+//           globals.callKey = 'isActivity';
+// } else
+        if (key == 'isParticipants') {
           isParticipants = true;
           isPrice = isAccessibility = isActivity = false;
+          globals.callKey = 'isParticipants';
         } else if (key == 'isPrice') {
           isPrice = true;
           isParticipants = isAccessibility = isActivity = false;
+          globals.callKey = 'isPrice';
         } else if (key == 'isAccessibility') {
           isAccessibility = true;
           isParticipants = isActivity = isPrice = false;
+          globals.callKey = 'isAccessibility';
         }
       });
     }
+
+    // double getCallValue() {}
 
     return Column(
       children: [
@@ -63,29 +75,29 @@ class _ListViewButtonsState extends State<ListViewButtons> {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: RaisedButton.icon(
-                  icon: Icon(
-                    Icons.ac_unit,
-                    color: isActivity ? Colors.white : Colors.black,
-                  ),
-                  shape: roundedRectangleBorder,
-                  onPressed: () {
-                    setKey('isActivity');
-                  },
-                  label: Text(
-                    "Activity",
-                    style: TextStyle(
-                      fontSize: widget.fontsize,
-                      color: isActivity ? Colors.white : Colors.black,
-                    ),
-                  ),
-                  color: isActivity
-                      ? Theme.of(context).primaryColor
-                      : Colors.white,
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(5.0),
+              //   child: RaisedButton.icon(
+              //     icon: Icon(
+              //       Icons.ac_unit,
+              //       color: isActivity ? Colors.white : Colors.black,
+              //     ),
+              //     shape: roundedRectangleBorder,
+              //     onPressed: () {
+              //       setKey('isActivity');
+              //     },
+              //     label: Text(
+              //       "Activity",
+              //       style: TextStyle(
+              //         fontSize: widget.fontsize,
+              //         color: isActivity ? Colors.white : Colors.black,
+              //       ),
+              //     ),
+              //     color: isActivity
+              //         ? Theme.of(context).primaryColor
+              //         : Colors.white,
+              //   ),
+              // ),
               // Divider(),
               Padding(
                 padding: const EdgeInsets.all(5.0),
@@ -161,11 +173,6 @@ class _ListViewButtonsState extends State<ListViewButtons> {
             ],
           ),
         ),
-        // isActivity
-        //     ? Expanded(
-        //         child: GridViewButtons(),
-        //       )
-        //     : Row(
         Row(
           children: <Widget>[
             Container(
@@ -192,16 +199,43 @@ class _ListViewButtonsState extends State<ListViewButtons> {
                 inactiveColor: Colors.blue,
                 // activeColor: Color,
                 activeColor: Colors.grey,
-                value: value,
+                value: isPrice
+                    ? priceValue
+                    : (isAccessibility ? accessValue : value),
                 onChanged: (newValue) {
                   setState(() {
-                    value = newValue;
+                    if (isAccessibility)
+                      accessValue = double.parse((newValue).toStringAsFixed(2));
+                    else if (isParticipants)
+                      value = newValue;
+                    else if (isPrice)
+                      priceValue = double.parse((newValue).toStringAsFixed(2));
+
+                    if (isAccessibility) {
+                      globals.accessibliltyKey =
+                          double.parse((newValue).toStringAsFixed(1));
+                      print(globals.accessibliltyKey);
+                    } else if (isPrice) {
+                      // if (newValue > 0.9)
+                      //   newValue -= 0.2;
+                      // else if (newValue > 0.8 && newValue < 0.9)
+                      //   newValue -= 0.1;
+
+                      globals.priceKey =
+                          double.parse((newValue).toStringAsFixed(1));
+                      print(globals.priceKey);
+                    } else if (isParticipants) {
+                      globals.participantsKey = newValue.toInt();
+                      print(globals.participantsKey);
+                    }
                   });
                 },
-                divisions: null,
-                max: 5,
-                min: 1,
-                label: "112121",
+                divisions: isParticipants ? 4 : null,
+                // max: (isPrice || isAccessibility) ? 1 : 5,
+
+                max: isParticipants ? 5 : (isAccessibility ? 1 : 0.8),
+                min: (isPrice || isAccessibility) ? 0 : 1,
+                label: (isPrice || isAccessibility) ? '$accessValue' : '$value',
               ),
             ),
             Container(
