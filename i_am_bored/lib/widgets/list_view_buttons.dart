@@ -40,7 +40,6 @@ class _ListViewButtonsState extends State<ListViewButtons> {
 
     var roundedRectangleBorder = RoundedRectangleBorder(
       side: BorderSide(color: Theme.of(context).primaryColor),
-      borderRadius: BorderRadius.circular(10),
       borderRadius: BorderRadius.circular(20),
     );
 
