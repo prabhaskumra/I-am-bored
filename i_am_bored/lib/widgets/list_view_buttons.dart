@@ -41,6 +41,7 @@ class _ListViewButtonsState extends State<ListViewButtons> {
     var roundedRectangleBorder = RoundedRectangleBorder(
       side: BorderSide(color: Theme.of(context).primaryColor),
       borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(20),
     );
 
     void setKey(String key) {
@@ -73,6 +74,7 @@ class _ListViewButtonsState extends State<ListViewButtons> {
         SizedBox(
           height: 50,
           child: ListView(
+            shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             children: <Widget>[
               // Padding(
@@ -216,11 +218,6 @@ class _ListViewButtonsState extends State<ListViewButtons> {
                           double.parse((newValue).toStringAsFixed(1));
                       print(globals.accessibliltyKey);
                     } else if (isPrice) {
-                      // if (newValue > 0.9)
-                      //   newValue -= 0.2;
-                      // else if (newValue > 0.8 && newValue < 0.9)
-                      //   newValue -= 0.1;
-
                       globals.priceKey =
                           double.parse((newValue).toStringAsFixed(1));
                       print(globals.priceKey);
@@ -230,7 +227,7 @@ class _ListViewButtonsState extends State<ListViewButtons> {
                     }
                   });
                 },
-                divisions: isParticipants ? 4 : null,
+                divisions: isParticipants ? 4 : (isPrice ? 8 : 10),
                 // max: (isPrice || isAccessibility) ? 1 : 5,
 
                 max: isParticipants ? 5 : (isAccessibility ? 1 : 0.8),

@@ -232,6 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: GridViewButtons(),
             ),
             Container(
+              alignment: Alignment.center,
               margin: EdgeInsets.symmetric(vertical: 20.0),
               // width: 200,
 
@@ -277,10 +278,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   //   fontsize: fontsize,
                   // ).getCallKeyValue();
                   // callKey = ListViewButtons
-                  // print(callKey);
+                  print(callKey);
                   print(globals.callKey);
                   // globals.callKey = 'hhdfahsdhfad';
-                  // print(globals.callKey);
+                  print(globals.callKey);
                   _fetchData();
                 },
                 color: Theme.of(context).primaryColor,

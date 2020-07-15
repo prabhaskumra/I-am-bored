@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../models/variables.dart' as globals;
+
 class GridViewButtons extends StatefulWidget {
   const GridViewButtons({
     Key key,
@@ -10,11 +12,68 @@ class GridViewButtons extends StatefulWidget {
 }
 
 class _GridViewButtonsState extends State<GridViewButtons> {
+  bool isAll = true;
+  bool isEducation = false;
+  bool isRecreational = false;
+  bool isSocial = false;
+  bool isDIY = false;
+  bool isCharity = false;
+  bool isCooking = false;
+  bool isRelaxtion = false;
+  bool isMusic = false;
+  bool isBusywork = false;
+
+  void setColorKey(String key) {
+    setState(() {
+      if (key == 'isAll') {
+        isAll = true;
+        isEducation = isRecreational = isSocial = isDIY =
+            isCharity = isCooking = isRelaxtion = isMusic = isBusywork = false;
+      } else if (key == 'isEducation') {
+        isEducation = true;
+        isAll = isRecreational = isSocial = isDIY =
+            isCharity = isCooking = isRelaxtion = isMusic = isBusywork = false;
+      } else if (key == 'isRecreational') {
+        isRecreational = true;
+        isEducation = isRelaxtion = isSocial = isDIY =
+            isCharity = isCooking = isAll = isMusic = isBusywork = false;
+      } else if (key == 'isSocial') {
+        isSocial = true;
+        isEducation = isRecreational = isRelaxtion = isDIY =
+            isCharity = isCooking = isAll = isMusic = isBusywork = false;
+      } else if (key == 'isDIY') {
+        isDIY = true;
+        isEducation = isRecreational = isSocial = isRelaxtion =
+            isCharity = isCooking = isAll = isMusic = isBusywork = false;
+      } else if (key == 'isCharity') {
+        isCharity = true;
+        isEducation = isRecreational = isSocial = isDIY =
+            isRelaxtion = isCooking = isAll = isMusic = isBusywork = false;
+      } else if (key == 'isCooking') {
+        isCooking = true;
+        isEducation = isRecreational = isSocial = isDIY =
+            isCharity = isRelaxtion = isAll = isMusic = isBusywork = false;
+      } else if (key == 'isRelaxation') {
+        isRelaxtion = true;
+        isEducation = isRecreational = isSocial = isDIY =
+            isCharity = isCooking = isAll = isMusic = isBusywork = false;
+      } else if (key == 'isMusic') {
+        isMusic = true;
+        isEducation = isRecreational = isSocial = isDIY =
+            isCharity = isCooking = isAll = isRelaxtion = isBusywork = false;
+      } else if (key == 'isBusywork') {
+        isBusywork = true;
+        isEducation = isRecreational = isSocial = isDIY =
+            isCharity = isCooking = isAll = isMusic = isRelaxtion = false;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var roundedRectangleBorder = RoundedRectangleBorder(
       side: BorderSide(color: Theme.of(context).primaryColor),
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(20),
     );
     return GridView.count(
       childAspectRatio: 5,
@@ -28,91 +87,161 @@ class _GridViewButtonsState extends State<GridViewButtons> {
         RaisedButton(
           child: Text(
             'All',
-            style: TextStyle(fontSize: 23),
+            style: TextStyle(
+              fontSize: 23,
+              color: isAll ? Colors.white : Colors.black,
+            ),
           ),
-          onPressed: () {},
-          color: Theme.of(context).bottomAppBarColor,
+          onPressed: () {
+            setColorKey('isAll');
+          },
+          color: isAll
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).bottomAppBarColor,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
           child: Text(
             'Education',
-            style: TextStyle(fontSize: 23),
+            style: TextStyle(
+              fontSize: 23,
+              color: isEducation ? Colors.white : Colors.black,
+            ),
           ),
-          onPressed: () {},
-          color: Theme.of(context).bottomAppBarColor,
+          onPressed: () {
+            setColorKey('isEducation');
+          },
+          color: isEducation
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).bottomAppBarColor,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
           child: Text(
             'Recreational',
-            style: TextStyle(fontSize: 23),
+            style: TextStyle(
+              fontSize: 23,
+              color: isRecreational ? Colors.white : Colors.black,
+            ),
           ),
-          onPressed: () {},
-          color: Theme.of(context).bottomAppBarColor,
+          onPressed: () {
+            setColorKey('isRecreational');
+          },
+          color: isRecreational
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).bottomAppBarColor,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
           child: Text(
             'Social',
-            style: TextStyle(fontSize: 23),
+            style: TextStyle(
+              fontSize: 23,
+              color: isSocial ? Colors.white : Colors.black,
+            ),
           ),
-          onPressed: () {},
-          color: Theme.of(context).bottomAppBarColor,
+          onPressed: () {
+            setColorKey('isSocial');
+          },
+          color: isSocial
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).bottomAppBarColor,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
           child: Text(
             'DIY',
-            style: TextStyle(fontSize: 23),
+            style: TextStyle(
+              fontSize: 23,
+              color: isDIY ? Colors.white : Colors.black,
+            ),
           ),
-          onPressed: () {},
-          color: Theme.of(context).bottomAppBarColor,
+          onPressed: () {
+            setColorKey('isDIY');
+          },
+          color: isDIY
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).bottomAppBarColor,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
           child: Text(
             'Charity',
-            style: TextStyle(fontSize: 23),
+            style: TextStyle(
+              fontSize: 23,
+              color: isCharity ? Colors.white : Colors.black,
+            ),
           ),
-          onPressed: () {},
-          color: Theme.of(context).bottomAppBarColor,
+          onPressed: () {
+            setColorKey('isCharity');
+          },
+          color: isCharity
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).bottomAppBarColor,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
           child: Text(
             'Cooking',
-            style: TextStyle(fontSize: 23),
+            style: TextStyle(
+              fontSize: 23,
+              color: isCooking ? Colors.white : Colors.black,
+            ),
           ),
-          onPressed: () {},
-          color: Theme.of(context).bottomAppBarColor,
+          onPressed: () {
+            setColorKey('isCooking');
+          },
+          color: isCooking
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).bottomAppBarColor,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
           child: Text(
             'Relaxation',
-            style: TextStyle(fontSize: 23),
+            style: TextStyle(
+              fontSize: 23,
+              color: isRelaxtion ? Colors.white : Colors.black,
+            ),
           ),
-          onPressed: () {},
-          color: Theme.of(context).bottomAppBarColor,
+          onPressed: () {
+            setColorKey('isRelaxation');
+          },
+          color: isRelaxtion
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).bottomAppBarColor,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
           child: Text(
             'Music',
-            style: TextStyle(fontSize: 23),
+            style: TextStyle(
+              fontSize: 23,
+              color: isMusic ? Colors.white : Colors.black,
+            ),
           ),
-          onPressed: () {},
-          color: Theme.of(context).bottomAppBarColor,
+          onPressed: () {
+            setColorKey('isMusic');
+          },
+          color: isMusic
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).bottomAppBarColor,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
           child: Text(
             'Busywork',
-            style: TextStyle(fontSize: 23),
+            style: TextStyle(
+              fontSize: 23,
+              color: isBusywork ? Colors.white : Colors.black,
+            ),
           ),
-          onPressed: () {},
-          color: Theme.of(context).bottomAppBarColor,
+          onPressed: () {
+            setColorKey('isBusywork');
+          },
+          color: isBusywork
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).bottomAppBarColor,
           shape: roundedRectangleBorder,
         ),
       ],

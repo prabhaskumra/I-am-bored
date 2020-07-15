@@ -36,7 +36,8 @@ class TableData extends StatelessWidget {
             //   style: TextStyle(fontSize: fontsize),
             //   textAlign: TextAlign.center,
             // ),
-            Text(
+
+            SelectableText(
               value.activity,
               style: TextStyle(fontSize: fontsize),
               textAlign: TextAlign.center,
