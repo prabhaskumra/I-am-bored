@@ -75,6 +75,9 @@ class _GridViewButtonsState extends State<GridViewButtons> {
       side: BorderSide(color: Theme.of(context).primaryColor),
       borderRadius: BorderRadius.circular(20),
     );
+
+    // var mediaQuery = MediaQuery.of(context);
+
     return GridView.count(
       childAspectRatio: 5,
       primary: false,
@@ -95,10 +98,9 @@ class _GridViewButtonsState extends State<GridViewButtons> {
           onPressed: () {
             setColorKey('isAll');
           },
-          color: isAll
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).bottomAppBarColor,
+          color: isAll ? Theme.of(context).primaryColor : Colors.white,
           shape: roundedRectangleBorder,
+          // autofocus: false,
         ),
         RaisedButton(
           child: Text(
@@ -111,9 +113,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
           onPressed: () {
             setColorKey('isEducation');
           },
-          color: isEducation
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).bottomAppBarColor,
+          color: isEducation ? Theme.of(context).primaryColor : Colors.white,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
@@ -127,9 +127,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
           onPressed: () {
             setColorKey('isRecreational');
           },
-          color: isRecreational
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).bottomAppBarColor,
+          color: isRecreational ? Theme.of(context).primaryColor : Colors.white,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
@@ -143,9 +141,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
           onPressed: () {
             setColorKey('isSocial');
           },
-          color: isSocial
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).bottomAppBarColor,
+          color: isSocial ? Theme.of(context).primaryColor : Colors.white,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
@@ -159,9 +155,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
           onPressed: () {
             setColorKey('isDIY');
           },
-          color: isDIY
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).bottomAppBarColor,
+          color: isDIY ? Theme.of(context).primaryColor : Colors.white,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
@@ -175,9 +169,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
           onPressed: () {
             setColorKey('isCharity');
           },
-          color: isCharity
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).bottomAppBarColor,
+          color: isCharity ? Theme.of(context).primaryColor : Colors.white,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
@@ -191,9 +183,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
           onPressed: () {
             setColorKey('isCooking');
           },
-          color: isCooking
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).bottomAppBarColor,
+          color: isCooking ? Theme.of(context).primaryColor : Colors.white,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
@@ -207,9 +197,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
           onPressed: () {
             setColorKey('isRelaxation');
           },
-          color: isRelaxtion
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).bottomAppBarColor,
+          color: isRelaxtion ? Theme.of(context).primaryColor : Colors.white,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
@@ -223,9 +211,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
           onPressed: () {
             setColorKey('isMusic');
           },
-          color: isMusic
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).bottomAppBarColor,
+          color: isMusic ? Theme.of(context).primaryColor : Colors.white,
           shape: roundedRectangleBorder,
         ),
         RaisedButton(
@@ -239,9 +225,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
           onPressed: () {
             setColorKey('isBusywork');
           },
-          color: isBusywork
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).bottomAppBarColor,
+          color: isBusywork ? Theme.of(context).primaryColor : Colors.white,
           shape: roundedRectangleBorder,
         ),
       ],

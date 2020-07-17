@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+// import 'dart:io';
 
 import './screens/home_screen.dart';
 import './screens/settings_screen.dart';
 import './screens/about_app_screen.dart';
 import './screens/donation_screen.dart';
+import './models/variables.dart' as globals;
 
 void main() {
   runApp(MyApp());
@@ -20,11 +22,15 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.teal,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'SansPro',
+        brightness: Brightness.light,
         textTheme: TextTheme(
           caption: TextStyle(
             fontSize: 20.0,
           ),
         ),
+        // darkTheme: ThemeData(
+        //   brightness: Brightness.dark,
+        // ),
       ),
       home: HomeScreen(),
       routes: {

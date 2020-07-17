@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/bored_https_call.dart';
 import '../models/bored_data.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 
 class TableData extends StatelessWidget {
   TableData({
@@ -17,8 +18,6 @@ class TableData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print("VALUE");
-    // print(value);
     return Table(
       // border: TableBorder.all(
       //     // color: Colors.green,
@@ -58,11 +57,20 @@ class TableData extends StatelessWidget {
               value.type,
               style: TextStyle(
                 fontSize: fontsize,
+                fontStyle: FontStyle.italic,
+                color: Colors.grey,
+                // decorationStyle: TextDecorationStyle.wavy,
               ),
               textAlign: TextAlign.center,
             )
           ],
         ),
+        // TableRow(
+        //   children: [
+        //     Spacer(),
+        //   ],
+        // ),
+        // Spacer(),
         // Third Row
         // TableRow(
         //   children: [
@@ -120,13 +128,21 @@ class TableData extends StatelessWidget {
                 textAlign: TextAlign.center,
               )
             else
-              Text(
-                value.link,
+              // Text(
+              //   value.link,
+              //   style: TextStyle(
+              //     fontSize: fontsize / 1.2,
+              //   ),
+              //   textAlign: TextAlign.center,
+              //   // INSERT THE LINK
+              // ),
+              // Spacer(),
+              SelectableLinkify(
+                text: value.link,
                 style: TextStyle(
                   fontSize: fontsize / 1.2,
                 ),
                 textAlign: TextAlign.center,
-                // INSERT THE LINK
               ),
 
             // Text('hee'),

@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   BoredHttpsCall callClass;
   BoredData receivedData;
-  bool firstTime = false;
+  bool firstTime = true;
   String dropDown = 'Activity';
   // var _isInit = true;
   var _isLoading = false;
@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
     receivedData =
         await BoredHttpsCall().callByActivity(value, callKey, callValue);
     setState(() {
-      firstTime = true;
+      firstTime = false;
       _isLoading = false;
     });
   }
@@ -56,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: kToolbarHeight / 1.2,
+        // toolbarHeight: kToolbarHeight * 5,
         elevation: 20,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -75,7 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.blue[50],
+          // color: Colors.blue[50],
+          // color: Colors.blue,
           border: Border.all(
             color: Colors.white10,
             width: 5,
@@ -85,149 +87,152 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            firstTime
-                ? Container(
-                    height: mediaQuery.size.height * .30,
-                    //     : double.infinity,
-                    // decoration: BoxDecoration(
-                    //   border: Border.all(
-                    //     color: Theme.of(context).primaryColor,
-                    //     width: 1,
-                    //   ),
-                    //   borderRadius: BorderRadius.circular(12),
-                    // ),
-                    child: Card(
-                      // borderOnForeground: mounted,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      shadowColor: Theme.of(context).primaryColorDark,
-                      elevation: 20,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            height: (mediaQuery.size.height * .30) / 1.5,
-                            // decoration: BoxDecoration(
-                            //   border: Border.all(
-                            //     color: Theme.of(context).primaryColor,
-                            //     width: 1,
-                            //   ),
-                            //   borderRadius: BorderRadius.circular(12),
-                            // ),
-                            child: SingleChildScrollView(
-                              child: TableData(
+            Container(
+              height: mediaQuery.size.height * .30,
+              //     : double.infinity,
+              // decoration: BoxDecoration(
+              //   border: Border.all(
+              //     color: Theme.of(context).primaryColor,
+              //     width: 1,
+              //   ),
+              //   borderRadius: BorderRadius.circular(12),
+              // ),
+              child: Card(
+                // borderOnForeground: mounted,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                shadowColor: Theme.of(context).primaryColorDark,
+                elevation: 20,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      height: (mediaQuery.size.height * .30) / 1.5,
+                      // decoration: BoxDecoration(
+                      //   border: Border.all(
+                      //     color: Theme.of(context).primaryColor,
+                      //     width: 1,
+                      //   ),
+                      //   borderRadius: BorderRadius.circular(12),
+                      // ),
+                      child: SingleChildScrollView(
+                        child: firstTime
+                            ? Text("Start Searching!")
+                            : TableData(
                                 fontsize: fontsize,
                                 value: receivedData,
                               ),
+                        // child: firstTime ? Text('Hello') : Text("NONON"),
+                      ),
+                    ),
+                    Container(
+                      height: (mediaQuery.size.height * .30) / 60,
+                      // decoration: BoxDecoration(
+                      //   border: Border.all(
+                      //     color: Theme.of(context).primaryColor,
+                      //     width: 1,
+                      //   ),
+                      //   borderRadius: BorderRadius.circular(12),
+                      // ),
+                      child: _isLoading
+                          ? LinearProgressIndicator(
+                              minHeight: 3,
+                            )
+                          : Divider(
+                              color: Theme.of(context).primaryColor,
+                              thickness: 3,
+                            ),
+                    ),
+                    Container(
+                      // decoration: BoxDecoration(
+                      //   border: Border.all(
+                      //     color: Theme.of(context).primaryColor,
+                      //     width: 1,
+                      //   ),
+                      //   borderRadius: BorderRadius.circular(12),
+                      // ),
+                      height: (mediaQuery.size.height * .30) / 6,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          FlatButton.icon(
+                            hoverColor: Theme.of(context).primaryColorLight,
+                            onPressed: null,
+                            icon: Icon(
+                              Icons.people,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            label: Text(
+                              // 'hello',
+                              firstTime
+                                  ? " "
+                                  : receivedData.participants.toString(),
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: fontsize - 4,
+                              ),
                             ),
                           ),
-                          Container(
-                            height: (mediaQuery.size.height * .30) / 60,
-                            // decoration: BoxDecoration(
-                            //   border: Border.all(
-                            //     color: Theme.of(context).primaryColor,
-                            //     width: 1,
-                            //   ),
-                            //   borderRadius: BorderRadius.circular(12),
-                            // ),
-                            child: _isLoading
-                                ? LinearProgressIndicator(
-                                    minHeight: 3,
-                                  )
-                                : Divider(
-                                    color: Theme.of(context).primaryColor,
-                                    thickness: 3,
-                                  ),
+                          FlatButton(
+                            child: Icon(
+                              Icons.attach_money,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            onPressed: null,
                           ),
-                          Container(
-                            // decoration: BoxDecoration(
-                            //   border: Border.all(
-                            //     color: Theme.of(context).primaryColor,
-                            //     width: 1,
-                            //   ),
-                            //   borderRadius: BorderRadius.circular(12),
-                            // ),
-                            height: (mediaQuery.size.height * .30) / 6,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                FlatButton.icon(
-                                  hoverColor:
-                                      Theme.of(context).primaryColorLight,
-                                  onPressed: null,
-                                  icon: Icon(
-                                    Icons.people,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                  label: Text(
-                                    receivedData.participants.toString(),
-                                    style: TextStyle(
-                                      color: Theme.of(context).accentColor,
-                                      fontSize: fontsize - 4,
+                          FlatButton(
+                            onPressed: () {},
+                            child: Icon(
+                              Icons.star_border,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                          // FlatButton(
+                          //   child: Icon(
+                          //     Icons.share,
+                          //     color: Theme.of(context).primaryColor,
+                          //   ),
+                          //   onPressed: () {},
+                          // ),
+                          FlatButton(
+                            child: Platform.isIOS
+                                ? Icon(
+                                    IconData(
+                                      62666, //share ICON
+                                      fontFamily: CupertinoIcons.iconFont,
+                                      fontPackage:
+                                          CupertinoIcons.iconFontPackage,
                                     ),
-                                  ),
-                                ),
-                                FlatButton(
-                                  child: Icon(
-                                    Icons.attach_money,
+                                    color: Theme.of(context).primaryColor,
+                                  )
+                                : Icon(
+                                    Icons.share,
                                     color: Theme.of(context).primaryColor,
                                   ),
-                                  onPressed: null,
-                                ),
-                                FlatButton(
-                                  onPressed: () {},
-                                  child: Icon(
-                                    Icons.star_border,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                ),
-                                // FlatButton(
-                                //   child: Icon(
-                                //     Icons.share,
-                                //     color: Theme.of(context).primaryColor,
-                                //   ),
-                                //   onPressed: () {},
-                                // ),
-                                FlatButton(
-                                  child: Platform.isIOS
-                                      ? Icon(
-                                          IconData(
-                                            62666, //share ICON
-                                            fontFamily: CupertinoIcons.iconFont,
-                                            fontPackage:
-                                                CupertinoIcons.iconFontPackage,
-                                          ),
-                                          color: Theme.of(context).primaryColor,
-                                        )
-                                      : Icon(
-                                          Icons.share,
-                                          color: Theme.of(context).primaryColor,
-                                        ),
-                                  onPressed: () {
-                                    Share.share(receivedData.activity);
-                                  },
-                                ),
-                                // CupertinoButton(
-                                //   color: Theme.of(context).primaryColor,
-                                //   child: Icon(
-                                //     IconData(
-                                //       0xf4ca,
-                                //       fontFamily: CupertinoIcons.iconFont,
-                                //       fontPackage:
-                                //           CupertinoIcons.iconFontPackage,
-                                //     ),
-                                //   ),
-                                //   onPressed: () {},
-                                // ),
-                              ],
-                            ),
+                            onPressed: () {
+                              Share.share(receivedData.activity);
+                            },
                           ),
+                          // CupertinoButton(
+                          //   color: Theme.of(context).primaryColor,
+                          //   child: Icon(
+                          //     IconData(
+                          //       0xf4ca,
+                          //       fontFamily: CupertinoIcons.iconFont,
+                          //       fontPackage:
+                          //           CupertinoIcons.iconFontPackage,
+                          //     ),
+                          //   ),
+                          //   onPressed: () {},
+                          // ),
                         ],
                       ),
                     ),
-                  )
-                : Text('First Time'),
+                  ],
+                ),
+              ),
+            ),
             Expanded(
               child: GridViewButtons(),
             ),
