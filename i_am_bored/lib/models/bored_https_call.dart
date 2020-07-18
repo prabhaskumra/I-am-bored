@@ -17,7 +17,13 @@ class BoredHttpsCall {
     switch (globals.callKey) {
       case "isActivity":
         {
-          url = 'https://www.boredapi.com/api/activity/';
+          if (globals.isAll) {
+            url = 'https://www.boredapi.com/api/activity/';
+          } else {
+            url =
+                'http://www.boredapi.com/api/activity?type=${globals.isActivityType}';
+          }
+
           break;
         }
 

@@ -29,43 +29,63 @@ class _GridViewButtonsState extends State<GridViewButtons> {
         isAll = true;
         isEducation = isRecreational = isSocial = isDIY =
             isCharity = isCooking = isRelaxtion = isMusic = isBusywork = false;
+        globals.isAll = true;
       } else if (key == 'isEducation') {
         isEducation = true;
         isAll = isRecreational = isSocial = isDIY =
             isCharity = isCooking = isRelaxtion = isMusic = isBusywork = false;
+        globals.isAll = false;
+        globals.isActivityType = 'education';
       } else if (key == 'isRecreational') {
         isRecreational = true;
         isEducation = isRelaxtion = isSocial = isDIY =
             isCharity = isCooking = isAll = isMusic = isBusywork = false;
+        globals.isAll = false;
+        globals.isActivityType = 'recreational';
       } else if (key == 'isSocial') {
         isSocial = true;
         isEducation = isRecreational = isRelaxtion = isDIY =
             isCharity = isCooking = isAll = isMusic = isBusywork = false;
+        globals.isAll = false;
+        globals.isActivityType = 'social';
       } else if (key == 'isDIY') {
         isDIY = true;
         isEducation = isRecreational = isSocial = isRelaxtion =
             isCharity = isCooking = isAll = isMusic = isBusywork = false;
+        globals.isAll = false;
+        globals.isActivityType = 'diy';
       } else if (key == 'isCharity') {
         isCharity = true;
         isEducation = isRecreational = isSocial = isDIY =
             isRelaxtion = isCooking = isAll = isMusic = isBusywork = false;
+        globals.isAll = false;
+        globals.isActivityType = 'charity';
       } else if (key == 'isCooking') {
         isCooking = true;
         isEducation = isRecreational = isSocial = isDIY =
             isCharity = isRelaxtion = isAll = isMusic = isBusywork = false;
+        globals.isAll = false;
+        globals.isActivityType = 'cooking';
       } else if (key == 'isRelaxation') {
         isRelaxtion = true;
         isEducation = isRecreational = isSocial = isDIY =
             isCharity = isCooking = isAll = isMusic = isBusywork = false;
+        globals.isAll = false;
+        globals.isActivityType = 'relaxation';
       } else if (key == 'isMusic') {
         isMusic = true;
         isEducation = isRecreational = isSocial = isDIY =
             isCharity = isCooking = isAll = isRelaxtion = isBusywork = false;
+        globals.isAll = false;
+        globals.isActivityType = 'music';
       } else if (key == 'isBusywork') {
         isBusywork = true;
         isEducation = isRecreational = isSocial = isDIY =
             isCharity = isCooking = isAll = isMusic = isRelaxtion = false;
+        globals.isAll = false;
+        globals.isActivityType = 'busywork';
       }
+      globals.callKey = 'isActivity';
     });
   }
 

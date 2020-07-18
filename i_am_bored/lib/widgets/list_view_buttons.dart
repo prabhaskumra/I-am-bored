@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
+// import 'dart:math';
 
 import '../models/variables.dart' as globals;
 
@@ -26,18 +26,8 @@ class _ListViewButtonsState extends State<ListViewButtons> {
   var accessValue = 0.0;
   var priceValue = 0.0;
 
-  // String getCallKey() {
-  //   if (isAccessibility)
-  //     return 'byAccessibility';
-  //   else if (isParticipants)
-  //     return 'byParticipants';
-  //   else if (isPrice) return 'byPrice';
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // var selectedKey = SelectedButton.Activity;
-
     var roundedRectangleBorder = RoundedRectangleBorder(
       side: BorderSide(color: Theme.of(context).primaryColor),
       borderRadius: BorderRadius.circular(20),
@@ -45,11 +35,6 @@ class _ListViewButtonsState extends State<ListViewButtons> {
 
     void setKey(String key) {
       setState(() {
-//         if (key == 'isActivity') {
-//           isActivity = true;
-//           isParticipants = isAccessibility = isPrice = false;
-//           globals.callKey = 'isActivity';
-// } else
         if (key == 'isParticipants') {
           isParticipants = true;
           isPrice = isAccessibility = isActivity = false;
@@ -65,8 +50,6 @@ class _ListViewButtonsState extends State<ListViewButtons> {
         }
       });
     }
-
-    // double getCallValue() {}
 
     return Column(
       children: [
@@ -114,8 +97,6 @@ class _ListViewButtonsState extends State<ListViewButtons> {
                   onPressed: () {
                     isParticipants = true;
                     setKey('isParticipants');
-                    print(isParticipants);
-                    print(isActivity);
                   },
                   label: Text(
                     "Pariticipants",
@@ -197,9 +178,9 @@ class _ListViewButtonsState extends State<ListViewButtons> {
             ),
             Expanded(
               child: Slider.adaptive(
-                inactiveColor: Colors.blue,
+                inactiveColor: Theme.of(context).primaryColor,
                 // activeColor: Color,
-                activeColor: Colors.grey,
+                activeColor: Theme.of(context).primaryColor,
                 value: isPrice
                     ? priceValue
                     : (isAccessibility ? accessValue : value),
@@ -231,7 +212,9 @@ class _ListViewButtonsState extends State<ListViewButtons> {
 
                 max: isParticipants ? 5 : (isAccessibility ? 1 : 0.8),
                 min: (isPrice || isAccessibility) ? 0 : 1,
-                label: (isPrice || isAccessibility) ? '$accessValue' : '$value',
+                label: isPrice
+                    ? '$priceValue'
+                    : (isAccessibility ? '$accessValue' : '$value'),
               ),
             ),
             Container(
