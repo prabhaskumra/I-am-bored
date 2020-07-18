@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/bored_https_call.dart';
 import '../models/bored_data.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TableData extends StatelessWidget {
   TableData({
@@ -29,13 +30,6 @@ class TableData extends StatelessWidget {
               // color: Colors.yellow,
               ),
           children: [
-            // Text(
-            //   'Activity',
-            //   // value.key,
-            //   style: TextStyle(fontSize: fontsize),
-            //   textAlign: TextAlign.center,
-            // ),
-
             SelectableText(
               value.activity,
               style: TextStyle(fontSize: fontsize),
@@ -46,13 +40,6 @@ class TableData extends StatelessWidget {
         //Second Row
         TableRow(
           children: [
-            // Text(
-            //   "Type",
-            //   style: TextStyle(
-            //     fontSize: fontsize,
-            //   ),
-            //   textAlign: TextAlign.center,
-            // ),
             Text(
               value.type,
               style: TextStyle(
@@ -65,51 +52,6 @@ class TableData extends StatelessWidget {
             )
           ],
         ),
-        // TableRow(
-        //   children: [
-        //     Spacer(),
-        //   ],
-        // ),
-        // Spacer(),
-        // Third Row
-        // TableRow(
-        //   children: [
-        //     Text(
-        //       "Participants",
-        //       style: TextStyle(
-        //         fontSize: fontsize,
-        //       ),
-        //       textAlign: TextAlign.center,
-        //     ),
-        //     Text(
-        //       value.participants.toString(),
-        //       style: TextStyle(
-        //         fontSize: fontsize,
-        //       ),
-        //       textAlign: TextAlign.center,
-        //     ),
-        //   ],
-        // ),
-        // 4th Row
-        // TableRow(
-        //   children: [
-        //     Text(
-        //       "Price",
-        //       style: TextStyle(
-        //         fontSize: fontsize,
-        //       ),
-        //       textAlign: TextAlign.center,
-        //     ),
-        //     Text(
-        //       "\$ " + value.price.toString(),
-        //       style: TextStyle(
-        //         fontSize: fontsize,
-        //       ),
-        //       textAlign: TextAlign.center,
-        //     )
-        //   ],
-        // ),
-        // 5th Row
         TableRow(
           children: [
             // Text(
@@ -139,6 +81,9 @@ class TableData extends StatelessWidget {
               // Spacer(),
               SelectableLinkify(
                 text: value.link,
+                onTap: () async {
+                  if (await canLaunch(value.link)) launch(value.link);
+                },
                 style: TextStyle(
                   fontSize: fontsize / 1.2,
                 ),
