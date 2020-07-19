@@ -221,10 +221,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Icons.share,
                                     color: Theme.of(context).primaryColor,
                                   ),
-                            onPressed: () {
-                              vibrate();
-                              Share.share(receivedData.activity);
-                            },
+                            onPressed: firstTime
+                                ? null
+                                : () {
+                                    vibrate();
+                                    Share.share(receivedData.activity);
+                                  },
                           ),
                           // CupertinoButton(
                           //   color: Theme.of(context).primaryColor,
@@ -276,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // ),
               child: RaisedButton.icon(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(20.0),
                   side: BorderSide(color: Theme.of(context).primaryColor),
                 ),
                 icon: Icon(
