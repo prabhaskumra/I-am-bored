@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:share/share.dart';
 
 import '../widgets/circle_shape.dart';
@@ -35,6 +36,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+  }
+
+  static Future<void> vibrate() async {
+    await SystemChannels.platform.invokeMethod<void>(
+      'HapticFeedback.vibrate',
+      'HapticFeedbackType.lightImpact',
+    );
+    // SystemChannels
   }
 
   Future<void> _fetchData() async {
@@ -182,7 +191,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             onPressed: null,
                           ),
                           FlatButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              vibrate();
+                            },
                             child: Icon(
                               Icons.star_border,
                               color: Theme.of(context).primaryColor,
@@ -211,6 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Theme.of(context).primaryColor,
                                   ),
                             onPressed: () {
+                              vibrate();
                               Share.share(receivedData.activity);
                             },
                           ),
@@ -288,6 +300,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // globals.callKey = 'hhdfahsdhfad';
                   print(globals.callKey);
                   _fetchData();
+                  vibrate();
                 },
                 color: Theme.of(context).primaryColor,
               ),

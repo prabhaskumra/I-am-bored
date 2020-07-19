@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../models/variables.dart' as globals;
 
@@ -24,7 +25,15 @@ class _GridViewButtonsState extends State<GridViewButtons> {
   bool isBusywork = false;
 
   void setColorKey(String key) {
+    Future<void> vibrate() async {
+      await SystemChannels.platform.invokeMethod<void>(
+        'HapticFeedback.vibrate',
+        'HapticFeedbackType.selectionClick',
+      );
+    }
+
     setState(() {
+      vibrate();
       if (key == 'isAll') {
         isAll = true;
         isEducation = isRecreational = isSocial = isDIY =

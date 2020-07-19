@@ -19,98 +19,105 @@ class TableData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Table(
-      // border: TableBorder.all(
-      //     // color: Colors.green,
-      //     // width: 10,
-      //     ),
-      children: [
-        TableRow(
-          decoration: BoxDecoration(
-              // color: Colors.yellow,
-              ),
-          children: [
-            SelectableText(
-              value.activity,
-              style: TextStyle(fontSize: fontsize),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-        //Second Row
-        TableRow(
-          children: [
-            Text(
-              value.type,
-              style: TextStyle(
-                fontSize: fontsize,
-                fontStyle: FontStyle.italic,
-                color: Colors.grey,
-                // decorationStyle: TextDecorationStyle.wavy,
-              ),
-              textAlign: TextAlign.center,
-            )
-          ],
-        ),
-        TableRow(
-          children: [
-            // Text(
-            //   "Websit Link",
-            //   style: TextStyle(
-            //     fontSize: fontsize,
-            //   ),
-            //   textAlign: TextAlign.center,
-            // ),
-            if (value.link == '')
-              Text(
-                "No link",
-                style: TextStyle(
-                  fontSize: fontsize,
-                ),
-                textAlign: TextAlign.center,
-              )
-            else
-              // Text(
-              //   value.link,
-              //   style: TextStyle(
-              //     fontSize: fontsize / 1.2,
-              //   ),
-              //   textAlign: TextAlign.center,
-              //   // INSERT THE LINK
-              // ),
-              // Spacer(),
-              SelectableLinkify(
-                text: value.link,
-                onTap: () async {
-                  if (await canLaunch(value.link)) launch(value.link);
-                },
-                style: TextStyle(
-                  fontSize: fontsize / 1.2,
-                ),
-                textAlign: TextAlign.center,
-              ),
+    // return Table(
+    //   // border: TableBorder.all(
+    //   //     // color: Colors.green,
+    //   //     // width: 10,
+    //   //     ),
+    //   children: [
+    //     TableRow(
+    //       decoration: BoxDecoration(
+    //           // color: Colors.yellow,
+    //           ),
+    //       children: [
+    //         SelectableText(
+    //           value.activity,
+    //           style: TextStyle(fontSize: fontsize),
+    //           textAlign: TextAlign.center,
+    //         ),
+    //       ],
+    //     ),
+    //     //Second Row
+    //     TableRow(
+    //       children: [
+    //         Text(
+    //           value.type,
+    //           style: TextStyle(
+    //             fontSize: fontsize,
+    //             fontStyle: FontStyle.italic,
+    //             color: Colors.grey,
+    //             // decorationStyle: TextDecorationStyle.wavy,
+    //           ),
+    //           textAlign: TextAlign.center,
+    //         )
+    //       ],
+    //     ),
+    //     TableRow(
+    //       children: [
+    //         if (value.link == '')
+    //           Text(
+    //             "No link",
+    //             style: TextStyle(
+    //               fontSize: fontsize,
+    //             ),
+    //             textAlign: TextAlign.center,
+    //           )
+    //         else
+    //           SelectableLinkify(
+    //             text: value.link,
+    //             onTap: () async {
+    //               if (await canLaunch(value.link)) launch(value.link);
+    //             },
+    //             style: TextStyle(
+    //               fontSize: fontsize / 1.2,
+    //             ),
+    //             textAlign: TextAlign.center,
+    //           ),
+    //       ],
+    //     ),
+    //   ],
+    // );
 
-            // Text('hee'),
-          ],
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 60,
+          child: SelectableText(
+            value.activity,
+            style: TextStyle(fontSize: fontsize),
+            textAlign: TextAlign.center,
+          ),
         ),
-        // TableRow(
-        //   children: [
-        //     Text(
-        //       "Accesibility",
-        //       style: TextStyle(
-        //         fontSize: fontsize,
-        //       ),
-        //       textAlign: TextAlign.center,
+        Divider(),
+        Text(
+          value.type,
+          style: TextStyle(
+            fontSize: fontsize,
+            fontStyle: FontStyle.italic,
+            color: Colors.grey,
+            // decorationStyle: TextDecorationStyle.wavy,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        //             if (value.link == '')
+        //   Text(
+        //     "No link",
+        //     style: TextStyle(
+        //       fontSize: fontsize,
         //     ),
-        //     Text(
-        //       value.accessibility.toString(),
-        //       style: TextStyle(
-        //         fontSize: fontsize,
-        //       ),
-        //       textAlign: TextAlign.center,
-        //     )
-        //   ],
-        // ),
+        //     textAlign: TextAlign.center,
+        //   )
+        // else
+        SelectableLinkify(
+          text: value.link,
+          onTap: () async {
+            if (await canLaunch(value.link)) launch(value.link);
+          },
+          style: TextStyle(
+            fontSize: fontsize / 1.2,
+          ),
+          textAlign: TextAlign.center,
+        ),
       ],
     );
   }

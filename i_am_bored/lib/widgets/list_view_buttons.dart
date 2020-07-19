@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // import 'dart:math';
 
 import '../models/variables.dart' as globals;
@@ -33,7 +34,16 @@ class _ListViewButtonsState extends State<ListViewButtons> {
       borderRadius: BorderRadius.circular(20),
     );
 
+    Future<void> vibrate() async {
+      await SystemChannels.platform.invokeMethod<void>(
+        'HapticFeedback.vibrate',
+        'HapticFeedbackType.selectionClick',
+      );
+      // SystemChannels
+    }
+
     void setKey(String key) {
+      vibrate();
       setState(() {
         if (key == 'isParticipants') {
           isParticipants = true;
@@ -59,30 +69,6 @@ class _ListViewButtonsState extends State<ListViewButtons> {
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             children: <Widget>[
-              // Padding(
-              //   padding: const EdgeInsets.all(5.0),
-              //   child: RaisedButton.icon(
-              //     icon: Icon(
-              //       Icons.ac_unit,
-              //       color: isActivity ? Colors.white : Colors.black,
-              //     ),
-              //     shape: roundedRectangleBorder,
-              //     onPressed: () {
-              //       setKey('isActivity');
-              //     },
-              //     label: Text(
-              //       "Activity",
-              //       style: TextStyle(
-              //         fontSize: widget.fontsize,
-              //         color: isActivity ? Colors.white : Colors.black,
-              //       ),
-              //     ),
-              //     color: isActivity
-              //         ? Theme.of(context).primaryColor
-              //         : Colors.white,
-              //   ),
-              // ),
-              // Divider(),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: RaisedButton.icon(
@@ -171,7 +157,7 @@ class _ListViewButtonsState extends State<ListViewButtons> {
                 child: Text(
                   isActivity
                       ? "Act"
-                      : (isParticipants ? "1" : (isPrice ? 'Low' : 'Least')),
+                      : (isParticipants ? "1" : (isPrice ? 'Low' : 'Most')),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -206,9 +192,9 @@ class _ListViewButtonsState extends State<ListViewButtons> {
                       print(globals.participantsKey);
                     }
                   });
+                  // vibrate();
                 },
                 divisions: isParticipants ? 4 : (isPrice ? 8 : 10),
-                // max: (isPrice || isAccessibility) ? 1 : 5,
 
                 max: isParticipants ? 5 : (isAccessibility ? 1 : 0.8),
                 min: (isPrice || isAccessibility) ? 0 : 1,
@@ -231,7 +217,7 @@ class _ListViewButtonsState extends State<ListViewButtons> {
                 child: Text(
                   isActivity
                       ? "Act"
-                      : (isParticipants ? "5" : (isPrice ? 'High' : 'Most')),
+                      : (isParticipants ? "5" : (isPrice ? 'High' : 'Least')),
                   textAlign: TextAlign.center,
                 ),
               ),
