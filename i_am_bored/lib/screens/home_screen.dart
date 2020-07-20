@@ -62,6 +62,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
+    var boxDecoration = BoxDecoration(
+      border: Border.all(
+        color: Theme.of(context).primaryColor,
+        width: 1,
+      ),
+      borderRadius: BorderRadius.circular(12),
+    );
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: kToolbarHeight / 1.2,
@@ -154,32 +161,32 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                     ),
                     Container(
-                      // decoration: BoxDecoration(
-                      //   border: Border.all(
-                      //     color: Theme.of(context).primaryColor,
-                      //     width: 1,
-                      //   ),
-                      //   borderRadius: BorderRadius.circular(12),
-                      // ),
+                      width: mediaQuery.size.width,
+                      // padding: EdgeInsets.all(0),
+                      // decoration: boxDecoration,
                       height: (mediaQuery.size.height * .30) / 6,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          FlatButton.icon(
-                            hoverColor: Theme.of(context).primaryColorLight,
-                            onPressed: null,
-                            icon: Icon(
-                              Icons.people,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            label: Text(
-                              // 'hello',
-                              firstTime
-                                  ? " "
-                                  : receivedData.participants.toString(),
-                              style: TextStyle(
+                          Container(
+                            // decoration: boxDecoration,
+                            width: mediaQuery.size.width * 0.2,
+                            child: FlatButton.icon(
+                              hoverColor: Theme.of(context).primaryColorLight,
+                              onPressed: null,
+                              icon: Icon(
+                                Icons.people,
                                 color: Theme.of(context).primaryColor,
-                                fontSize: fontsize - 4,
+                              ),
+                              label: Text(
+                                // 'hello',
+                                firstTime
+                                    ? " "
+                                    : receivedData.participants.toString(),
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: fontsize - 4,
+                                ),
                               ),
                             ),
                           ),
@@ -190,56 +197,45 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             onPressed: null,
                           ),
-                          FlatButton(
-                            onPressed: () {
-                              vibrate();
-                            },
-                            child: Icon(
-                              Icons.star_border,
-                              color: Theme.of(context).primaryColor,
+                          Container(
+                            // decoration: boxDecoration,
+                            width: mediaQuery.size.width * 0.2,
+                            child: FlatButton(
+                              onPressed: () {
+                                vibrate();
+                              },
+                              child: Icon(
+                                Icons.star_border,
+                                color: Theme.of(context).primaryColor,
+                              ),
                             ),
                           ),
-                          // FlatButton(
-                          //   child: Icon(
-                          //     Icons.share,
-                          //     color: Theme.of(context).primaryColor,
-                          //   ),
-                          //   onPressed: () {},
-                          // ),
-                          FlatButton(
-                            child: Platform.isIOS
-                                ? Icon(
-                                    IconData(
-                                      62666, //share ICON
-                                      fontFamily: CupertinoIcons.iconFont,
-                                      fontPackage:
-                                          CupertinoIcons.iconFontPackage,
+                          Container(
+                            // decoration: boxDecoration,
+                            width: mediaQuery.size.width * 0.2,
+                            child: FlatButton(
+                              child: Platform.isIOS
+                                  ? Icon(
+                                      IconData(
+                                        62666, //share ICON
+                                        fontFamily: CupertinoIcons.iconFont,
+                                        fontPackage:
+                                            CupertinoIcons.iconFontPackage,
+                                      ),
+                                      color: Theme.of(context).primaryColor,
+                                    )
+                                  : Icon(
+                                      Icons.share,
+                                      color: Theme.of(context).primaryColor,
                                     ),
-                                    color: Theme.of(context).primaryColor,
-                                  )
-                                : Icon(
-                                    Icons.share,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                            onPressed: firstTime
-                                ? null
-                                : () {
-                                    vibrate();
-                                    Share.share(receivedData.activity);
-                                  },
+                              onPressed: firstTime
+                                  ? null
+                                  : () {
+                                      vibrate();
+                                      Share.share(receivedData.activity);
+                                    },
+                            ),
                           ),
-                          // CupertinoButton(
-                          //   color: Theme.of(context).primaryColor,
-                          //   child: Icon(
-                          //     IconData(
-                          //       0xf4ca,
-                          //       fontFamily: CupertinoIcons.iconFont,
-                          //       fontPackage:
-                          //           CupertinoIcons.iconFontPackage,
-                          //     ),
-                          //   ),
-                          //   onPressed: () {},
-                          // ),
                         ],
                       ),
                     ),
@@ -256,12 +252,9 @@ class _HomeScreenState extends State<HomeScreen> {
               // width: 200,
 
               height: 100,
-              // decoration: BoxDecoration(
-              //   border: Border.all(
-              //     color: Theme.of(context).primaryColor,
-              //     width: 2,
-              //   ),
-              // ),
+              // height: mediaQuery.size.height * .16,
+
+              // decoration: boxDecoration,
               child: listButtons,
             ),
             // Expanded(
@@ -270,12 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               width: mediaQuery.size.width * 0.6,
               height: 42,
-              // decoration: BoxDecoration(
-              //   border: Border.all(
-              //     color: Theme.of(context).primaryColor,
-              //     width: 2,
-              //   ),
-              // ),
+              // decoration: boxDecoration,
               child: RaisedButton.icon(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),
