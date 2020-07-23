@@ -60,6 +60,7 @@ class _ListViewButtonsState extends State<ListViewButtons> {
         }
       });
     }
+    
 
     return Column(
       children: [
@@ -119,7 +120,7 @@ class _ListViewButtonsState extends State<ListViewButtons> {
                 padding: const EdgeInsets.all(5.0),
                 child: RaisedButton.icon(
                   icon: Icon(
-                    Icons.ac_unit,
+                    Icons.accessibility_new,
                     color: isAccessibility ? Colors.white : Colors.black,
                   ),
                   shape: roundedRectangleBorder,

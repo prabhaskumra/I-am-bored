@@ -24,14 +24,14 @@ class _GridViewButtonsState extends State<GridViewButtons> {
   bool isMusic = false;
   bool isBusywork = false;
 
-  void setColorKey(String key) {
-    Future<void> vibrate() async {
-      await SystemChannels.platform.invokeMethod<void>(
-        'HapticFeedback.vibrate',
-        'HapticFeedbackType.selectionClick',
-      );
-    }
+  Future<void> vibrate() async {
+    await SystemChannels.platform.invokeMethod<void>(
+      'HapticFeedback.vibrate',
+      'HapticFeedbackType.selectionClick',
+    );
+  }
 
+  void setColorKey(String key) {
     setState(() {
       vibrate();
       if (key == 'isAll') {

@@ -29,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   var _isLoading = false;
   String callKey = 'byActivity';
   double callValue;
+  var _isStar = false;
 
   // ListViewButtons(fontsize: fontsize) listButtons;
   ListViewButtons listButtons = ListViewButtons(fontsize: fontsize);
@@ -201,11 +202,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             // decoration: boxDecoration,
                             width: mediaQuery.size.width * 0.2,
                             child: FlatButton(
-                              onPressed: () {
-                                vibrate();
-                              },
+                              onPressed: firstTime
+                                  ? null
+                                  : () {
+                                      vibrate();
+                                      setState(() {
+                                        _isStar = !_isStar;
+                                      });
+                                    },
                               child: Icon(
-                                Icons.star_border,
+                                _isStar ? Icons.star_border : Icons.star,
                                 color: Theme.of(context).primaryColor,
                               ),
                             ),
