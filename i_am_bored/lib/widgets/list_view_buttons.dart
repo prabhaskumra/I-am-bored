@@ -30,7 +30,10 @@ class _ListViewButtonsState extends State<ListViewButtons> {
   @override
   Widget build(BuildContext context) {
     var roundedRectangleBorder = RoundedRectangleBorder(
-      side: BorderSide(color: Theme.of(context).primaryColor),
+      side: BorderSide(
+        color: Theme.of(context).primaryColor,
+        width: 2,
+      ),
       borderRadius: BorderRadius.circular(20),
     );
 
@@ -42,9 +45,14 @@ class _ListViewButtonsState extends State<ListViewButtons> {
       // SystemChannels
     }
 
+    // if (globals.colorKey == 'isGrid') {
+    //   isParticipants = isAccessibility = isPrice;
+    // }
+
     void setKey(String key) {
       vibrate();
       setState(() {
+        globals.colorKey = 'isList';
         if (key == 'isParticipants') {
           isParticipants = true;
           isPrice = isAccessibility = isActivity = false;
@@ -60,7 +68,6 @@ class _ListViewButtonsState extends State<ListViewButtons> {
         }
       });
     }
-    
 
     return Column(
       children: [
@@ -171,6 +178,7 @@ class _ListViewButtonsState extends State<ListViewButtons> {
                 value: isPrice
                     ? priceValue
                     : (isAccessibility ? accessValue : value),
+                autofocus: true,
                 onChanged: (newValue) {
                   setState(() {
                     if (isAccessibility)

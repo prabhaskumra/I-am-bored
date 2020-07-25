@@ -107,13 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               height: mediaQuery.size.height * .30,
               //     : double.infinity,
-              // decoration: BoxDecoration(
-              //   border: Border.all(
-              //     color: Theme.of(context).primaryColor,
-              //     width: 1,
-              //   ),
-              //   borderRadius: BorderRadius.circular(12),
-              // ),
+              // decoration: boxDecoration,
               child: Card(
                 // borderOnForeground: mounted,
                 shape: RoundedRectangleBorder(
@@ -126,13 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Container(
                       height: (mediaQuery.size.height * .30) / 1.5,
-                      // decoration: BoxDecoration(
-                      //   border: Border.all(
-                      //     color: Theme.of(context).primaryColor,
-                      //     width: 1,
-                      //   ),
-                      //   borderRadius: BorderRadius.circular(12),
-                      // ),
+                      // decoration: boxDecoration,
                       child: SingleChildScrollView(
                         child: firstTime
                             ? Text("Start Searching!")

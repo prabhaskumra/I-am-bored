@@ -33,6 +33,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
 
   void setColorKey(String key) {
     setState(() {
+      globals.colorKey = 'isGrid';
       vibrate();
       if (key == 'isAll') {
         isAll = true;
@@ -101,7 +102,10 @@ class _GridViewButtonsState extends State<GridViewButtons> {
   @override
   Widget build(BuildContext context) {
     var roundedRectangleBorder = RoundedRectangleBorder(
-      side: BorderSide(color: Theme.of(context).primaryColor),
+      side: BorderSide(
+          color: Theme.of(context).primaryColor,
+          width: 2,
+          style: BorderStyle.solid),
       borderRadius: BorderRadius.circular(20),
     );
 
