@@ -199,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       });
                                     },
                               child: Icon(
-                                _isStar ? Icons.star_border : Icons.star,
+                                _isStar ? Icons.star : Icons.star_border,
                                 color: Theme.of(context).primaryColor,
                               ),
                             ),
