@@ -168,7 +168,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
                   context, 'Education', 'isEducation', isEducation),
               buildRaisedButton(
                   context, 'Recreational', 'isRecreational', isRecreational),
-              buildRaisedButton(context, 'Social', 'isScial', isSocial),
+              buildRaisedButton(context, 'Social', 'isSocial', isSocial),
               buildRaisedButton(context, 'DIY', 'isDIY', isDIY),
               buildRaisedButton(context, 'Charity', 'isCharity', isCharity),
               buildRaisedButton(context, 'Cooking', 'isCooking', isCooking),
@@ -286,6 +286,11 @@ class _GridViewButtonsState extends State<GridViewButtons> {
                       ? "Act"
                       : (isParticipants ? "1" : (isPrice ? 'Low' : 'Most')),
                   textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: colorKey
+                        ? Colors.grey
+                        : Theme.of(context).textSelectionHandleColor,
+                  ),
                 ),
               ),
             ),
@@ -352,6 +357,11 @@ class _GridViewButtonsState extends State<GridViewButtons> {
                       ? "Act"
                       : (isParticipants ? "5" : (isPrice ? 'High' : 'Least')),
                   textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: colorKey
+                        ? Colors.grey
+                        : Theme.of(context).textSelectionHandleColor,
+                  ),
                 ),
               ),
             ),
