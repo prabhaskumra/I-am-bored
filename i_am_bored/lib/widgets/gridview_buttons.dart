@@ -40,6 +40,8 @@ class _GridViewButtonsState extends State<GridViewButtons> {
   bool isMusic = false;
   bool isBusywork = false;
 
+  bool colorKey = true;
+
   Future<void> vibrate() async {
     await SystemChannels.platform.invokeMethod<void>(
       'HapticFeedback.vibrate',
@@ -49,7 +51,8 @@ class _GridViewButtonsState extends State<GridViewButtons> {
 
   void setColorKey(String key) {
     setState(() {
-      globals.colorKey = 'isGrid';
+      // globals.colorKey = 'isGrid';
+      colorKey = true;
       vibrate();
       if (key == 'isAll') {
         isAll = true;
@@ -118,7 +121,8 @@ class _GridViewButtonsState extends State<GridViewButtons> {
   void setKey(String key) {
     vibrate();
     setState(() {
-      globals.colorKey = 'isList';
+      // globals.colorKey = 'isList';
+      colorKey = false;
       if (key == 'isParticipants') {
         isParticipants = true;
         isPrice = isAccessibility = isActivity = false;
@@ -159,157 +163,23 @@ class _GridViewButtonsState extends State<GridViewButtons> {
             crossAxisCount: 2,
             scrollDirection: Axis.vertical,
             children: <Widget>[
-              RaisedButton(
-                child: Text(
-                  'All',
-                  style: TextStyle(
-                    fontSize: 23,
-                    color: isAll ? Colors.white : Colors.black,
-                  ),
-                ),
-                onPressed: () {
-                  setColorKey('isAll');
-                },
-                color: isAll ? Theme.of(context).primaryColor : Colors.white,
-                shape: roundedRectangleBorder,
-                // autofocus: false,
-              ),
-              RaisedButton(
-                child: Text(
-                  'Education',
-                  style: TextStyle(
-                    fontSize: 23,
-                    color: isEducation ? Colors.white : Colors.black,
-                  ),
-                ),
-                onPressed: () {
-                  setColorKey('isEducation');
-                },
-                color:
-                    isEducation ? Theme.of(context).primaryColor : Colors.white,
-                shape: roundedRectangleBorder,
-              ),
-              RaisedButton(
-                child: Text(
-                  'Recreational',
-                  style: TextStyle(
-                    fontSize: 23,
-                    color: isRecreational ? Colors.white : Colors.black,
-                  ),
-                ),
-                onPressed: () {
-                  setColorKey('isRecreational');
-                },
-                color: isRecreational
-                    ? Theme.of(context).primaryColor
-                    : Colors.white,
-                shape: roundedRectangleBorder,
-              ),
-              RaisedButton(
-                child: Text(
-                  'Social',
-                  style: TextStyle(
-                    fontSize: 23,
-                    color: isSocial ? Colors.white : Colors.black,
-                  ),
-                ),
-                onPressed: () {
-                  setColorKey('isSocial');
-                },
-                color: isSocial ? Theme.of(context).primaryColor : Colors.white,
-                shape: roundedRectangleBorder,
-              ),
-              RaisedButton(
-                child: Text(
-                  'DIY',
-                  style: TextStyle(
-                    fontSize: 23,
-                    color: isDIY ? Colors.white : Colors.black,
-                  ),
-                ),
-                onPressed: () {
-                  setColorKey('isDIY');
-                },
-                color: isDIY ? Theme.of(context).primaryColor : Colors.white,
-                shape: roundedRectangleBorder,
-              ),
-              RaisedButton(
-                child: Text(
-                  'Charity',
-                  style: TextStyle(
-                    fontSize: 23,
-                    color: isCharity ? Colors.white : Colors.black,
-                  ),
-                ),
-                onPressed: () {
-                  setColorKey('isCharity');
-                },
-                color:
-                    isCharity ? Theme.of(context).primaryColor : Colors.white,
-                shape: roundedRectangleBorder,
-              ),
-              RaisedButton(
-                child: Text(
-                  'Cooking',
-                  style: TextStyle(
-                    fontSize: 23,
-                    color: isCooking ? Colors.white : Colors.black,
-                  ),
-                ),
-                onPressed: () {
-                  setColorKey('isCooking');
-                },
-                color:
-                    isCooking ? Theme.of(context).primaryColor : Colors.white,
-                shape: roundedRectangleBorder,
-              ),
-              RaisedButton(
-                child: Text(
-                  'Relaxation',
-                  style: TextStyle(
-                    fontSize: 23,
-                    color: isRelaxtion ? Colors.white : Colors.black,
-                  ),
-                ),
-                onPressed: () {
-                  setColorKey('isRelaxation');
-                },
-                color:
-                    isRelaxtion ? Theme.of(context).primaryColor : Colors.white,
-                shape: roundedRectangleBorder,
-              ),
-              RaisedButton(
-                child: Text(
-                  'Music',
-                  style: TextStyle(
-                    fontSize: 23,
-                    color: isMusic ? Colors.white : Colors.black,
-                  ),
-                ),
-                onPressed: () {
-                  setColorKey('isMusic');
-                },
-                color: isMusic ? Theme.of(context).primaryColor : Colors.white,
-                shape: roundedRectangleBorder,
-              ),
-              RaisedButton(
-                child: Text(
-                  'Busywork',
-                  style: TextStyle(
-                    fontSize: 23,
-                    color: isBusywork ? Colors.white : Colors.black,
-                  ),
-                ),
-                onPressed: () {
-                  setColorKey('isBusywork');
-                },
-                color:
-                    isBusywork ? Theme.of(context).primaryColor : Colors.white,
-                shape: roundedRectangleBorder,
-              ),
+              buildRaisedButton(context, 'All', 'isAll', isAll),
+              buildRaisedButton(
+                  context, 'Education', 'isEducation', isEducation),
+              buildRaisedButton(
+                  context, 'Recreational', 'isRecreational', isRecreational),
+              buildRaisedButton(context, 'Social', 'isScial', isSocial),
+              buildRaisedButton(context, 'DIY', 'isDIY', isDIY),
+              buildRaisedButton(context, 'Charity', 'isCharity', isCharity),
+              buildRaisedButton(context, 'Cooking', 'isCooking', isCooking),
+              buildRaisedButton(
+                  context, 'Relaxation', 'isRelaxation', isRelaxtion),
+              buildRaisedButton(context, 'Music', 'isMusic', isMusic),
+              buildRaisedButton(context, 'Busywork', 'isBusywork', isBusywork),
             ],
           ),
         ),
+        /////////////////////// LIST VIEW STARTS HERE  ////////////////////////////
         SizedBox(
           height: 50,
           child: ListView(
@@ -319,13 +189,15 @@ class _GridViewButtonsState extends State<GridViewButtons> {
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: RaisedButton.icon(
-                  color: isParticipants
+                  color: (isParticipants && !colorKey)
                       ? Theme.of(context).primaryColor
                       : Colors.white,
                   shape: roundedRectangleBorder,
                   icon: Icon(
                     Icons.people,
-                    color: isParticipants ? Colors.white : Colors.black,
+                    color: (isParticipants && !colorKey)
+                        ? Colors.white
+                        : Colors.black,
                   ),
                   onPressed: () {
                     isParticipants = true;
@@ -335,7 +207,9 @@ class _GridViewButtonsState extends State<GridViewButtons> {
                     "Pariticipants",
                     style: TextStyle(
                       fontSize: widget.fontsize,
-                      color: isParticipants ? Colors.white : Colors.black,
+                      color: (isParticipants && !colorKey)
+                          ? Colors.white
+                          : Colors.black,
                     ),
                   ),
                 ),
@@ -345,7 +219,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
                 child: RaisedButton.icon(
                   icon: Icon(
                     Icons.attach_money,
-                    color: isPrice ? Colors.white : Colors.black,
+                    color: (isPrice && !colorKey) ? Colors.white : Colors.black,
                   ),
                   shape: roundedRectangleBorder,
                   onPressed: () {
@@ -355,11 +229,13 @@ class _GridViewButtonsState extends State<GridViewButtons> {
                     "Price",
                     style: TextStyle(
                       fontSize: widget.fontsize,
-                      color: isPrice ? Colors.white : Colors.black,
+                      color:
+                          (isPrice && !colorKey) ? Colors.white : Colors.black,
                     ),
                   ),
-                  color:
-                      isPrice ? Theme.of(context).primaryColor : Colors.white,
+                  color: (isPrice && !colorKey)
+                      ? Theme.of(context).primaryColor
+                      : Colors.white,
                 ),
               ),
               Padding(
@@ -367,10 +243,12 @@ class _GridViewButtonsState extends State<GridViewButtons> {
                 child: RaisedButton.icon(
                   icon: Icon(
                     Icons.accessibility_new,
-                    color: isAccessibility ? Colors.white : Colors.black,
+                    color: (isAccessibility && !colorKey)
+                        ? Colors.white
+                        : Colors.black,
                   ),
                   shape: roundedRectangleBorder,
-                  color: isAccessibility
+                  color: (isAccessibility && !colorKey)
                       ? Theme.of(context).primaryColor
                       : Colors.white,
                   onPressed: () {
@@ -380,7 +258,9 @@ class _GridViewButtonsState extends State<GridViewButtons> {
                     "Accessibility",
                     style: TextStyle(
                       fontSize: widget.fontsize,
-                      color: isAccessibility ? Colors.white : Colors.black,
+                      color: (isAccessibility && !colorKey)
+                          ? Colors.white
+                          : Colors.black,
                     ),
                   ),
                 ),
@@ -411,37 +291,42 @@ class _GridViewButtonsState extends State<GridViewButtons> {
             ),
             Expanded(
               child: Slider.adaptive(
-                inactiveColor: Theme.of(context).primaryColor,
+                // inactiveColor: Theme.of(context).primaryColor,
                 // activeColor: Color,
-                activeColor: Theme.of(context).primaryColor,
+                activeColor:
+                    colorKey ? Colors.grey : Theme.of(context).primaryColor,
                 value: isPrice
                     ? priceValue
                     : (isAccessibility ? accessValue : value),
                 autofocus: true,
-                onChanged: (newValue) {
-                  setState(() {
-                    if (isAccessibility)
-                      accessValue = double.parse((newValue).toStringAsFixed(2));
-                    else if (isParticipants)
-                      value = newValue;
-                    else if (isPrice)
-                      priceValue = double.parse((newValue).toStringAsFixed(2));
+                onChanged: colorKey
+                    ? null
+                    : (newValue) {
+                        setState(() {
+                          if (isAccessibility)
+                            accessValue =
+                                double.parse((newValue).toStringAsFixed(2));
+                          else if (isParticipants)
+                            value = newValue;
+                          else if (isPrice)
+                            priceValue =
+                                double.parse((newValue).toStringAsFixed(2));
 
-                    if (isAccessibility) {
-                      globals.accessibliltyKey =
-                          double.parse((newValue).toStringAsFixed(1));
-                      print(globals.accessibliltyKey);
-                    } else if (isPrice) {
-                      globals.priceKey =
-                          double.parse((newValue).toStringAsFixed(1));
-                      print(globals.priceKey);
-                    } else if (isParticipants) {
-                      globals.participantsKey = newValue.toInt();
-                      print(globals.participantsKey);
-                    }
-                  });
-                  // vibrate();
-                },
+                          if (isAccessibility) {
+                            globals.accessibliltyKey =
+                                double.parse((newValue).toStringAsFixed(1));
+                            print(globals.accessibliltyKey);
+                          } else if (isPrice) {
+                            globals.priceKey =
+                                double.parse((newValue).toStringAsFixed(1));
+                            print(globals.priceKey);
+                          } else if (isParticipants) {
+                            globals.participantsKey = newValue.toInt();
+                            print(globals.participantsKey);
+                          }
+                        });
+                        // vibrate();
+                      },
                 divisions: isParticipants ? 4 : (isPrice ? 8 : 10),
 
                 max: isParticipants ? 5 : (isAccessibility ? 1 : 0.8),
@@ -473,6 +358,39 @@ class _GridViewButtonsState extends State<GridViewButtons> {
           ],
         ),
       ],
+    );
+  }
+
+  RaisedButton buildRaisedButton(
+    BuildContext context,
+    String textTitle,
+    String colorTitle,
+    bool colorSwitch,
+  ) {
+    var roundedRectangleBorder = RoundedRectangleBorder(
+      side: BorderSide(
+          color: Theme.of(context).primaryColor,
+          width: 2,
+          style: BorderStyle.solid),
+      borderRadius: BorderRadius.circular(20),
+    );
+
+    return RaisedButton(
+      child: Text(
+        textTitle,
+        style: TextStyle(
+          fontSize: 23,
+          color: (colorSwitch && colorKey) ? Colors.white : Colors.black,
+        ),
+      ),
+      onPressed: () {
+        setColorKey(colorTitle);
+      },
+      color: (colorSwitch && colorKey)
+          ? Theme.of(context).primaryColor
+          : Colors.white,
+      shape: roundedRectangleBorder,
+      // autofocus: false,
     );
   }
 }

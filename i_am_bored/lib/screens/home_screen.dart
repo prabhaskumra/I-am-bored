@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   var _isStar = false;
 
   // ListViewButtons(fontsize: fontsize) listButtons;
-  ListViewButtons listButtons = ListViewButtons(fontsize: fontsize);
+  // ListViewButtons listButtons = ListViewButtons(fontsize: fontsize);
 
   @override
   void initState() {
