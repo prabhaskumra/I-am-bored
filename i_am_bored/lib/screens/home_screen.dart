@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   var _isStar = false;
 
   // ListViewButtons(fontsize: fontsize) listButtons;
-  ListViewButtons listButtons = ListViewButtons(fontsize: fontsize);
+  // ListViewButtons listButtons = ListViewButtons(fontsize: fontsize);
 
   @override
   void initState() {
@@ -159,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: <Widget>[
                           Container(
                             // decoration: boxDecoration,
-                            width: mediaQuery.size.width * 0.2,
+                            width: mediaQuery.size.width * 0.22,
                             child: FlatButton.icon(
                               hoverColor: Theme.of(context).primaryColorLight,
                               onPressed: null,
@@ -172,6 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 firstTime
                                     ? " "
                                     : receivedData.participants.toString(),
+                                // : '',
                                 style: TextStyle(
                                   color: Theme.of(context).primaryColor,
                                   fontSize: fontsize - 4,
@@ -179,6 +180,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
+                          // Container(
+                          //   decoration: boxDecoration,
+                          // width: mediaQuery.size.width * 0.2,
+                          // child: FlatButton(
                           FlatButton(
                             child: Icon(
                               Icons.attach_money,
@@ -186,6 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             onPressed: null,
                           ),
+                          // ),
                           Container(
                             // decoration: boxDecoration,
                             width: mediaQuery.size.width * 0.2,
@@ -238,19 +244,34 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Expanded(
-              child: GridViewButtons(),
+              child: Container(
+                padding: EdgeInsets.only(bottom: 10),
+                // decoration: boxDecoration,
+                child: GridViewButtons(
+                  fontsize: fontsize,
+                ),
+              ),
             ),
-            Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(vertical: 20.0),
-              // width: 200,
+            //////
+            ///
+            ///
+            ///
+            ///
+            // Container(
+            //   alignment: Alignment.center,
+            //   margin: EdgeInsets.symmetric(vertical: 20.0),
+            //   // width: 200,
 
-              height: 100,
-              // height: mediaQuery.size.height * .16,
+            //   height: 100,
+            //   // height: mediaQuery.size.height * .16,
 
-              // decoration: boxDecoration,
-              child: listButtons,
-            ),
+            //   // decoration: boxDecoration,
+            //   child: listButtons,
+            // ),
+
+            //////////
+            ///
+            ///
             // Expanded(
             //   child: GridViewButtons(),
             // ),
