@@ -128,18 +128,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontsize: fontsize,
                                 value: receivedData,
                               ),
-                        // child: firstTime ? Text('Hello') : Text("NONON"),
                       ),
                     ),
                     Container(
                       height: (mediaQuery.size.height * .30) / 60,
-                      // decoration: BoxDecoration(
-                      //   border: Border.all(
-                      //     color: Theme.of(context).primaryColor,
-                      //     width: 1,
-                      //   ),
-                      //   borderRadius: BorderRadius.circular(12),
-                      // ),
+                      // decoration: boxDecoration,
                       child: _isLoading
                           ? LinearProgressIndicator(
                               minHeight: 3,
@@ -165,7 +158,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               onPressed: null,
                               icon: Icon(
                                 Icons.people,
-                                color: Theme.of(context).primaryColor,
+                                color: firstTime
+                                    ? Theme.of(context).disabledColor
+                                    : Theme.of(context).primaryColor,
                               ),
                               label: Text(
                                 // 'hello',
@@ -184,14 +179,46 @@ class _HomeScreenState extends State<HomeScreen> {
                           //   decoration: boxDecoration,
                           // width: mediaQuery.size.width * 0.2,
                           // child: FlatButton(
-                          FlatButton(
-                            child: Icon(
-                              Icons.attach_money,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            onPressed: null,
-                          ),
+                          // FlatButton(
+                          //   child: Icon(
+                          //     Icons.attach_money,
+                          //     color: Theme.of(context).primaryColor,
+                          //   ),
+                          //   onPressed: null,
                           // ),
+                          // ),
+
+                          Container(
+                            // decoration: boxDecoration,
+                            width: mediaQuery.size.width * 0.2,
+                            child: FlatButton(
+                              child: Platform.isIOS
+                                  ? Icon(
+                                      IconData(
+                                        // 62666, //share ICON
+                                        61984,
+                                        fontFamily: CupertinoIcons.iconFont,
+                                        fontPackage:
+                                            CupertinoIcons.iconFontPackage,
+                                      ),
+                                      color: firstTime
+                                          ? Theme.of(context).disabledColor
+                                          : Theme.of(context).primaryColor,
+                                    )
+                                  : Icon(
+                                      Icons.share,
+                                      color: firstTime
+                                          ? Theme.of(context).disabledColor
+                                          : Theme.of(context).primaryColor,
+                                    ),
+                              onPressed: firstTime
+                                  ? null
+                                  : () {
+                                      vibrate();
+                                      Share.share(receivedData.activity);
+                                    },
+                            ),
+                          ),
                           Container(
                             // decoration: boxDecoration,
                             width: mediaQuery.size.width * 0.2,
@@ -205,35 +232,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                       });
                                     },
                               child: Icon(
-                                _isStar ? Icons.star : Icons.star_border,
-                                color: Theme.of(context).primaryColor,
+                                _isStar
+                                    ? Icons.bookmark
+                                    : Icons.bookmark_border,
+                                color: firstTime
+                                    ? Theme.of(context).disabledColor
+                                    : Theme.of(context).primaryColor,
                               ),
-                            ),
-                          ),
-                          Container(
-                            // decoration: boxDecoration,
-                            width: mediaQuery.size.width * 0.2,
-                            child: FlatButton(
-                              child: Platform.isIOS
-                                  ? Icon(
-                                      IconData(
-                                        62666, //share ICON
-                                        fontFamily: CupertinoIcons.iconFont,
-                                        fontPackage:
-                                            CupertinoIcons.iconFontPackage,
-                                      ),
-                                      color: Theme.of(context).primaryColor,
-                                    )
-                                  : Icon(
-                                      Icons.share,
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                              onPressed: firstTime
-                                  ? null
-                                  : () {
-                                      vibrate();
-                                      Share.share(receivedData.activity);
-                                    },
                             ),
                           ),
                         ],
@@ -252,29 +257,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            //////
-            ///
-            ///
-            ///
-            ///
-            // Container(
-            //   alignment: Alignment.center,
-            //   margin: EdgeInsets.symmetric(vertical: 20.0),
-            //   // width: 200,
-
-            //   height: 100,
-            //   // height: mediaQuery.size.height * .16,
-
-            //   // decoration: boxDecoration,
-            //   child: listButtons,
-            // ),
-
-            //////////
-            ///
-            ///
-            // Expanded(
-            //   child: GridViewButtons(),
-            // ),
             Container(
               width: mediaQuery.size.width * 0.6,
               height: 42,
@@ -296,13 +278,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 onPressed: () {
-                  // callKey = ListViewButtons(
-                  //   fontsize: fontsize,
-                  // ).getCallKeyValue();
-                  // callKey = ListViewButtons
                   print(callKey);
                   print(globals.callKey);
-                  // globals.callKey = 'hhdfahsdhfad';
+
                   print(globals.callKey);
                   _fetchData();
                   vibrate();
