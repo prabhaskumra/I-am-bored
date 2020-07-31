@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:flutter/services.dart';
 
 import './home_screen.dart';
 import './saved_list_screen.dart';
@@ -12,11 +13,30 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int currentIndex = 0;
+  int _currentIndex = 0;
 
-  var _homeSceen = true;
-  var _savedListScreen = false;
-  var _settingsScreen = false;
+  PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  static Future<void> vibrate() async {
+    await SystemChannels.platform.invokeMethod<void>(
+      'HapticFeedback.vibrate',
+      'HapticFeedbackType.lightImpact',
+    );
+  }
+
+  HomeScreen homeScreen = HomeScreen();
 
   @override
   Widget build(BuildContext context) {
@@ -34,24 +54,14 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavyBar(
-        selectedIndex: currentIndex,
+        selectedIndex: _currentIndex,
         showElevation: true,
         itemCornerRadius: 20,
-        curve: Curves.easeInBack,
-        // containerHeight: 50,
-        onItemSelected: (index) => setState(() {
-          currentIndex = index;
-          if (currentIndex == 0) {
-            _homeSceen = true;
-            _savedListScreen = _settingsScreen = false;
-          } else if (currentIndex == 1) {
-            _savedListScreen = true;
-            _homeSceen = _settingsScreen = false;
-          } else if (currentIndex == 2) {
-            _settingsScreen = true;
-            _homeSceen = _savedListScreen = false;
-          }
-        }),
+        curve: Curves.decelerate,
+        onItemSelected: (index) {
+          setState(() => _currentIndex = index);
+          _pageController.jumpToPage(index);
+        },
         items: [
           BottomNavyBarItem(
             icon: Icon(Icons.home),
@@ -75,9 +85,22 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      body: _homeSceen
-          ? HomeScreen()
-          : (_savedListScreen ? SavedListScreen() : SettingsScreen()),
+      body: SizedBox.expand(
+        child: PageView(
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() => _currentIndex = index);
+          },
+          children: <Widget>[
+            HomeScreen(),
+            SavedListScreen(),
+            SettingsScreen(),
+          ],
+        ),
+      ),
+      // body: _homeSceen
+      //     ? homeScreen
+      //     : (_savedListScreen ? SavedListScreen() : SettingsScreen()),
     );
   }
 }

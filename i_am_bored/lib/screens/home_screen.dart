@@ -119,6 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
       decoration: BoxDecoration(
         // color: Colors.blue[50],
         // color: Colors.blue,
+        // color: Theme.of(context).backgroundColor,
         border: Border.all(
           color: Colors.white10,
           width: 5,
