@@ -5,6 +5,7 @@ import './screens/home_screen.dart';
 import './screens/settings_screen.dart';
 import './screens/about_app_screen.dart';
 import './screens/donation_screen.dart';
+import './screens/main_screen.dart';
 import './models/variables.dart' as globals;
 
 void main() {
@@ -32,11 +33,12 @@ class MyApp extends StatelessWidget {
         //   brightness: Brightness.dark,
         // ),
       ),
-      home: HomeScreen(),
+      home: MainScreen(),
       routes: {
         SettingsScreen.routeName: (ctx) => SettingsScreen(),
         AboutAppScreen.routeName: (ctx) => AboutAppScreen(),
         DonationScreen.routeName: (ctx) => DonationScreen(),
+        MainScreen.routeName: (ctx) => MainScreen(),
       },
     );
   }
