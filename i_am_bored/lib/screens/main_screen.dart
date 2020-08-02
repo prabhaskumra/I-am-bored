@@ -71,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavyBarItem(
             icon: Icon(Icons.bookmark),
-            title: Text('Saved List'),
+            title: Text('Saved Items'),
             activeColor: Theme.of(context).primaryColor,
             textAlign: TextAlign.center,
           ),
@@ -98,9 +98,6 @@ class _MainScreenState extends State<MainScreen> {
           ],
         ),
       ),
-      // body: _homeSceen
-      //     ? homeScreen
-      //     : (_savedListScreen ? SavedListScreen() : SettingsScreen()),
     );
   }
 }

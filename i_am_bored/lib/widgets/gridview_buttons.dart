@@ -6,10 +6,10 @@ import '../models/variables.dart' as globals;
 class GridViewButtons extends StatefulWidget {
   const GridViewButtons({
     Key key,
-    @required this.fontsize,
+    // @required this.fontsize,
   }) : super(key: key);
 
-  final double fontsize;
+  // final double fontsize;
 
   @override
   _GridViewButtonsState createState() => _GridViewButtonsState();
@@ -26,6 +26,8 @@ class _GridViewButtonsState extends State<GridViewButtons> {
   var value = 1.0;
   var accessValue = 0.0;
   var priceValue = 0.0;
+
+  double fontsize = 20;
 
   //////
 
@@ -157,7 +159,8 @@ class _GridViewButtonsState extends State<GridViewButtons> {
           child: GridView.count(
             childAspectRatio: 5,
             primary: false,
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(15),
+            // padding: EdgeInsets.only(bottom: 20),
             crossAxisSpacing: 5,
             mainAxisSpacing: 10,
             crossAxisCount: 2,
@@ -181,10 +184,15 @@ class _GridViewButtonsState extends State<GridViewButtons> {
         ),
         /////////////////////// LIST VIEW STARTS HERE  ////////////////////////////
         SizedBox(
+          // height: 60,
           height: 50,
           child: ListView(
             shrinkWrap: true,
+            // padding: EdgeInsets.only(top: 10),
             scrollDirection: Axis.horizontal,
+            // physics: ScrollPhysics(
+            //   parent: AlwaysScrollableScrollPhysics(),
+            // ),
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(5.0),
@@ -206,7 +214,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
                   label: Text(
                     "Pariticipants",
                     style: TextStyle(
-                      fontSize: widget.fontsize,
+                      fontSize: fontsize,
                       color: (isParticipants && !colorKey)
                           ? Colors.white
                           : Colors.black,
@@ -228,7 +236,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
                   label: Text(
                     "Price",
                     style: TextStyle(
-                      fontSize: widget.fontsize,
+                      fontSize: fontsize,
                       color:
                           (isPrice && !colorKey) ? Colors.white : Colors.black,
                     ),
@@ -257,7 +265,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
                   label: Text(
                     "Accessibility",
                     style: TextStyle(
-                      fontSize: widget.fontsize,
+                      fontSize: fontsize,
                       color: (isAccessibility && !colorKey)
                           ? Colors.white
                           : Colors.black,
@@ -389,7 +397,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
       child: Text(
         textTitle,
         style: TextStyle(
-          fontSize: 23,
+          fontSize: 20,
           color: (colorSwitch && colorKey) ? Colors.white : Colors.black,
         ),
       ),

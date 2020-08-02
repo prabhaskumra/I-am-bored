@@ -84,7 +84,9 @@ class TableData extends StatelessWidget {
           height: 60,
           child: SelectableText(
             value.activity,
-            style: TextStyle(fontSize: fontsize),
+            style: TextStyle(
+              fontSize: fontsize,
+            ),
             textAlign: TextAlign.center,
           ),
         ),
@@ -114,8 +116,8 @@ class TableData extends StatelessWidget {
             if (await canLaunch(value.link)) launch(value.link);
           },
           style: TextStyle(
-            fontSize: fontsize / 1.2,
-          ),
+              // fontSize: fontsize / 1.2,
+              ),
           textAlign: TextAlign.center,
         ),
       ],

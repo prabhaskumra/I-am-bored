@@ -21,12 +21,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
     return Container(
       // decoration: boxDecoration,
-      padding: EdgeInsets.all(5),
+      padding: EdgeInsets.all(10),
       child: ListView(
+        // shrinkWrap: ,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              CircleAvatar(
+                child: Icon(
+                  Icons.bookmark_border,
+                ),
+              ),
+              Text("Saved List"),
+              FlatButton(
+                onPressed: () {},
+                child: Icon(Icons.arrow_forward_ios),
+              )
+            ],
+          ),
+          Divider(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CircleAvatar(
+                child: Icon(
+                  Icons.brightness_2,
+                ),
+              ),
               Text("Dark Mode"),
               Switch.adaptive(
                   value: globals.darkMode,
@@ -41,7 +63,44 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Color Scheme"),
+              CircleAvatar(
+                child: Icon(
+                  Icons.info_outline,
+                ),
+              ),
+              Text("About App"),
+              FlatButton(
+                clipBehavior: Clip.hardEdge,
+                onPressed: () {},
+                child: Icon(Icons.arrow_forward_ios),
+              )
+            ],
+          ),
+          Divider(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CircleAvatar(
+                child: Icon(Icons.share),
+              ),
+              Text("Tell a friend!"),
+              FlatButton(
+                clipBehavior: Clip.hardEdge,
+                onPressed: () {},
+                child: Icon(Icons.arrow_forward_ios),
+              )
+            ],
+          ),
+          Divider(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // CircleAvatar(
+              //   child: Icon(
+              //     Icons.info_outline,
+              //   ),
+              // ),
+              // Text("Color Scheme"),
               Container(
                 // color: Colors.red,
                 child: CircleAvatar(
@@ -91,6 +150,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ],
           ),
           Divider(),
+          Text(
+            "Version: 1.0.0\n All Rights Reserved",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Theme.of(context).disabledColor,
+            ),
+          ),
         ],
       ),
     );

@@ -10,7 +10,7 @@ class _SavedListScreenState extends State<SavedListScreen> {
   Widget build(BuildContext context) {
     return Container(
         child: Center(
-      child: Text("Saved List For Now"),
+      child: Text("No Saved Activities!"),
     ));
   }
 }

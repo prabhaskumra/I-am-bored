@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   var _isLoading = false;
   String callKey = 'byActivity';
   double callValue;
-  // var _isStar = false;
+  var _isStar = false;
   int currentIndex = 0;
 
   static Future<void> vibrate() async {
@@ -63,57 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       borderRadius: BorderRadius.circular(12),
     );
-    // return Container(
-    // appBar: AppBar(
-    //   toolbarHeight: kToolbarHeight / 1.2,
-    //   // toolbarHeight: kToolbarHeight * 5,
-    //   elevation: 20,
-    //   shape: RoundedRectangleBorder(
-    //     borderRadius: BorderRadius.vertical(
-    //       bottom: Radius.elliptical(30, 30),
-    //       // bottom: Radius.circular(50),
-    //     ),
-    //   ),
-    //   title: Text(
-    //     'The Bored App',
-    //     style: TextStyle(
-    //       fontSize: fontsize,
-    //     ),
-    //   ),
-    //   centerTitle: true,
-    // ),
-    // drawer: AppDrawer(),
-    // bottomNavigationBar: BottomNavyBar(
-    //   selectedIndex: currentIndex,
-    //   showElevation: true,
-    //   itemCornerRadius: 20,
-    //   curve: Curves.easeInBack,
-    //   onItemSelected: (index) => setState(() {
-    //     currentIndex = index;
-    //   }),
-    //   items: [
-    //     BottomNavyBarItem(
-    //       icon: Icon(Icons.home),
-    //       title: Text('Home'),
-    //       activeColor: Theme.of(context).primaryColor,
-    //       textAlign: TextAlign.center,
-    //     ),
-    //     BottomNavyBarItem(
-    //       icon: Icon(Icons.bookmark),
-    //       title: Text('Saved List'),
-    //       activeColor: Theme.of(context).primaryColor,
-    //       textAlign: TextAlign.center,
-    //     ),
-    //     BottomNavyBarItem(
-    //       icon: Icon(Icons.settings),
-    //       title: Text(
-    //         'Settings',
-    //       ),
-    //       activeColor: Theme.of(context).primaryColor,
-    //       textAlign: TextAlign.center,
-    //     ),
-    //   ],
-    // ),
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -195,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               // : '',
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
-                                fontSize: fontsize - 4,
+                                // fontSize: fontsize - 4,
                               ),
                             ),
                           ),
@@ -253,14 +202,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 : () {
                                     vibrate();
                                     setState(() {
-                                      // _isStar = !_isStar;
+                                      _isStar = !_isStar;
                                     });
                                   },
                             child: Icon(
-                              // _isStar
-                              //     ? Icons.bookmark
-                              //     : Icons.bookmark_border,
-                              Icons.bookmark_border,
+                              _isStar ? Icons.bookmark : Icons.bookmark_border,
+                              // Icons.bookmark_border,
                               color: firstTime
                                   ? Theme.of(context).disabledColor
                                   : Theme.of(context).primaryColor,
@@ -278,16 +225,27 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               padding: EdgeInsets.only(bottom: 10),
               // decoration: boxDecoration,
-              child: GridViewButtons(
-                fontsize: fontsize,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                shadowColor: Theme.of(context).primaryColorDark,
+                elevation: 20,
+                child: GridViewButtons(
+                    // fontsize: fontsize,
+                    ),
               ),
             ),
           ),
           Container(
-            width: mediaQuery.size.width * 0.6,
+            // width: mediaQuery.size.width * 0.6,
+            width: double.infinity,
             height: 42,
+
             // decoration: boxDecoration,
             child: RaisedButton.icon(
+              // shadowColor: Theme.of(context).primaryColorDark,
+              // elevation: 20,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
                 side: BorderSide(color: Theme.of(context).primaryColor),
@@ -318,6 +276,5 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
     // body: CircleShape(),
-    // );
   }
 }
