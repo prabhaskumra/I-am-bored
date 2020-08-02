@@ -6,12 +6,14 @@ import '../models/bored_data.dart';
 class SavedList with ChangeNotifier {
   // final BoredData boredItem;
 
-  List<BoredData> _savedItems = [];
+  List<BoredData> savedItems = [];
 
   // SavedList(this.boredItem);
 
   void addItem(BoredData item) {
-    _savedItems.add(item);
+    savedItems.add(item);
+    // print(_savedItems[0].activity);
+    print(savedItems.length);
     notifyListeners();
   }
 

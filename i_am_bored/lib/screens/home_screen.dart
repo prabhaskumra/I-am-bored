@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
     BoredData value;
     receivedData =
         await BoredHttpsCall().callByActivity(value, callKey, callValue);
+    _isStar = receivedData.isFavourite;
     setState(() {
       firstTime = false;
       _isLoading = false;
@@ -58,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final savedActivityList = Provider.of<SavedList>(context);
+    // _isStar = receivedData.isFavourite;
 
     var mediaQuery = MediaQuery.of(context);
     var boxDecoration = BoxDecoration(
@@ -209,7 +211,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   : () {
                                       vibrate();
                                       setState(() {
-                                        _isStar = !_isStar;
+                                        if (!receivedData.isFavourite) {
+                                          receivedData.isFavourite = true;
+                                          _isStar = !_isStar;
+                                          savedActivityList
+                                              .addItem(receivedData);
+                                        }
+                                        // savedActivityLis
                                       });
                                     },
                               child: Icon(
