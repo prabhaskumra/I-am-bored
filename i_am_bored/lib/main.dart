@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './provider/saved_list.dart';
+import 'package:provider/provider.dart';
 // import 'dart:io';
 
 import './screens/home_screen.dart';
@@ -16,30 +18,37 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: 'SansPro',
-        brightness: Brightness.light,
-        textTheme: TextTheme(
-          caption: TextStyle(
-            fontSize: 20.0,
-          ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<SavedList>(
+          create: (context) => SavedList(),
         ),
-        // darkTheme: ThemeData(
-        //   brightness: Brightness.dark,
-        // ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.teal,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          fontFamily: 'SansPro',
+          brightness: Brightness.light,
+          textTheme: TextTheme(
+            caption: TextStyle(
+              fontSize: 20.0,
+            ),
+          ),
+          // darkTheme: ThemeData(
+          //   brightness: Brightness.dark,
+          // ),
+        ),
+        home: MainScreen(),
+        routes: {
+          SettingsScreen.routeName: (ctx) => SettingsScreen(),
+          AboutAppScreen.routeName: (ctx) => AboutAppScreen(),
+          DonationScreen.routeName: (ctx) => DonationScreen(),
+          MainScreen.routeName: (ctx) => MainScreen(),
+        },
       ),
-      home: MainScreen(),
-      routes: {
-        SettingsScreen.routeName: (ctx) => SettingsScreen(),
-        AboutAppScreen.routeName: (ctx) => AboutAppScreen(),
-        DonationScreen.routeName: (ctx) => DonationScreen(),
-        MainScreen.routeName: (ctx) => MainScreen(),
-      },
     );
   }
 }
