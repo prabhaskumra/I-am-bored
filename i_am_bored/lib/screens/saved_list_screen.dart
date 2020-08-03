@@ -21,7 +21,7 @@ class _SavedListScreenState extends State<SavedListScreen> {
       list.add(
         Card(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(12),
           ),
           elevation: 10,
           child: Container(
