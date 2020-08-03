@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:i_am_bored/models/bored_data.dart';
+import 'package:i_am_bored/screens/list_detail_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/saved_list.dart';
+import '../screens/saved_list_screen.dart';
 
 class SavedListScreen extends StatefulWidget {
   @override
@@ -10,7 +12,8 @@ class SavedListScreen extends StatefulWidget {
 }
 
 class _SavedListScreenState extends State<SavedListScreen> {
-  Widget getTextWidgets(List<BoredData> savedListItmes, var mediaQuery) {
+  Widget getTextWidgets(
+      List<BoredData> savedListItmes, var mediaQuery, BuildContext context) {
     List<Widget> list = new List<Widget>();
     for (var i = 0; i < savedListItmes.length; i++) {
       // print("I");
@@ -25,7 +28,15 @@ class _SavedListScreenState extends State<SavedListScreen> {
             // width: 0,
             padding: EdgeInsets.all(10),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ListDetailScreen(
+                      receivedList: savedListItmes[i],
+                    ),
+                  ),
+                );
+              },
               child: SizedBox(
                 height: mediaQuery.height / 12,
                 child: Text(
@@ -58,7 +69,7 @@ class _SavedListScreenState extends State<SavedListScreen> {
     final savedActivityList = Provider.of<SavedList>(context);
 
     return Container(
-      child: getTextWidgets(savedActivityList.savedItems, _mediaQuery),
+      child: getTextWidgets(savedActivityList.savedItems, _mediaQuery, context),
     );
   }
 }
