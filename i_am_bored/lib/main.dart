@@ -9,6 +9,7 @@ import './screens/about_app_screen.dart';
 import './screens/donation_screen.dart';
 import './screens/main_screen.dart';
 import './screens/list_detail_screen.dart';
+import './provider/theme_data.dart';
 import './models/variables.dart' as globals;
 
 void main() {
@@ -19,36 +20,46 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // final selectedThemeData = Provider.of<CustomThemeData>(context);
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<SavedList>(
           create: (context) => SavedList(),
         ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.teal,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          fontFamily: 'SansPro',
-          brightness: Brightness.light,
-          textTheme: TextTheme(
-            caption: TextStyle(
-              fontSize: 20.0,
-            ),
-          ),
-          // darkTheme: ThemeData(
-          //   brightness: Brightness.dark,
-          // ),
+        ChangeNotifierProvider<CustomThemeData>(
+          create: (context) => CustomThemeData(),
         ),
-        home: MainScreen(),
-        routes: {
-          SettingsScreen.routeName: (ctx) => SettingsScreen(),
-          AboutAppScreen.routeName: (ctx) => AboutAppScreen(),
-          DonationScreen.routeName: (ctx) => DonationScreen(),
-          MainScreen.routeName: (ctx) => MainScreen(),
-          ListDetailScreen.routeName: (ctx) => ListDetailScreen(),
+      ],
+      child: Builder(
+        builder: (BuildContext newContext) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch:
+                  Provider.of<CustomThemeData>(newContext).themeColor,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+              fontFamily: 'SansPro',
+              brightness: Brightness.light,
+              textTheme: TextTheme(
+                caption: TextStyle(
+                  fontSize: 20.0,
+                ),
+              ),
+              // darkTheme: ThemeData(
+              //   brightness: Brightness.dark,
+              // ),
+            ),
+            home: MainScreen(),
+            routes: {
+              SettingsScreen.routeName: (ctx) => SettingsScreen(),
+              AboutAppScreen.routeName: (ctx) => AboutAppScreen(),
+              DonationScreen.routeName: (ctx) => DonationScreen(),
+              MainScreen.routeName: (ctx) => MainScreen(),
+              ListDetailScreen.routeName: (ctx) => ListDetailScreen(),
+            },
+          );
         },
       ),
     );

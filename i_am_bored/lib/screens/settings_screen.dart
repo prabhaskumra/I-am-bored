@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/variables.dart' as globals;
+import '../provider/theme_data.dart';
+import '../screens/about_app_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const routeName = '/settings';
@@ -12,6 +15,8 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
+    var themeData = Provider.of<CustomThemeData>(context);
+
     var boxDecoration = BoxDecoration(
       border: Border.all(
         color: Theme.of(context).primaryColor,
@@ -25,128 +30,40 @@ class _SettingsScreenState extends State<SettingsScreen> {
       child: ListView(
         // shrinkWrap: ,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CircleAvatar(
-                child: Icon(
-                  Icons.bookmark_border,
-                ),
-              ),
-              Text("Saved List"),
-              FlatButton(
-                onPressed: () {},
-                child: Icon(Icons.arrow_forward_ios),
-              )
-            ],
+          ListTile(
+            leading: Icon(
+              Icons.info_outline,
+              color: Theme.of(context).primaryColor,
+            ),
+            title: Text("About App!"),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              color: Theme.of(context).primaryColor,
+            ),
+            onTap: () {
+              Navigator.of(context).pushNamed(AboutAppScreen.routeName);
+            },
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(
+              Icons.share,
+              color: Theme.of(context).primaryColor,
+            ),
+            title: Text("Tell a friend!"),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              color: Theme.of(context).primaryColor,
+            ),
           ),
           Divider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CircleAvatar(
-                child: Icon(
-                  Icons.brightness_2,
-                ),
-              ),
-              Text("Dark Mode"),
-              Switch.adaptive(
-                  value: globals.darkMode,
-                  onChanged: (value) {
-                    setState(() {
-                      globals.darkMode = !globals.darkMode;
-                    });
-                  }),
-            ],
-          ),
-          Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CircleAvatar(
-                child: Icon(
-                  Icons.info_outline,
-                ),
-              ),
-              Text("About App"),
-              FlatButton(
-                clipBehavior: Clip.hardEdge,
-                onPressed: () {},
-                child: Icon(Icons.arrow_forward_ios),
-              )
-            ],
-          ),
-          Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CircleAvatar(
-                child: Icon(Icons.share),
-              ),
-              Text("Tell a friend!"),
-              FlatButton(
-                clipBehavior: Clip.hardEdge,
-                onPressed: () {},
-                child: Icon(Icons.arrow_forward_ios),
-              )
-            ],
-          ),
-          Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // CircleAvatar(
-              //   child: Icon(
-              //     Icons.info_outline,
-              //   ),
-              // ),
-              // Text("Color Scheme"),
-              Container(
-                // color: Colors.red,
-                child: CircleAvatar(
-                  radius: 30,
-                  backgroundColor: Colors.teal,
-                  // foregroundColor: Colors.green,
-                  child: FlatButton(
-                    child: null,
-                    onPressed: () {},
-                  ),
-                ),
-              ),
-              Container(
-                // color: Colors.red,
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.blueGrey,
-                  // foregroundColor: Colors.green,
-                  child: FlatButton(
-                    child: null,
-                    onPressed: () {},
-                  ),
-                ),
-              ),
-              Container(
-                // color: Colors.red,
-                child: CircleAvatar(
-                  backgroundColor: Colors.red,
-                  // foregroundColor: Colors.green,
-                  child: FlatButton(
-                    child: null,
-                    onPressed: () {},
-                  ),
-                ),
-              ),
-              Container(
-                // color: Colors.red,
-                child: CircleAvatar(
-                  backgroundColor: Colors.green,
-                  // foregroundColor: Colors.green,
-                  child: FlatButton(
-                    child: null,
-                    onPressed: () {},
-                  ),
-                ),
-              ),
+              buildCircleAvatarColor(themeData, Colors.teal),
+              buildCircleAvatarColor(themeData, Colors.blueGrey),
+              buildCircleAvatarColor(themeData, Colors.red),
+              buildCircleAvatarColor(themeData, Colors.green),
             ],
           ),
           Divider(),
@@ -158,6 +75,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  CircleAvatar buildCircleAvatarColor(CustomThemeData themeData, var color) {
+    return CircleAvatar(
+      radius: 23,
+      backgroundColor: color,
+      child: InkWell(
+        onTap: () {
+          themeData.changeColor(color);
+        },
       ),
     );
   }
