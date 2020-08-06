@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -60,8 +62,7 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
   );
 
   // CupertinoAlertDialog iosStyle = CupertinoAlertDialog(
-  //   // title: Text("You sure want to delete the item?"),
-
+  //   title: Text("You sure want to delete the item?"),
   //   content: Text("Thisis my message."),
   //   actions: [
   //     CupertinoDialogAction(
@@ -202,14 +203,69 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                     onPressed: () {
                       // Navigator.pop(context);
                       vibrate();
-                      indexData.removeItem(widget.index);
-                      Navigator.pop(context);
-                      // showDialog(
-                      //   context: context,
-                      //   builder: (BuildContext context) {
-                      //     return androidStyle;
-                      //   },
-                      // );
+                      // indexData.removeItem(widget.index);
+                      // Navigator.pop(context);
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Platform.isIOS
+                              ? CupertinoAlertDialog(
+                                  title:
+                                      Text("Remove this item from the list?"),
+                                  // content: Text("Thisis my message."),
+                                  actions: [
+                                    // CupertinoDialogAction(
+                                    //   child: FlatButton(
+                                    //     onPressed: () {
+                                    //       indexData.removeItem(widget.index);
+                                    //       Navigator.pop(context);
+                                    //       Navigator.pop(context);
+                                    //     },
+                                    //     child: Text('Yes'),
+                                    //   ),
+                                    // ),
+                                    CupertinoDialogAction(
+                                      child: Text("Yes"),
+                                      onPressed: () {
+                                        indexData.removeItem(widget.index);
+                                        Navigator.pop(context);
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    CupertinoDialogAction(
+                                      child: Text("Cancel"),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                )
+                              : AlertDialog(
+                                  title:
+                                      Text("Remove this item from the list?"),
+                                  // content: Text("This is my message."),
+                                  actions: [
+                                    FlatButton(
+                                      child: Text("Yes"),
+                                      onPressed: () {
+                                        // indexData.removeItem(widget.index);
+                                        indexData.removeItem(widget.index);
+                                        Navigator.pop(context);
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    FlatButton(
+                                      child: Text("Cancel"),
+                                      onPressed: () {
+                                        // DismissAction(context);
+                                        // indexData.removeItem(widget.index);
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                );
+                        },
+                      );
                       // showCupertinoDialog(
                       //     context: context,
                       //     builder: (BuildContext context) {
