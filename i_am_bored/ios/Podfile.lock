@@ -3,6 +3,7 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - path_provider (0.0.1):
     - Flutter
   - share (0.0.1):
     - Flutter
