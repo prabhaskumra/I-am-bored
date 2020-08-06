@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:i_am_bored/models/bored_data.dart';
 import 'package:i_am_bored/screens/list_detail_screen.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,16 @@ class SavedListScreen extends StatefulWidget {
 }
 
 class _SavedListScreenState extends State<SavedListScreen> {
+  // SystemChannels
+
+  static Future<void> vibrate() async {
+    await SystemChannels.platform.invokeMethod<void>(
+      'HapticFeedback.vibrate',
+      'HapticFeedbackType.lightImpact',
+    );
+    // SystemChannels
+  }
+
   Widget getTextWidgets(
       List<BoredData> savedListItmes, var mediaQuery, BuildContext context) {
     List<Widget> list = new List<Widget>();
@@ -30,10 +41,12 @@ class _SavedListScreenState extends State<SavedListScreen> {
             padding: EdgeInsets.all(10),
             child: ListTile(
               onTap: () {
+                vibrate();
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => ListDetailScreen(
                       receivedList: savedListItmes[i],
+                      index: i,
                     ),
                   ),
                 );
@@ -81,15 +94,11 @@ class _SavedListScreenState extends State<SavedListScreen> {
     final savedActivityList = Provider.of<SavedList>(context);
 
     return Container(
-      child: getTextWidgets(savedActivityList.savedItems, _mediaQuery, context),
+      child: savedActivityList.savedItems.isEmpty
+          ? Center(
+              child: Text("No saved items!"),
+            )
+          : getTextWidgets(savedActivityList.savedItems, _mediaQuery, context),
     );
   }
 }
-
-// class BuildSavedList extends StatelessWidget {
-//   Widget build(BuildContext context) {
-//     return(
-
-//     );
-//   }
-// }

@@ -18,6 +18,7 @@ class SavedList with ChangeNotifier {
   }
 
   void removeItem(int key) {
+    savedItems.removeAt(key);
     notifyListeners();
   }
 }

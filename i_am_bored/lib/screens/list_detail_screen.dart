@@ -1,16 +1,22 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
 
 import '../models/bored_data.dart';
+import '../provider/saved_list.dart';
 
 class ListDetailScreen extends StatefulWidget {
   static const routeName = '/list-detail';
 
   final BoredData receivedList;
+  final int index;
 
   ListDetailScreen({
     this.receivedList,
+    this.index,
   });
 
   @override
@@ -29,9 +35,56 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
       linkisEmpty = false;
   }
 
+  // SystemChannels
+  static Future<void> vibrate() async {
+    await SystemChannels.platform.invokeMethod<void>(
+      'HapticFeedback.vibrate',
+      'HapticFeedbackType.lightImpact',
+    );
+    // SystemChannels
+  }
+
+  AlertDialog androidStyle = AlertDialog(
+    title: Text("My title"),
+    content: Text("This is my message."),
+    actions: [
+      FlatButton(
+        child: Text("OK"),
+        onPressed: () {
+          // DismissAction(context);
+          // indexData.removeItem(widget.index);
+          // Navigator.pop(context);
+        },
+      ),
+    ],
+  );
+
+  // CupertinoAlertDialog iosStyle = CupertinoAlertDialog(
+  //   // title: Text("You sure want to delete the item?"),
+
+  //   content: Text("Thisis my message."),
+  //   actions: [
+  //     CupertinoDialogAction(
+  //       child: FlatButton(
+  //         onPressed: () {},
+  //         child: Text('Yes'),
+  //       ),
+  //     ),
+  //     CupertinoDialogAction(
+  //       child: FlatButton(
+  //         onPressed: () {
+  //           Navigator.pop();
+  //         },
+  //         child: Text('Cancel'),
+  //       ),
+  //     ),
+  //   ],
+  // );
+
   @override
   Widget build(BuildContext context) {
     var _mediaQuery = MediaQuery.of(context).size;
+    final indexData = Provider.of<SavedList>(context);
 
     var roundRectangularBorder = RoundedRectangleBorder(
       side: BorderSide(
@@ -146,13 +199,30 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                 children: [
                   RaisedButton(
                     child: Text('Remove from the list'),
-                    onPressed: () {},
+                    onPressed: () {
+                      // Navigator.pop(context);
+                      vibrate();
+                      indexData.removeItem(widget.index);
+                      Navigator.pop(context);
+                      // showDialog(
+                      //   context: context,
+                      //   builder: (BuildContext context) {
+                      //     return androidStyle;
+                      //   },
+                      // );
+                      // showCupertinoDialog(
+                      //     context: context,
+                      //     builder: (BuildContext context) {
+                      //       return iosStyle;
+                      //     });
+                    },
                     shape: roundRectangularBorder,
                     color: Colors.white,
                   ),
                   RaisedButton(
                     child: Text('Done'),
                     onPressed: () {
+                      vibrate();
                       Navigator.of(context).pop();
                     },
                     shape: roundRectangularBorder,

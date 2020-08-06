@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../models/variables.dart' as globals;
@@ -13,6 +14,16 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  // SystemChannels
+
+  static Future<void> vibrate() async {
+    await SystemChannels.platform.invokeMethod<void>(
+      'HapticFeedback.vibrate',
+      'HapticFeedbackType.lightImpact',
+    );
+    // SystemChannels
+  }
+
   @override
   Widget build(BuildContext context) {
     var themeData = Provider.of<CustomThemeData>(context);
@@ -38,9 +49,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: Text("About App!"),
             trailing: Icon(
               Icons.arrow_forward_ios,
-              color: Theme.of(context).primaryColor,
+              // color: Theme.of(context).primaryColor,
             ),
             onTap: () {
+              // vibrate();
               Navigator.of(context).pushNamed(AboutAppScreen.routeName);
             },
           ),
@@ -53,7 +65,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: Text("Tell a friend!"),
             trailing: Icon(
               Icons.arrow_forward_ios,
-              color: Theme.of(context).primaryColor,
+              // color: Theme.of(context).primaryColor,
             ),
           ),
           Divider(),
@@ -85,6 +97,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       backgroundColor: color,
       child: InkWell(
         onTap: () {
+          vibrate();
           themeData.changeColor(color);
         },
       ),
