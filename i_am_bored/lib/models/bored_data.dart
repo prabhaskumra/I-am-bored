@@ -9,6 +9,7 @@ class BoredData {
   final String key;
   final double accessibility;
   bool isFavourite;
+  DateTime savedTime;
 
   BoredData({
     @required this.activity,
@@ -19,5 +20,6 @@ class BoredData {
     @required this.key,
     @required this.accessibility,
     this.isFavourite = false,
+    this.savedTime,
   });
 }

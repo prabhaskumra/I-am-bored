@@ -214,8 +214,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                         if (!receivedData.isFavourite) {
                                           receivedData.isFavourite = true;
                                           _isStar = !_isStar;
+                                          receivedData.savedTime =
+                                              DateTime.now();
                                           savedActivityList
                                               .addItem(receivedData);
+                                        } else {
+                                          receivedData.isFavourite = false;
+                                          _isStar = !_isStar;
+                                          // int index = savedActivityList.savedItems.elementAt(index)
+                                          savedActivityList.removeItem(
+                                              savedActivityList
+                                                      .savedItems.length -
+                                                  1);
                                         }
                                         // savedActivityLis
                                       });

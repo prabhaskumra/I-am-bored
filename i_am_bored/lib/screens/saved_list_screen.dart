@@ -53,8 +53,10 @@ class _SavedListScreenState extends State<SavedListScreen> {
               },
               // dense: true,
               // leading: Text("${i + 1}. "),
-              subtitle:
-                  Text(DateFormat('MM-dd-yyyy – kk:mm').format(DateTime.now())),
+              subtitle: Text(
+                  DateFormat /*('MM-dd-yyyy – kk:mm') // .yMMMMd('en_US')*/ .yMd()
+                      .add_jm()
+                      .format(savedListItmes[i].savedTime)),
               title: Text(
                 "${i + 1}. " + savedListItmes[i].activity,
                 style: TextStyle(
