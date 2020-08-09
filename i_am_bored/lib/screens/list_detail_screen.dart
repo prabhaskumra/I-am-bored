@@ -182,13 +182,13 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                               ),
                             ],
                           ),
-                          buildTableRowDivider(),
-                          TableRow(
-                            children: [
-                              Text("Time saved"),
-                              Text(DateTime.now().toString()),
-                            ],
-                          ),
+                          // buildTableRowDivider(),
+                          // TableRow(
+                          //   children: [
+                          //     Text("Time saved"),
+                          //     Text(DateTime.now().toString()),
+                          //   ],
+                          // ),
                         ],
                       ),
                     ],
@@ -199,7 +199,10 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   RaisedButton(
-                    child: Text('Remove from the list'),
+                    child: Text(
+                      'Remove from the list',
+                      // style: TextStyle(color: Colors.black),
+                    ),
                     onPressed: () {
                       // Navigator.pop(context);
                       vibrate();
@@ -210,9 +213,12 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                         builder: (BuildContext context) {
                           return Platform.isIOS
                               ? CupertinoAlertDialog(
-                                  title:
-                                      Text("Remove this item from the list?"),
-                                  // content: Text("Thisis my message."),
+                                  title: Text(
+                                    // "Remove this item from the list?",
+                                    "Remove this item?",
+                                  ),
+                                  content: Text(
+                                      "Item will be deleted from saved list"),
                                   actions: [
                                     // CupertinoDialogAction(
                                     //   child: FlatButton(
@@ -233,7 +239,10 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                                       },
                                     ),
                                     CupertinoDialogAction(
-                                      child: Text("Cancel"),
+                                      child: Text(
+                                        "Cancel",
+                                        style: TextStyle(color: Colors.red),
+                                      ),
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
@@ -241,9 +250,9 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                                   ],
                                 )
                               : AlertDialog(
-                                  title:
-                                      Text("Remove this item from the list?"),
-                                  // content: Text("This is my message."),
+                                  title: Text("Remove this item?"),
+                                  content: Text(
+                                      "Item will be deleted from saved list"),
                                   actions: [
                                     FlatButton(
                                       child: Text("Yes"),
@@ -255,7 +264,10 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                                       },
                                     ),
                                     FlatButton(
-                                      child: Text("Cancel"),
+                                      child: Text(
+                                        "Cancel",
+                                        style: TextStyle(color: Colors.red),
+                                      ),
                                       onPressed: () {
                                         // DismissAction(context);
                                         // indexData.removeItem(widget.index);
@@ -273,7 +285,7 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                       //     });
                     },
                     shape: roundRectangularBorder,
-                    color: Colors.white,
+                    color: Theme.of(context).bottomAppBarColor,
                   ),
                   RaisedButton(
                     child: Text('Done'),
@@ -282,7 +294,7 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                       Navigator.of(context).pop();
                     },
                     shape: roundRectangularBorder,
-                    color: Colors.white,
+                    color: Theme.of(context).bottomAppBarColor,
                   ),
                 ],
               )

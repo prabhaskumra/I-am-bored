@@ -199,7 +199,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
                 child: RaisedButton.icon(
                   color: (isParticipants && !colorKey)
                       ? Theme.of(context).primaryColor
-                      : Colors.white,
+                      : Theme.of(context).bottomAppBarColor,
                   shape: roundedRectangleBorder,
                   icon: Icon(
                     Icons.people,
@@ -243,7 +243,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
                   ),
                   color: (isPrice && !colorKey)
                       ? Theme.of(context).primaryColor
-                      : Colors.white,
+                      : Theme.of(context).bottomAppBarColor,
                 ),
               ),
               Padding(
@@ -258,7 +258,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
                   shape: roundedRectangleBorder,
                   color: (isAccessibility && !colorKey)
                       ? Theme.of(context).primaryColor
-                      : Colors.white,
+                      : Theme.of(context).bottomAppBarColor,
                   onPressed: () {
                     setKey('isAccessibility');
                   },
@@ -406,7 +406,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
       },
       color: (colorSwitch && colorKey)
           ? Theme.of(context).primaryColor
-          : Colors.white,
+          : Theme.of(context).bottomAppBarColor,
       shape: roundedRectangleBorder,
       // autofocus: false,
     );

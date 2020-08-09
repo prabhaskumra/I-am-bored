@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
             title: 'Flutter Demo',
             theme: ThemeData(
               primarySwatch:
+                  // primarySwatch: MaterialColor(0X3b5998, Map<>);
                   Provider.of<CustomThemeData>(newContext).themeColor,
               visualDensity: VisualDensity.adaptivePlatformDensity,
               fontFamily: 'SansPro',

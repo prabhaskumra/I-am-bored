@@ -78,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // color: Colors.blue[50],
           // color: Colors.blue,
           // color: Theme.of(context).backgroundColor,
+          color: Theme.of(context).bottomAppBarColor,
           border: Border.all(
             color: Colors.white10,
             width: 5,
