@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final selectedThemeData = Provider.of<CustomThemeData>(context);
+    // Provider.of<SavedList>(context).getDatabaseList();
 
     return MultiProvider(
       providers: [

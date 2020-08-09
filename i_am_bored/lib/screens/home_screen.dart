@@ -16,6 +16,7 @@ import '../widgets/list_view_buttons.dart';
 import '../widgets/gridview_buttons.dart';
 import '../provider/saved_list.dart';
 import '../models/variables.dart' as globals;
+import '../helpers/database_helper.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -33,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   double callValue;
   var _isStar = false;
   int currentIndex = 0;
+  int columnIdcreated;
 
   static Future<void> vibrate() async {
     await SystemChannels.platform.invokeMethod<void>(
@@ -209,27 +211,30 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: FlatButton(
                               onPressed: firstTime
                                   ? null
-                                  : () {
+                                  : () async {
+                                      // columnIdcreated;
                                       vibrate();
-                                      setState(() {
-                                        if (!receivedData.isFavourite) {
+                                      if (!receivedData.isFavourite) {
+                                        setState(() {
                                           receivedData.isFavourite = true;
                                           _isStar = !_isStar;
                                           receivedData.savedTime =
                                               DateTime.now();
-                                          savedActivityList
-                                              .addItem(receivedData);
-                                        } else {
+                                        });
+                                        columnIdcreated =
+                                            await savedActivityList
+                                                .addItem(receivedData);
+                                        print(columnIdcreated);
+                                      } else {
+                                        setState(() {
                                           receivedData.isFavourite = false;
                                           _isStar = !_isStar;
-                                          // int index = savedActivityList.savedItems.elementAt(index)
-                                          savedActivityList.removeItem(
-                                              savedActivityList
-                                                      .savedItems.length -
-                                                  1);
-                                        }
-                                        // savedActivityLis
-                                      });
+                                        });
+                                        // int index = savedActivityList.savedItems.elementAt(index)
+                                        savedActivityList
+                                            .removeItem(columnIdcreated);
+                                      }
+                                      // savedActivityLis
                                     },
                               child: Icon(
                                 _isStar
@@ -242,6 +247,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
+                          // RaisedButton(
+                          //   child: Text("sexy"),
+                          //   onPressed: () async {
+                          //     List<Map<String, dynamic>> rowow =
+                          //         await DatabaseHelper.instance.queryALl();
+                          //     print(rowow);
+                          //     // int rowsAffected =
+                          //     //     await DatabaseHelper.instance.delete(1);
+                          //     // print(rowsAffected);
+                          //   },
+                          // ),
                         ],
                       ),
                     ),

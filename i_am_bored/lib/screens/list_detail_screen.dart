@@ -7,13 +7,14 @@ import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 
+import '../helpers/database_helper.dart';
 import '../models/bored_data.dart';
 import '../provider/saved_list.dart';
 
 class ListDetailScreen extends StatefulWidget {
   static const routeName = '/list-detail';
 
-  final BoredData receivedList;
+  final Map<String, dynamic> receivedList;
   final int index;
 
   ListDetailScreen({
@@ -28,10 +29,10 @@ class ListDetailScreen extends StatefulWidget {
 class _ListDetailScreenState extends State<ListDetailScreen> {
   var linkisEmpty = false;
 
-  @override
+  // @override
   void initState() {
     // TODO: implement initState
-    if (widget.receivedList.link == '')
+    if (widget.receivedList[DatabaseHelper.link] == '')
       linkisEmpty = true;
     else
       linkisEmpty = false;
@@ -105,7 +106,7 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
             // top: Radius.circular(30),
           ),
         ),
-        title: Text(widget.receivedList.activity),
+        title: Text(widget.receivedList[DatabaseHelper.activity]),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -124,7 +125,7 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                   child: Column(
                     children: [
                       Text(
-                        widget.receivedList.activity,
+                        widget.receivedList[DatabaseHelper.activity],
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20,
@@ -138,29 +139,33 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                           TableRow(
                             children: [
                               Text("Type"),
-                              Text(widget.receivedList.type),
+                              Text(widget.receivedList[DatabaseHelper.type]),
                             ],
                           ),
                           buildTableRowDivider(),
                           TableRow(
                             children: [
                               Text("Participants"),
-                              Text(widget.receivedList.participants.toString()),
+                              Text(widget
+                                  .receivedList[DatabaseHelper.participants]
+                                  .toString()),
                             ],
                           ),
                           buildTableRowDivider(),
                           TableRow(
                             children: [
                               Text("Price"),
-                              Text(widget.receivedList.price.toString()),
+                              Text(widget.receivedList[DatabaseHelper.price]
+                                  .toString()),
                             ],
                           ),
                           buildTableRowDivider(),
                           TableRow(
                             children: [
                               Text("Accessibility"),
-                              Text(
-                                  widget.receivedList.accessibility.toString()),
+                              Text(widget
+                                  .receivedList[DatabaseHelper.accessibility]
+                                  .toString()),
                             ],
                           ),
                           buildTableRowDivider(),
@@ -170,10 +175,12 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                               SelectableLinkify(
                                 text: linkisEmpty
                                     ? 'None available'
-                                    : widget.receivedList.link,
+                                    : widget.receivedList[DatabaseHelper.link],
                                 onTap: () async {
-                                  if (await canLaunch(widget.receivedList.link))
-                                    launch(widget.receivedList.link);
+                                  if (await canLaunch(
+                                      widget.receivedList[DatabaseHelper.link]))
+                                    launch(widget
+                                        .receivedList[DatabaseHelper.link]);
                                 },
                                 style: TextStyle(
                                     // fontSize: fontsize / 1.2,
@@ -233,7 +240,10 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                                     CupertinoDialogAction(
                                       child: Text("Yes"),
                                       onPressed: () {
-                                        indexData.removeItem(widget.index);
+                                        // indexData.removeItem(widget.index);
+                                        indexData.removeItem(
+                                            widget.receivedList[
+                                                DatabaseHelper.columnId]);
                                         Navigator.pop(context);
                                         Navigator.pop(context);
                                       },
@@ -258,7 +268,11 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                                       child: Text("Yes"),
                                       onPressed: () {
                                         // indexData.removeItem(widget.index);
-                                        indexData.removeItem(widget.index);
+                                        print(
+                                            'column id is ${widget.receivedList[DatabaseHelper.columnId]}');
+                                        indexData.removeItem(
+                                            widget.receivedList[
+                                                DatabaseHelper.columnId]);
                                         Navigator.pop(context);
                                         Navigator.pop(context);
                                       },

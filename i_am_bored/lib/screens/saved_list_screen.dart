@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:i_am_bored/models/bored_data.dart';
@@ -7,6 +8,7 @@ import 'package:intl/intl.dart';
 
 import '../provider/saved_list.dart';
 import '../screens/saved_list_screen.dart';
+import '../helpers/database_helper.dart';
 
 class SavedListScreen extends StatefulWidget {
   @override
@@ -25,7 +27,10 @@ class _SavedListScreenState extends State<SavedListScreen> {
   }
 
   Widget getTextWidgets(
-      List<BoredData> savedListItmes, var mediaQuery, BuildContext context) {
+      // List<BoredData> savedListItmes, var mediaQuery, BuildContext context) {
+      List<Map<String, dynamic>> savedListItmes,
+      var mediaQuery,
+      BuildContext context) {
     List<Widget> list = new List<Widget>();
     for (var i = 0; i < savedListItmes.length; i++) {
       // print("I");
@@ -46,35 +51,19 @@ class _SavedListScreenState extends State<SavedListScreen> {
                   MaterialPageRoute(
                     builder: (context) => ListDetailScreen(
                       receivedList: savedListItmes[i],
-                      index: i,
+                      // index: i,
                     ),
                   ),
                 );
               },
-              // dense: true,
-              // leading: Text("${i + 1}. "),
-              subtitle: Text(
-                  DateFormat /*('MM-dd-yyyy – kk:mm') // .yMMMMd('en_US')*/ .yMd()
-                      .add_jm()
-                      .format(savedListItmes[i].savedTime)),
+              subtitle: Text(savedListItmes[i][DatabaseHelper.savedTime]),
               title: Text(
-                "${i + 1}. " + savedListItmes[i].activity,
+                "${i + 1}. " + savedListItmes[i][DatabaseHelper.activity],
                 style: TextStyle(
                     // fontSize: 18,
                     ),
               ),
               trailing: Icon(Icons.arrow_forward_ios),
-              // child: SizedBox(
-              //   height: mediaQuery.height / 20,
-              //   child: Text(
-              //     "${i + 1}. " + savedListItmes[i].activity,
-              //     softWrap: true,
-              //     style: TextStyle(
-              //       fontSize: 18,
-              //     ),
-              //     // textAlign: TextAlign.left,
-              //   ),
-              // ),
             ),
           ),
         ),
@@ -94,13 +83,16 @@ class _SavedListScreenState extends State<SavedListScreen> {
     var _mediaQuery = MediaQuery.of(context).size;
 
     final savedActivityList = Provider.of<SavedList>(context);
+    savedActivityList.getDatabaseList();
 
     return Container(
-      child: savedActivityList.savedItems.isEmpty
+      child: savedActivityList.databaseList.isEmpty
           ? Center(
               child: Text("No saved items!"),
+              // child: CupertinoActivityIndicator(),
             )
-          : getTextWidgets(savedActivityList.savedItems, _mediaQuery, context),
+          : getTextWidgets(
+              savedActivityList.databaseList, _mediaQuery, context),
     );
   }
 }

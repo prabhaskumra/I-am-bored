@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 class BoredData {
+  int columnId;
   final String activity;
   final String type;
   final int participants;
@@ -10,8 +11,10 @@ class BoredData {
   final double accessibility;
   bool isFavourite;
   DateTime savedTime;
+  String notes;
 
   BoredData({
+    this.columnId,
     @required this.activity,
     @required this.type,
     @required this.participants,
@@ -21,5 +24,6 @@ class BoredData {
     @required this.accessibility,
     this.isFavourite = false,
     this.savedTime,
+    this.notes,
   });
 }
