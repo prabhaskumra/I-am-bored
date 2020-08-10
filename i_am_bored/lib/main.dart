@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Builder(
         builder: (BuildContext newContext) {
+          Provider.of<SavedList>(newContext).getDatabaseList();
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
               primarySwatch:
                   // primarySwatch: MaterialColor(0X3b5998, Map<>);
                   Provider.of<CustomThemeData>(newContext).themeColor,
+
               visualDensity: VisualDensity.adaptivePlatformDensity,
               fontFamily: 'SansPro',
               brightness: Brightness.light,

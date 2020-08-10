@@ -48,7 +48,7 @@ class DatabaseHelper {
       ($columnId INTEGER PRIMARY KEY,
       $activity TEXT NOT NULL,
       $type TEXT NOT NULL,
-      $participants FLOAT NOT NULL,
+      $participants INTEGER NOT NULL,
       $price FLOAT NOT NULL,
       $link TEXT NOT NULL,
       $key TEXT NOT NULL,

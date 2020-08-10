@@ -83,7 +83,7 @@ class _SavedListScreenState extends State<SavedListScreen> {
     var _mediaQuery = MediaQuery.of(context).size;
 
     final savedActivityList = Provider.of<SavedList>(context);
-    savedActivityList.getDatabaseList();
+    // savedActivityList.getDatabaseList();
 
     return Container(
       child: savedActivityList.databaseList.isEmpty

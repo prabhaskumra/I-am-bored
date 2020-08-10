@@ -8,6 +8,7 @@ class AboutAppScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 20,
+        toolbarHeight: kToolbarHeight / 1.2,
         // backgroundColor: Theme.of(context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(

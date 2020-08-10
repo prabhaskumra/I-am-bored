@@ -99,6 +99,7 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 20,
+        toolbarHeight: kToolbarHeight / 1.2,
         // backgroundColor: Theme.of(context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -306,6 +307,7 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                     onPressed: () {
                       vibrate();
                       Navigator.of(context).pop();
+                      // print(widget.receivedList[DatabaseHelper.participants]);
                     },
                     shape: roundRectangularBorder,
                     color: Theme.of(context).bottomAppBarColor,

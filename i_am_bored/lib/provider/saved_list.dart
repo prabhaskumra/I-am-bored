@@ -11,15 +11,8 @@ class SavedList with ChangeNotifier {
   List<BoredData> savedItems = [];
   List<Map<String, dynamic>> databaseList = [];
 
-  // SavedList(this.boredItem);
-
-  // SavedList.constructor_onstart() {
-  //   getDatabaseList();
-  // }
-
   Future<int> addItem(BoredData item) async {
     savedItems.add(item);
-    // print(_savedItems[0].activity);
 
     var isFavourite = 0;
 
@@ -40,7 +33,6 @@ class SavedList with ChangeNotifier {
     getDatabaseList();
     print('the inserted id is ${item.columnId}');
 
-    // print(savedItems.length);
     notifyListeners();
     return item.columnId;
   }
@@ -55,6 +47,7 @@ class SavedList with ChangeNotifier {
 
   Future<void> getDatabaseList() async {
     databaseList = await DatabaseHelper.instance.queryALl();
+    // databaseList.reversed.toList();
     notifyListeners();
   }
 }
