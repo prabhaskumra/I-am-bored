@@ -146,7 +146,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
     var roundedRectangleBorder = RoundedRectangleBorder(
       side: BorderSide(
           color: Theme.of(context).primaryColor,
-          width: 2,
+          width: 1.5,
           style: BorderStyle.solid),
       borderRadius: BorderRadius.circular(20),
     );
@@ -388,7 +388,7 @@ class _GridViewButtonsState extends State<GridViewButtons> {
     var roundedRectangleBorder = RoundedRectangleBorder(
       side: BorderSide(
           color: Theme.of(context).primaryColor,
-          width: 2,
+          width: 1.5,
           style: BorderStyle.solid),
       borderRadius: BorderRadius.circular(20),
     );

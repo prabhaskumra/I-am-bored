@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../models/variables.dart' as globals;
 import '../provider/theme_data.dart';
 import '../screens/about_app_screen.dart';
 
@@ -27,6 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     var themeData = Provider.of<CustomThemeData>(context);
+    var _mediaQuery = MediaQuery.of(context).size;
 
     var boxDecoration = BoxDecoration(
       border: Border.all(
@@ -69,14 +69,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              buildCircleAvatarColor(themeData, Colors.teal),
-              buildCircleAvatarColor(themeData, Colors.blueGrey),
-              buildCircleAvatarColor(themeData, Colors.red),
-              buildCircleAvatarColor(themeData, Colors.green),
-            ],
+          Card(
+            color: themeData.themeColor,
+            elevation: 25,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Container(
+              height: _mediaQuery.height * .20,
+              padding: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  buildCircleAvatarColor(themeData, Colors.teal),
+                  buildCircleAvatarColor(themeData, Colors.blueGrey),
+                  buildCircleAvatarColor(themeData, Colors.red),
+                  buildCircleAvatarColor(themeData, Colors.green),
+                ],
+              ),
+            ),
           ),
           Divider(),
           Text(
@@ -91,16 +102,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  CircleAvatar buildCircleAvatarColor(CustomThemeData themeData, var color) {
-    return CircleAvatar(
-      radius: 23,
-      backgroundColor: color,
-      child: InkWell(
-        onTap: () {
-          vibrate();
-          themeData.changeColor(color);
-        },
+  Container buildCircleAvatarColor(CustomThemeData themeData, var color) {
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: Colors.white,
+          width: 2.5,
+        ),
+      ),
+      child: CircleAvatar(
+        radius: 23,
+        backgroundColor: color,
+        child: InkWell(
+          // borderRadius: BorderRadius.all(color),
+          onTap: () {
+            vibrate();
+            themeData.changeColor(color);
+          },
+        ),
       ),
     );
   }
 }
+
+// onTap: () {
+// vibrate();
+// themeData.changeColor(color);
