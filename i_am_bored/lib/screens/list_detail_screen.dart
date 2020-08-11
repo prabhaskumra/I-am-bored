@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
+import 'package:add_2_calendar/add_2_calendar.dart';
 
 import '../helpers/database_helper.dart';
 import '../models/bored_data.dart';
@@ -27,6 +28,7 @@ class ListDetailScreen extends StatefulWidget {
 }
 
 class _ListDetailScreenState extends State<ListDetailScreen> {
+  final GlobalKey<ScaffoldState> scaffoldState = GlobalKey();
   var linkisEmpty = false;
 
   // @override
@@ -85,6 +87,15 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Event event = Event(
+      title: widget.receivedList[DatabaseHelper.activity],
+      description: widget.receivedList[DatabaseHelper.link],
+      // location: 'Flutter app',
+      startDate: DateTime.now(),
+      endDate: DateTime.now().add(Duration(days: 1)),
+      allDay: false,
+    );
+
     var _mediaQuery = MediaQuery.of(context).size;
     final indexData = Provider.of<SavedList>(context);
 
@@ -97,6 +108,16 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
     );
 
     return Scaffold(
+      key: scaffoldState,
+      floatingActionButton: FloatingActionButton(
+          tooltip: 'Add this activity to calendar',
+          child: Icon(Icons.calendar_today),
+          onPressed: () {
+            Add2Calendar.addEvent2Cal(event).then((success) {
+              scaffoldState.currentState.showSnackBar(
+                  SnackBar(content: Text(success ? 'Success' : 'Error')));
+            });
+          }),
       appBar: AppBar(
         elevation: 20,
         toolbarHeight: kToolbarHeight / 1.2,
@@ -190,13 +211,6 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                               ),
                             ],
                           ),
-                          // buildTableRowDivider(),
-                          // TableRow(
-                          //   children: [
-                          //     Text("Time saved"),
-                          //     Text(DateTime.now().toString()),
-                          //   ],
-                          // ),
                         ],
                       ),
                     ],
