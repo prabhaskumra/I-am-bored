@@ -71,6 +71,21 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
     );
 
     return Scaffold(
+      // bottomNavigationBar: BottomNavigationBar(items: [
+      //   BottomNavigationBarItem(
+      //     title: Text('ajjdsfdjjf'),
+      //     icon: Icon(
+      //       Icons.delete_forever,
+      //     ),
+      //   ),
+      //   BottomNavigationBarItem(
+      //     title: Text('ajjdsfdjjf'),
+      //     icon: Icon(
+      //       Icons.delete_forever,
+      //     ),
+      //   ),
+      // ]),
+
       key: scaffoldState,
       floatingActionButton: FloatingActionButton(
           tooltip: 'Add this activity to calendar',
@@ -83,22 +98,36 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
             // });
           }),
       appBar: AppBar(
+        actions: [
+          FlatButton(
+            child: Icon(
+              Icons.calendar_today,
+              color: Colors.white,
+            ),
+            onPressed: () {},
+          )
+        ],
         elevation: 20,
-        toolbarHeight: kToolbarHeight / 1.2,
+        toolbarHeight: kToolbarHeight / 1.3,
         // backgroundColor: Theme.of(context),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.elliptical(40, 30),
-            // top: Radius.circular(30),
-          ),
-        ),
-        title: Text(widget.receivedList[DatabaseHelper.activity]),
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.vertical(
+        //     // bottom: Radius.elliptical(30, 30),
+        //     top: Radius.circular(30),
+        //     bottom: Radius.circular(30),
+
+        //     // top: Radius.circular(30),
+        //   ),
+        // ),
+        // title: Text(widget.receivedList[DatabaseHelper.activity]),
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(15),
           // height: _mediaQuery.height / 2,
           child: Column(
+            // mainAxisAlignment: MainAxisAlignment.end,
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Card(
                 elevation: 20,
@@ -177,18 +206,51 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                           ),
                         ],
                       ),
+                      SizedBox(height: 20),
+
+                      TextField(
+                        decoration: new InputDecoration(
+                          labelText: "Enter Notes",
+                          alignLabelWithHint: true,
+                          fillColor: Colors.white,
+                          border: new OutlineInputBorder(
+                            borderRadius: new BorderRadius.circular(20.0),
+                            borderSide: new BorderSide(),
+                          ),
+                        ),
+                        onTap: () {
+                          FocusScopeNode currentFocus = FocusScope.of(context);
+                          if (!currentFocus.hasPrimaryFocus &&
+                              currentFocus.focusedChild != null) {
+                            currentFocus.focusedChild.unfocus();
+                          }
+                        },
+                        // FocusScope.of(context).requestFocus(FocusNode()),
+                        keyboardType: TextInputType.multiline,
+                        // autofocus: true,
+                        maxLines: 5,
+                        toolbarOptions: ToolbarOptions(
+                          copy: true,
+                          paste: true,
+                          cut: true,
+                          selectAll: true,
+                        ),
+                        // expands: true,
+                      ),
+                      SizedBox(height: 20),
 
                       ///
                     ],
                   ),
                 ),
               ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   RaisedButton(
                     child: Text(
-                      'Remove from the list',
+                      'Remove item',
                       // style: TextStyle(color: Colors.black),
                     ),
                     onPressed: () {
@@ -283,30 +345,30 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
               //   thickness: 10,
               //   // color: Theme.of(context).primaryColor,
               // ),
-              SizedBox(height: 20),
+              // SizedBox(height: 20),
 
-              TextField(
-                decoration: new InputDecoration(
-                  labelText: "Enter Notes",
-                  alignLabelWithHint: true,
-                  fillColor: Colors.white,
-                  border: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(20.0),
-                    borderSide: new BorderSide(),
-                  ),
-                ),
-                keyboardType: TextInputType.text,
-                // autofocus: true,
-                maxLines: 10,
-                toolbarOptions: ToolbarOptions(
-                  copy: true,
-                  paste: true,
-                  cut: true,
-                  selectAll: true,
-                ),
-                // expands: true,
-              ),
-              SizedBox(height: 20),
+              // TextField(
+              //   decoration: new InputDecoration(
+              //     labelText: "Enter Notes",
+              //     alignLabelWithHint: true,
+              //     fillColor: Colors.white,
+              //     border: new OutlineInputBorder(
+              //       borderRadius: new BorderRadius.circular(20.0),
+              //       borderSide: new BorderSide(),
+              //     ),
+              //   ),
+              //   keyboardType: TextInputType.text,
+              //   // autofocus: true,
+              //   maxLines: 10,
+              //   toolbarOptions: ToolbarOptions(
+              //     copy: true,
+              //     paste: true,
+              //     cut: true,
+              //     selectAll: true,
+              //   ),
+              //   // expands: true,
+              // ),
+              // SizedBox(height: 20),
             ],
           ),
         ),

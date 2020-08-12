@@ -42,16 +42,18 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("The Bored App"),
-        toolbarHeight: kToolbarHeight / 1.2,
+        title: Text("Hobby-It"),
+        toolbarHeight: kToolbarHeight / 1.3,
         // toolbarHeight: kToolbarHeight * 5,
         elevation: 20,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.elliptical(30, 30),
-            // bottom: Radius.circular(50),
-          ),
-        ),
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.vertical(
+        //     // bottom: Radius.elliptical(30, 30),
+        //     // top: Radius.circular(30),
+        //     bottom: Radius.circular(30),
+        //     // bottom: Radius.circular(50),
+        //   ),
+        // ),
       ),
       bottomNavigationBar: BottomNavyBar(
         selectedIndex: _currentIndex,
