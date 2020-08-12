@@ -33,7 +33,6 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
 
   // @override
   void initState() {
-    // TODO: implement initState
     if (widget.receivedList[DatabaseHelper.link] == '')
       linkisEmpty = true;
     else
@@ -48,42 +47,6 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
     );
     // SystemChannels
   }
-
-  AlertDialog androidStyle = AlertDialog(
-    title: Text("My title"),
-    content: Text("This is my message."),
-    actions: [
-      FlatButton(
-        child: Text("OK"),
-        onPressed: () {
-          // DismissAction(context);
-          // indexData.removeItem(widget.index);
-          // Navigator.pop(context);
-        },
-      ),
-    ],
-  );
-
-  // CupertinoAlertDialog iosStyle = CupertinoAlertDialog(
-  //   title: Text("You sure want to delete the item?"),
-  //   content: Text("Thisis my message."),
-  //   actions: [
-  //     CupertinoDialogAction(
-  //       child: FlatButton(
-  //         onPressed: () {},
-  //         child: Text('Yes'),
-  //       ),
-  //     ),
-  //     CupertinoDialogAction(
-  //       child: FlatButton(
-  //         onPressed: () {
-  //           Navigator.pop();
-  //         },
-  //         child: Text('Cancel'),
-  //       ),
-  //     ),
-  //   ],
-  // );
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +76,11 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
           tooltip: 'Add this activity to calendar',
           child: Icon(Icons.calendar_today),
           onPressed: () {
-            Add2Calendar.addEvent2Cal(event).then((success) {
-              scaffoldState.currentState.showSnackBar(
-                  SnackBar(content: Text(success ? 'Success' : 'Error')));
-            });
+            Add2Calendar.addEvent2Cal(event);
+            // .then((success) {
+            //   scaffoldState.currentState.showSnackBar(
+            //       SnackBar(content: Text(success ? 'Success' : 'Error')));
+            // });
           }),
       appBar: AppBar(
         elevation: 20,
@@ -213,6 +177,8 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                           ),
                         ],
                       ),
+
+                      ///
                     ],
                   ),
                 ),
@@ -242,16 +208,6 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                                   content: Text(
                                       "Item will be deleted from saved list"),
                                   actions: [
-                                    // CupertinoDialogAction(
-                                    //   child: FlatButton(
-                                    //     onPressed: () {
-                                    //       indexData.removeItem(widget.index);
-                                    //       Navigator.pop(context);
-                                    //       Navigator.pop(context);
-                                    //     },
-                                    //     child: Text('Yes'),
-                                    //   ),
-                                    // ),
                                     CupertinoDialogAction(
                                       child: Text("Yes"),
                                       onPressed: () {
@@ -307,11 +263,6 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                                 );
                         },
                       );
-                      // showCupertinoDialog(
-                      //     context: context,
-                      //     builder: (BuildContext context) {
-                      //       return iosStyle;
-                      //     });
                     },
                     shape: roundRectangularBorder,
                     color: Theme.of(context).bottomAppBarColor,
@@ -327,7 +278,35 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                     color: Theme.of(context).bottomAppBarColor,
                   ),
                 ],
-              )
+              ),
+              // Divider(
+              //   thickness: 10,
+              //   // color: Theme.of(context).primaryColor,
+              // ),
+              SizedBox(height: 20),
+
+              TextField(
+                decoration: new InputDecoration(
+                  labelText: "Enter Notes",
+                  alignLabelWithHint: true,
+                  fillColor: Colors.white,
+                  border: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(20.0),
+                    borderSide: new BorderSide(),
+                  ),
+                ),
+                keyboardType: TextInputType.text,
+                // autofocus: true,
+                maxLines: 10,
+                toolbarOptions: ToolbarOptions(
+                  copy: true,
+                  paste: true,
+                  cut: true,
+                  selectAll: true,
+                ),
+                // expands: true,
+              ),
+              SizedBox(height: 20),
             ],
           ),
         ),
