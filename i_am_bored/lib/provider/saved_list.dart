@@ -29,6 +29,7 @@ class SavedList with ChangeNotifier {
       DatabaseHelper.isFavourite: isFavourite,
       DatabaseHelper.savedTime:
           DateFormat.yMd().add_jm().format(item.savedTime),
+      // DatabaseHelper.notes: "",
     });
     getDatabaseList();
     print('the inserted id is ${item.columnId}');

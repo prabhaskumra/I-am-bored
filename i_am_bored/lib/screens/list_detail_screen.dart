@@ -30,9 +30,12 @@ class ListDetailScreen extends StatefulWidget {
 class _ListDetailScreenState extends State<ListDetailScreen> {
   final GlobalKey<ScaffoldState> scaffoldState = GlobalKey();
   var linkisEmpty = false;
+  var _myTextController;
 
   // @override
   void initState() {
+    _myTextController = TextEditingController()
+      ..text = widget.receivedList[DatabaseHelper.notes];
     if (widget.receivedList[DatabaseHelper.link] == '')
       linkisEmpty = true;
     else
@@ -48,16 +51,43 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
     // SystemChannels
   }
 
+  void updateDatabase() async {
+    Map<String, dynamic> updatedNode = {
+      DatabaseHelper.columnId: widget.receivedList[DatabaseHelper.columnId],
+      DatabaseHelper.activity: widget.receivedList[DatabaseHelper.activity],
+      DatabaseHelper.type: widget.receivedList[DatabaseHelper.type],
+      DatabaseHelper.participants:
+          widget.receivedList[DatabaseHelper.participants],
+      DatabaseHelper.price: widget.receivedList[DatabaseHelper.price],
+      DatabaseHelper.link: widget.receivedList[DatabaseHelper.link],
+      DatabaseHelper.key: widget.receivedList[DatabaseHelper.key],
+      DatabaseHelper.accessibility:
+          widget.receivedList[DatabaseHelper.accessibility],
+      DatabaseHelper.isFavourite:
+          widget.receivedList[DatabaseHelper.isFavourite],
+      DatabaseHelper.savedTime: widget.receivedList[DatabaseHelper.savedTime],
+      DatabaseHelper.notes: _myTextController.text,
+    };
+
+    // widget.receivedList[DatabaseHelper.notes] =
+    //     _myTextController.text;
+    int i = await DatabaseHelper.instance.update(updatedNode);
+    print(i);
+  }
+
   @override
   Widget build(BuildContext context) {
-    Event event = Event(
-      title: widget.receivedList[DatabaseHelper.activity],
-      description: widget.receivedList[DatabaseHelper.link],
-      // location: 'Flutter app',
-      startDate: DateTime.now(),
-      endDate: DateTime.now().add(Duration(days: 1)),
-      allDay: false,
-    );
+    // Event event = Event(
+    //   title: widget.receivedList[DatabaseHelper.activity],
+    //   // description: widget.receivedList[DatabaseHelper.link] +
+    //   //     '\n' +
+    //   //     widget.receivedList[DatabaseHelper.notes],
+    //   description: _myTextController.text,
+    //   // location: 'Flutter app',
+    //   startDate: DateTime.now(),
+    //   endDate: DateTime.now().add(Duration(days: 1)),
+    //   allDay: false,
+    // );
 
     var _mediaQuery = MediaQuery.of(context).size;
     final indexData = Provider.of<SavedList>(context);
@@ -91,6 +121,16 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
           tooltip: 'Add this activity to calendar',
           child: Icon(Icons.calendar_today),
           onPressed: () {
+            Event event = Event(
+              title: widget.receivedList[DatabaseHelper.activity],
+              description:
+                  '${widget.receivedList[DatabaseHelper.link]}\n${_myTextController.text}',
+              // description: _myTextController.text,
+              // location: 'Flutter app',
+              startDate: DateTime.now(),
+              endDate: DateTime.now().add(Duration(days: 1)),
+              allDay: false,
+            );
             Add2Calendar.addEvent2Cal(event);
             // .then((success) {
             //   scaffoldState.currentState.showSnackBar(
@@ -208,9 +248,12 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                       ),
                       SizedBox(height: 20),
 
-                      TextField(
+                      TextFormField(
+                        // initialValue: widget.receivedList[DatabaseHelper.notes],
+                        // initialValue: _myTextController.text,
+                        controller: _myTextController,
                         decoration: new InputDecoration(
-                          labelText: "Enter Notes",
+                          labelText: 'Enter notes',
                           alignLabelWithHint: true,
                           fillColor: Colors.white,
                           border: new OutlineInputBorder(
@@ -218,13 +261,26 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                             borderSide: new BorderSide(),
                           ),
                         ),
-                        onTap: () {
+                        onTap: () async {
                           FocusScopeNode currentFocus = FocusScope.of(context);
                           if (!currentFocus.hasPrimaryFocus &&
                               currentFocus.focusedChild != null) {
                             currentFocus.focusedChild.unfocus();
+
+                            updateDatabase();
                           }
                         },
+                        // onSubmitted: ,
+                        // onSubmitted: (_) async {
+                        //   print("readinghere");
+                        //   widget.receivedList[DatabaseHelper.notes] = value;
+                        //   int i = await DatabaseHelper.instance
+                        //       .update(widget.receivedList);
+                        //   print(i);
+                        // },
+                        // onFieldSubmitted: (value) => print("hello heelo"),
+                        onEditingComplete: () => print("Editing omcplee"),
+                        // onEditingComplete: () async {},
                         // FocusScope.of(context).requestFocus(FocusNode()),
                         keyboardType: TextInputType.multiline,
                         // autofocus: true,

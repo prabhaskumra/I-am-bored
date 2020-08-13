@@ -73,10 +73,10 @@ class DatabaseHelper {
 
   Future<int> update(Map<String, dynamic> row) async {
     Database db = await instance.database;
-    int id = row[key];
-    String activity_value = row[activity];
-    return await db.update(_savedListTable, row,
-        where: '$columnId = ? $activity = ?', whereArgs: [id, activity_value]);
+    int id = row[columnId];
+    // String activity_value = row[activity];
+    return await db
+        .update(_savedListTable, row, where: '$columnId = ?', whereArgs: [id]);
   }
 
   Future<int> delete(int id) async {
