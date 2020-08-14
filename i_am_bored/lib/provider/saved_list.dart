@@ -34,7 +34,7 @@ class SavedList with ChangeNotifier {
     getDatabaseList();
     print('the inserted id is ${item.columnId}');
 
-    notifyListeners();
+    // notifyListeners();
     return item.columnId;
   }
 
@@ -48,7 +48,8 @@ class SavedList with ChangeNotifier {
 
   Future<void> getDatabaseList() async {
     databaseList = await DatabaseHelper.instance.queryALl();
+    print(databaseList);
     // databaseList.reversed.toList();
-    notifyListeners();
+    // notifyListeners();
   }
 }

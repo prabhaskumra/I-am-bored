@@ -3,14 +3,12 @@ import './provider/saved_list.dart';
 import 'package:provider/provider.dart';
 // import 'dart:io';
 
-import './screens/home_screen.dart';
 import './screens/settings_screen.dart';
 import './screens/about_app_screen.dart';
 import './screens/donation_screen.dart';
 import './screens/main_screen.dart';
 import './screens/list_detail_screen.dart';
 import './provider/theme_data.dart';
-import './models/variables.dart' as globals;
 
 void main() {
   runApp(MyApp());
