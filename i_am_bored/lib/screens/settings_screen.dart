@@ -69,6 +69,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           Divider(),
+          ListTile(
+            leading: Icon(
+              Icons.help_outline,
+              color: Theme.of(context).primaryColor,
+            ),
+            title: Text("Help us out!"),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              // color: Theme.of(context).primaryColor,
+            ),
+            onTap: () {},
+          ),
+          Divider(),
           Card(
             color: themeData.themeColor,
             elevation: 25,

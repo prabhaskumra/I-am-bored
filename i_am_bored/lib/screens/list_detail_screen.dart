@@ -129,10 +129,17 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
             tooltip: 'Add this activity to calendar',
             child: Icon(Icons.calendar_today),
             onPressed: () {
+              String combined;
+              if (!linkisEmpty) {
+                combined =
+                    '${widget.receivedList[DatabaseHelper.link]}\n${_myTextController.text}';
+              } else {
+                combined = '${_myTextController.text}';
+              }
+
               Event event = Event(
                 title: widget.receivedList[DatabaseHelper.activity],
-                description:
-                    '${widget.receivedList[DatabaseHelper.link]}\n${_myTextController.text}',
+                description: combined,
                 // description: _myTextController.text,
                 // location: 'Flutter app',
                 startDate: DateTime.now(),
@@ -146,15 +153,15 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
               // });
             }),
         appBar: AppBar(
-          actions: [
-            FlatButton(
-              child: Icon(
-                Icons.calendar_today,
-                color: Colors.white,
-              ),
-              onPressed: () {},
-            )
-          ],
+          // actions: [
+          //   FlatButton(
+          //     child: Icon(
+          //       Icons.calendar_today,
+          //       color: Colors.white,
+          //     ),
+          //     onPressed: () {},
+          //   )
+          // ],
           elevation: 20,
           toolbarHeight: kToolbarHeight / 1.3,
           // backgroundColor: Theme.of(context),
@@ -167,7 +174,7 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
           //     // top: Radius.circular(30),
           //   ),
           // ),
-          // title: Text(widget.receivedList[DatabaseHelper.activity]),
+          title: Text(widget.receivedList[DatabaseHelper.activity]),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -187,7 +194,7 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                     padding: EdgeInsets.all(20),
                     child: Column(
                       children: [
-                        Text(
+                        SelectableText(
                           widget.receivedList[DatabaseHelper.activity],
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -218,8 +225,13 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                             TableRow(
                               children: [
                                 Text("Price"),
-                                Text(widget.receivedList[DatabaseHelper.price]
-                                    .toString()),
+                                Text(
+                                    widget.receivedList[DatabaseHelper.price] ==
+                                            0.0
+                                        ? "Affordable"
+                                        : "not Affortdable"
+                                    // .toString(),
+                                    ),
                               ],
                             ),
                             buildTableRowDivider(),

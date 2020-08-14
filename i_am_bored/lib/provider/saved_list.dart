@@ -48,8 +48,5 @@ class SavedList with ChangeNotifier {
 
   Future<void> getDatabaseList() async {
     databaseList = await DatabaseHelper.instance.queryALl();
-    print(databaseList);
-    // databaseList.reversed.toList();
-    // notifyListeners();
   }
 }
