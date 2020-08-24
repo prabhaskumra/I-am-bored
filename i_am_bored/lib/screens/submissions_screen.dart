@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 
+import 'package:flutter/services.dart';
+
 class SubmissionScreen extends StatefulWidget {
   @override
   _SubmissionScreenState createState() => _SubmissionScreenState();
@@ -10,6 +12,15 @@ class SubmissionScreen extends StatefulWidget {
 class _SubmissionScreenState extends State<SubmissionScreen> {
   var val = 'Education';
   var participantsVal = "1";
+
+  // SystemChannels
+
+  static Future<void> vibrate() async {
+    await SystemChannels.platform.invokeMethod<void>(
+      'HapticFeedback.vibrate',
+      'HapticFeedbackType.lightImpact',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +67,8 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                           // controller: _myTextController,
                           decoration: new InputDecoration(
                             labelText: 'Activity Title *',
+                            hintText: 'Example: Learn to code in C++',
+                            hintStyle: TextStyle(fontStyle: FontStyle.italic),
                             alignLabelWithHint: true,
                             fillColor: Colors.white,
                             border: new OutlineInputBorder(
@@ -129,6 +142,7 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                         ],
                       ),
                       Divider(),
+                      // Spacer(),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
@@ -146,6 +160,7 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                               borderSide: new BorderSide(),
                             ),
                           ),
+                          keyboardType: TextInputType.name,
                         ),
                       ),
                       Padding(
@@ -164,6 +179,8 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                               borderSide: new BorderSide(),
                             ),
                           ),
+                          keyboardType: TextInputType.emailAddress,
+                          // style:,
                         ),
                       ),
                       Container(
@@ -191,7 +208,9 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                             Icons.done,
                             color: Colors.white,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            vibrate();
+                          },
                           color: Theme.of(context).primaryColor,
                         ),
                       ),

@@ -226,12 +226,13 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                               children: [
                                 Text("Price"),
                                 Text(
-                                    widget.receivedList[DatabaseHelper.price] ==
-                                            0.0
-                                        ? "Affordable"
-                                        : "not Affortdable"
-                                    // .toString(),
-                                    ),
+                                  // widget.receivedList[DatabaseHelper.price] ==
+                                  //         0.0
+                                  //     ? "Affordable"
+                                  //     : "not Affortdable"
+                                  widget.receivedList[DatabaseHelper.price]
+                                      .toString(),
+                                ),
                               ],
                             ),
                             buildTableRowDivider(),
