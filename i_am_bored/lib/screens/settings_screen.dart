@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:i_am_bored/screens/submissions_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/theme_data.dart';
@@ -79,7 +80,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Icons.arrow_forward_ios,
               // color: Theme.of(context).primaryColor,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed(SubmissionScreen.routeName);
+            },
           ),
           Divider(),
           Card(

@@ -9,6 +9,7 @@ import './screens/donation_screen.dart';
 import './screens/main_screen.dart';
 import './screens/list_detail_screen.dart';
 import './provider/theme_data.dart';
+import './screens/submissions_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
               DonationScreen.routeName: (ctx) => DonationScreen(),
               MainScreen.routeName: (ctx) => MainScreen(),
               ListDetailScreen.routeName: (ctx) => ListDetailScreen(),
+              SubmissionScreen.routeName: (ctx) => SubmissionScreen(),
             },
           );
         },
