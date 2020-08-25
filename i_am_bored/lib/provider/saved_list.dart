@@ -43,10 +43,11 @@ class SavedList with ChangeNotifier {
     print('rows affected $i');
     getDatabaseList();
     // savedItems.removeAt(key);
-    notifyListeners();
+    // notifyListeners();
   }
 
   Future<void> getDatabaseList() async {
     databaseList = await DatabaseHelper.instance.queryALl();
+    notifyListeners();
   }
 }

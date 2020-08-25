@@ -34,6 +34,9 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
   var _myTextController;
   var doneColor = false;
 
+  // final _myTextController = TextEditingController()
+  //   ..text = widget.receivedList[DatabaseHelper.notes];
+
   // @override
   void initState() {
     _myTextController = TextEditingController()
@@ -286,6 +289,7 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                           onTap: () async {
                             FocusScopeNode currentFocus =
                                 FocusScope.of(context);
+
                             if (!currentFocus.hasPrimaryFocus &&
                                 currentFocus.focusedChild != null) {
                               currentFocus.focusedChild.unfocus();
@@ -416,7 +420,9 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                       onPressed: () {
                         vibrate();
                         // updateDatabase();
+                        // Provider.of<SavedList>(context).getDatabaseList();
                         Navigator.of(context).pop();
+                        // Provider.of<SavedList>(context).getDatabaseList();
                         // print(widget.receivedList[DatabaseHelper.participants]);
                       },
                       shape: roundRectangularBorder,
