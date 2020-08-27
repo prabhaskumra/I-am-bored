@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
 import '../models/submissions_https.dart';
@@ -10,8 +11,8 @@ class SubmissionScreen extends StatefulWidget {
 }
 
 class _SubmissionScreenState extends State<SubmissionScreen> {
-  var val = 'Education';
-  var participantsVal = "1";
+  var val = 'Select';
+  var participantsVal = "Select";
 
   var _activityTitleController = TextEditingController();
   var _linkController = TextEditingController();
@@ -44,6 +45,16 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
     });
 
     resetForm();
+  }
+
+  bool _isFilled() {
+    if (_activityTitleController.text == '') return false;
+
+    if (val == 'Select') return false;
+
+    if (participantsVal == "Select") return false;
+
+    return true;
   }
 
   void resetForm() {
@@ -135,6 +146,7 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                             // hint: Text("TYpe"),
                             focusColor: Theme.of(context).primaryColor,
                             items: <String>[
+                              "Select",
                               "Education",
                               "Recreational",
                               "Social",
@@ -164,6 +176,7 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                             // hint: Text("TYpe"),
                             focusColor: Theme.of(context).primaryColor,
                             items: <String>[
+                              "Select",
                               "1",
                               "2",
                               "3",
@@ -283,7 +296,7 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                             Icons.done,
                             color: Colors.white,
                           ),
-                          onPressed: _activityTitleController.text == ''
+                          onPressed: !_isFilled()
                               ? null
                               : () {
                                   vibrate();

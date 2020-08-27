@@ -107,7 +107,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           Divider(),
           Text(
-            "Version: 1.0.0\n All Rights Reserved",
+            "Version: 1.0.0", // \n All Rights Reserved",
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Theme.of(context).disabledColor,
