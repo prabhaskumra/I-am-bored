@@ -12,7 +12,7 @@ class SubmissionScreen extends StatefulWidget {
 
 class _SubmissionScreenState extends State<SubmissionScreen> {
   var val = 'Select';
-  var participantsVal = "Select";
+  var participantsVal = "1";
 
   var _activityTitleController = TextEditingController();
   var _linkController = TextEditingController();
@@ -63,7 +63,7 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
     _nameController.text = '';
     _emailController.text = '';
     val = "Select";
-    participantsVal = 'Select';
+    participantsVal = '1';
   }
 
   static Future<void> vibrate() async {
@@ -169,14 +169,13 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                               });
                             },
                           ),
-                          VerticalDivider(),
+                          // VerticalDivider(),
                           Text("Participants:"),
                           DropdownButton<String>(
                             value: participantsVal,
                             // hint: Text("TYpe"),
                             focusColor: Theme.of(context).primaryColor,
                             items: <String>[
-                              "Select",
                               "1",
                               "2",
                               "3",
