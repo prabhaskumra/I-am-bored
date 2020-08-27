@@ -423,7 +423,7 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                         // Provider.of<SavedList>(context).getDatabaseList();
                         Navigator.of(context).pop();
                         // Provider.of<SavedList>(context).getDatabaseList();
-                        // print(widget.receivedList[DatabaseHelper.participants]);
+                        // print(_myTextController.text);
                       },
                       shape: roundRectangularBorder,
                       color: Theme.of(context).bottomAppBarColor,

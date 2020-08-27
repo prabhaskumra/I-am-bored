@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
+import '../models/submissions_https.dart';
 
 class SubmissionScreen extends StatefulWidget {
   @override
@@ -13,7 +14,21 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
   var val = 'Education';
   var participantsVal = "1";
 
+  var _activityTitleController = TextEditingController();
+  var _linkController = TextEditingController();
+  var _nameController = TextEditingController();
+  var _emailController = TextEditingController();
+
   // SystemChannels
+
+  void resetForm() {
+    _activityTitleController.text = '';
+    _linkController.text = '';
+    _nameController.text = '';
+    _emailController.text = '';
+    val = "Education";
+    participantsVal = '1';
+  }
 
   static Future<void> vibrate() async {
     await SystemChannels.platform.invokeMethod<void>(
@@ -64,7 +79,7 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                         child: TextFormField(
                           // initialValue: widget.receivedList[DatabaseHelper.notes],
                           // initialValue: _myTextController.text,
-                          // controller: _myTextController,
+                          controller: _activityTitleController,
                           decoration: new InputDecoration(
                             labelText: 'Activity Title *',
                             hintText: 'Example: Learn to code in C++',
@@ -141,6 +156,29 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                           ),
                         ],
                       ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          // initialValue: widget.receivedList[DatabaseHelper.notes],
+                          // initialValue: _myTextController.text,
+                          controller: _linkController,
+
+                          decoration: new InputDecoration(
+                            labelText: 'Link (Optional)',
+                            alignLabelWithHint: true,
+                            // hintMaxLines: 2,
+                            hintText: "Example: https://www.cplusplus.com",
+                            hintStyle: TextStyle(fontStyle: FontStyle.italic),
+                            fillColor: Colors.white,
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(20.0),
+                              borderSide: new BorderSide(),
+                            ),
+                          ),
+                          keyboardType: TextInputType.url,
+                          // style:,
+                        ),
+                      ),
                       Divider(),
                       // Spacer(),
                       Padding(
@@ -148,7 +186,7 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                         child: TextFormField(
                           // initialValue: widget.receivedList[DatabaseHelper.notes],
                           // initialValue: _myTextController.text,
-                          // controller: _myTextController,
+                          controller: _nameController,
 
                           decoration: new InputDecoration(
                             labelText: 'Name (Optional)',
@@ -168,7 +206,7 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                         child: TextFormField(
                           // initialValue: widget.receivedList[DatabaseHelper.notes],
                           // initialValue: _myTextController.text,
-                          // controller: _myTextController,
+                          controller: _emailController,
 
                           decoration: new InputDecoration(
                             labelText: 'Email (Optional)',
@@ -194,10 +232,14 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                         child: RaisedButton.icon(
                           // shadowColor: Theme.of(context).primaryColorDark,
                           // elevation: 20,
+                          // disabledColor: _activityTitleController.text == '' ? true : false,
+
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0),
-                            side: BorderSide(
-                                color: Theme.of(context).primaryColor),
+                            // side: BorderSide(
+                            //   color: Theme.of(context).primaryColor,
+                            //   // color:
+                            // ),
                           ),
 
                           label: Text(
@@ -208,10 +250,31 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                             Icons.done,
                             color: Colors.white,
                           ),
-                          onPressed: () {
-                            vibrate();
-                          },
+                          onPressed: _activityTitleController.text == ''
+                              ? null
+                              : () {
+                                  vibrate();
+
+                                  print(_activityTitleController.text);
+                                  SubmissionsData activityCreated =
+                                      new SubmissionsData(
+                                    activity: _activityTitleController.text,
+                                    type: val,
+                                    participants: participantsVal,
+                                    link: _linkController.text,
+                                    name: _nameController.text,
+                                    email: _emailController.text,
+                                  );
+                                  // print(activityCreated);
+                                  SubmissionsHttp()
+                                      .submitActivity(activityCreated);
+
+                                  resetForm();
+                                },
                           color: Theme.of(context).primaryColor,
+                          // color: _activityTitleController.text == ''
+                          //     ? Theme.of(context).disabledColor
+                          //     : Theme.of(context).primaryColor,
                         ),
                       ),
                     ],
