@@ -42,6 +42,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text("Hobby-It"),
         toolbarHeight: kToolbarHeight / 1.3,
         // toolbarHeight: kToolbarHeight * 5,
