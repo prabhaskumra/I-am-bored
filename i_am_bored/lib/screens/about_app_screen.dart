@@ -35,11 +35,15 @@ class AboutAppScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Text(
-                  "This app is created just created for productivity purposes! The main motive of this app is to recommend the users new activities to do in their free time to build new hobbies! ",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18,
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Text(
+                    "This app is created for productivity purposes. The main motive of this app is to recommend the users new activities to do in their free time to build new hobbies and skills! Activities can be saved for later use. A user can also add notes and add the activites in their phone calendar simply with Calendar button.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      height: 1.4,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
                 SizedBox(

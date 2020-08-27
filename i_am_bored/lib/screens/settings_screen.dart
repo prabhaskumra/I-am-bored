@@ -99,7 +99,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   buildCircleAvatarColor(themeData, Colors.teal),
                   buildCircleAvatarColor(themeData, Colors.blueGrey),
-                  buildCircleAvatarColor(themeData, Colors.red),
+                  buildCircleAvatarColor(themeData, Colors.orange),
                   buildCircleAvatarColor(themeData, Colors.green),
                 ],
               ),
