@@ -109,7 +109,41 @@ class _HomeScreenState extends State<HomeScreen> {
                       // decoration: boxDecoration,
                       child: SingleChildScrollView(
                         child: firstTime
-                            ? Text("Start Searching!")
+                            // ? Text("Start Searching!")
+                            ? Container(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Welcome to Hobby-it!",
+                                      style: TextStyle(
+                                        fontSize: fontsize,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: mediaQuery.size.height * 0.05,
+                                    ),
+                                    RaisedButton.icon(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      color: Theme.of(context).primaryColor,
+                                      label: Text(
+                                        "Start Searching!",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      icon: Icon(Icons.shuffle,
+                                          color: Colors.white),
+                                      onPressed: () {
+                                        _fetchData();
+                                        vibrate();
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              )
                             : TableData(
                                 fontsize: fontsize,
                                 value: receivedData,

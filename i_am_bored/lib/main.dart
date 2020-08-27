@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './provider/saved_list.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 // import 'dart:io';
 
 import './screens/settings_screen.dart';
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     // final selectedThemeData = Provider.of<CustomThemeData>(context);
     // Provider.of<SavedList>(context).getDatabaseList();
 

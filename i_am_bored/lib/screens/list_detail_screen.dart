@@ -416,7 +416,7 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                       color: Theme.of(context).bottomAppBarColor,
                     ),
                     RaisedButton(
-                      child: Text('Done'),
+                      child: Text("Back"),
                       onPressed: () {
                         vibrate();
                         // updateDatabase();
