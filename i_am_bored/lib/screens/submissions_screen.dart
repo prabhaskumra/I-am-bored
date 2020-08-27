@@ -62,8 +62,8 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
     _linkController.text = '';
     _nameController.text = '';
     _emailController.text = '';
-    val = "Education";
-    participantsVal = '1';
+    val = "Select";
+    participantsVal = 'Select';
   }
 
   static Future<void> vibrate() async {
