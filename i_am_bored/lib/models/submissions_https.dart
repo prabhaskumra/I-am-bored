@@ -14,6 +14,8 @@ class SubmissionsHttp {
           "link": submissionsData.link,
           "name": submissionsData.name,
           "email": submissionsData.email,
+          "price": submissionsData.price,
+          "accessibility": submissionsData.accessibility,
         }));
   }
 }
@@ -23,10 +25,10 @@ class SubmissionsData {
   final String activity;
   final String type;
   final String participants;
-  final double price;
+  final String price;
   final String link;
   final String key;
-  final double accessibility;
+  final String accessibility;
   final String name;
   final String email;
   DateTime savedTime;

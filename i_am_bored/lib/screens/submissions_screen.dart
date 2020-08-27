@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
 
 import 'package:flutter/services.dart';
 import '../models/submissions_https.dart';
@@ -18,8 +17,34 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
   var _linkController = TextEditingController();
   var _nameController = TextEditingController();
   var _emailController = TextEditingController();
+  var _isLoading = false;
 
   // SystemChannels
+
+  Future<void> _submitData() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    SubmissionsData activityCreated = new SubmissionsData(
+      activity: _activityTitleController.text,
+      type: val,
+      participants: participantsVal,
+      link: _linkController.text,
+      name: _nameController.text,
+      email: _emailController.text,
+      price: '',
+      accessibility: '',
+    );
+
+    await SubmissionsHttp().submitActivity(activityCreated);
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    resetForm();
+  }
 
   void resetForm() {
     _activityTitleController.text = '';
@@ -66,9 +91,17 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                     ),
                   ),
                 ),
-                Divider(
-                  color: Theme.of(context).primaryColor,
-                  thickness: 2.5,
+                Container(
+                  height: (MediaQuery.of(context).size.height * .30) / 70,
+                  // decoration: boxDecoration,
+                  child: _isLoading
+                      ? LinearProgressIndicator(
+                          minHeight: 3,
+                        )
+                      : Divider(
+                          color: Theme.of(context).primaryColor,
+                          thickness: 3,
+                        ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -254,22 +287,7 @@ class _SubmissionScreenState extends State<SubmissionScreen> {
                               ? null
                               : () {
                                   vibrate();
-
-                                  print(_activityTitleController.text);
-                                  SubmissionsData activityCreated =
-                                      new SubmissionsData(
-                                    activity: _activityTitleController.text,
-                                    type: val,
-                                    participants: participantsVal,
-                                    link: _linkController.text,
-                                    name: _nameController.text,
-                                    email: _emailController.text,
-                                  );
-                                  // print(activityCreated);
-                                  SubmissionsHttp()
-                                      .submitActivity(activityCreated);
-
-                                  resetForm();
+                                  _submitData();
                                 },
                           color: Theme.of(context).primaryColor,
                           // color: _activityTitleController.text == ''
