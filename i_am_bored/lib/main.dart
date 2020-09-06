@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Builder(
         builder: (BuildContext newContext) {
-          Provider.of<SavedList>(newContext).getDatabaseList();
+          Provider.of<SavedList>(newContext, listen: false).getDatabaseList();
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',

@@ -55,6 +55,8 @@ class _SavedListScreenState extends State<SavedListScreen> {
                     ),
                   ),
                 );
+                // .then((_) => Provider.of<SavedList>(context, listen: false)
+                //     .notifyAllListerners());
               },
               subtitle: Text(savedListItmes[i][DatabaseHelper.savedTime]),
               title: Text(
@@ -77,6 +79,17 @@ class _SavedListScreenState extends State<SavedListScreen> {
       children: list,
     );
   }
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+
+  //   // super.initState();
+  // }
+
+  // void getDB() {
+
+  // }
 
   @override
   Widget build(BuildContext context) {

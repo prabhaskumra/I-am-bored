@@ -56,7 +56,7 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
     // SystemChannels
   }
 
-  void updateDatabase() async {
+  void updateDatabase(var db) async {
     Map<String, dynamic> updatedNode = {
       DatabaseHelper.columnId: widget.receivedList[DatabaseHelper.columnId],
       DatabaseHelper.activity: widget.receivedList[DatabaseHelper.activity],
@@ -77,6 +77,7 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
     // widget.receivedList[DatabaseHelper.notes] =
     //     _myTextController.text;
     int i = await DatabaseHelper.instance.update(updatedNode);
+    Provider.of<SavedList>(context, listen: false).getDatabaseList();
     print(i);
   }
 
@@ -294,7 +295,7 @@ class _ListDetailScreenState extends State<ListDetailScreen> {
                                 currentFocus.focusedChild != null) {
                               currentFocus.focusedChild.unfocus();
 
-                              updateDatabase();
+                              updateDatabase(indexData);
                             }
                           },
                           // onSubmitted: ,

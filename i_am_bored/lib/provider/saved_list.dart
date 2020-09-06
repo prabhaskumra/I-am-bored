@@ -50,4 +50,8 @@ class SavedList with ChangeNotifier {
     databaseList = await DatabaseHelper.instance.queryALl();
     notifyListeners();
   }
+
+  // void notifyAllListerners() {
+  //   notifyListeners();
+  // }
 }
