@@ -43,7 +43,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Hobby-It"),
+        title: Text("Hobby-it"),
         toolbarHeight: kToolbarHeight / 1.3,
         // toolbarHeight: kToolbarHeight * 5,
         elevation: 20,
