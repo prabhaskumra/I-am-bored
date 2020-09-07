@@ -42,7 +42,8 @@ dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/icon/icon.png"
+  image_path_ios: "assets/icon/icon.png"
+  image_path_android: "assets/icon/icon1.png"
 
 dev_dependencies:
   flutter_test:
