@@ -214,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: FlatButton(
                               child: Platform.isIOS
                                   ? Icon(
-                                      IconData(
+                                      const IconData(
                                         // 62666, //share ICON
                                         61984,
                                         fontFamily: CupertinoIcons.iconFont,
