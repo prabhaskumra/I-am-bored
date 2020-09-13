@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:i_am_bored/screens/submissions_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:share/share.dart';
 
 import '../provider/theme_data.dart';
 import '../screens/about_app_screen.dart';
@@ -59,6 +60,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           Divider(),
           ListTile(
+            onTap: () {
+              final url =
+                  "https://play.google.com/store/apps/details?id=com.hobby_it.i_am_bored";
+              vibrate();
+              Share.share("Hey, check out this awesome app!\n$url");
+            },
             leading: Icon(
               Icons.share,
               color: Theme.of(context).primaryColor,
@@ -107,7 +114,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           Divider(),
           Text(
-            "Version: 1.0.0", // \n All Rights Reserved",
+            "Version: 1.0.1", // \n All Rights Reserved",
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Theme.of(context).disabledColor,

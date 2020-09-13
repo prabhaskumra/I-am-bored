@@ -234,8 +234,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               onPressed: firstTime
                                   ? null
                                   : () {
+                                      final url =
+                                          "https://play.google.com/store/apps/details?id=com.hobby_it.i_am_bored";
                                       vibrate();
-                                      Share.share(receivedData.activity);
+                                      Share.share(
+                                          "${receivedData.activity}\n\nCheck out this activity on this awesome app!\n$url");
                                     },
                             ),
                           ),
